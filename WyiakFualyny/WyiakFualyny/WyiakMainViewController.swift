@@ -13,19 +13,19 @@ class WyiakMainViewController: UITabBarController, UITabBarControllerDelegate {
     }
 
     private func setupViewControllers() {
-        // 配置你的四个 Tab 页面
-        let v1 = UIViewController()
-        v1.view.backgroundColor = .white
+       
+        let v1 = WYIExploreViewController()
+       
         v1.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "compassWyiakicon")?.withRenderingMode(.alwaysOriginal),selectedImage: UIImage(named: "compassWyiakiconsel")?.withRenderingMode(.alwaysOriginal))
         
-        let v2 = UIViewController()
+        let v2 = WYIGridinteriorDesignwyi()
          v2.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "compassWyiakicon1")?.withRenderingMode(.alwaysOriginal),selectedImage: UIImage(named: "compassWyiakiconsel1")?.withRenderingMode(.alwaysOriginal))
                                                                   
                                                                   
-        let v3 = UIViewController()
+        let v3 = WYInightPhotographywyi()
         v3.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "compassWyiakicon2")?.withRenderingMode(.alwaysOriginal),selectedImage: UIImage(named: "compassWyiakiconsel2")?.withRenderingMode(.alwaysOriginal))
         
-        let v4 = UIViewController()
+        let v4 = WYIProfileNexusController()
         v4.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "compassWyiakicon3")?.withRenderingMode(.alwaysOriginal),selectedImage: UIImage(named: "compassWyiakiconsel3")?.withRenderingMode(.alwaysOriginal))
         
         viewControllers = [v1, v2, v3, v4]

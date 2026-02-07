@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // 3. 实例化你的主控制器
         // 如果你的 MainTabBarController 是在 Storyboard 中定义的，请使用 storyboard.instantiateInitialViewController()
-        let mainVC = WyiakMainViewController()
+        let mainVC = WyiakMainViewController()//WYILoginViewController()//
         
         // 4. 设置根控制器并显示
         window.rootViewController = mainVC
