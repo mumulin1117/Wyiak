@@ -12,8 +12,8 @@ class WYInightPhotographywyi: UIViewController {
     private let wyiDeviceWidth = UIScreen.main.bounds.width
     private let wyiDeviceHeight = UIScreen.main.bounds.height
     
-    private var wyiVoiceCatalog: [WYIVoiceEntity] = []
-    private var wyiVisualFeed: [WYIFeedEntity] = []
+   
+    private var wyiVisualFeed: [Dictionary<String,Any>] = []
     
     private lazy var wyiPrimaryStage: UICollectionView = {
         let wyiLayout = UICollectionViewFlowLayout()
@@ -27,10 +27,18 @@ class WYInightPhotographywyi: UIViewController {
         wyiView.register(WYInightPhotograCell.self, forCellWithReuseIdentifier: "WYInightPhotograCell")
         return wyiView
     }()
-    
-    private let wyiTopNavigator: UIView = {
+    private let wyinopsodtTag: UILabel = {
+        let wyiLoc = UILabel()
+        wyiLoc.text = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "/PZ5OgAef3P7cQlkvCMkz6Q6Ts1/396F7eeStujTnByuAfcFs4+VXILbNkbH9A==")
+        wyiLoc.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        wyiLoc.textColor = .systemGray
+        wyiLoc.isHidden = true
+        wyiLoc.textAlignment = .center
+        return wyiLoc
+    }()
+    private lazy var wyiTopNavigator: UIView = {
         let wyiNav = UIView()
-        let wyiLogo = UIImageView(image: UIImage(named: "WYItitile"))
+        let wyiLogo = UIImageView(image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "WYItitile"))
         wyiLogo.contentMode = .scaleAspectFit
         wyiLogo.frame = CGRect(x: 18, y: 0, width: 90, height: 36)
         wyiNav.addSubview(wyiLogo)
@@ -39,13 +47,15 @@ class WYInightPhotographywyi: UIViewController {
         wyiRoomTrigger.layer.masksToBounds = true
         wyiRoomTrigger.layer.cornerRadius = 10.5
         wyiRoomTrigger.backgroundColor =  UIColor(red: 0.33, green: 0.33, blue: 0.33, alpha: 0.4000)
-        wyiRoomTrigger.setTitle("0 coins", for: .normal)
+        wyiRoomTrigger.setTitle(WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "cOkQIKI7RwXHXtOigdFce0i4w3bh/9L3pZ3KYuvlHtoGHe8kexkw"), for: .normal)
         wyiRoomTrigger.setTitleColor(UIColor.white, for: .normal)
         wyiRoomTrigger.titleLabel?.font = UIFont(name: "Manrope-Medium", size: 13.5)
         wyiRoomTrigger.frame = CGRect(x: UIScreen.main.bounds.width - 101 - 19, y: 0, width: 101, height: 25)
-        
+        wyiRoomTrigger.tag = 99
+        wyiRoomTrigger.addTarget(self, action: #selector( vintageVibewyi(diff:)), for: .touchUpInside)
+       
         let imagebavk = UIImageView.init(frame: CGRect(x: UIScreen.main.bounds.width - 48 - 90, y: -10, width: 48, height: 48))
-        imagebavk.image = UIImage(named: "rabertsoni")
+        imagebavk.image = WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "rabertsoni")
         imagebavk.contentMode = .scaleAspectFill
         
        
@@ -59,14 +69,23 @@ class WYInightPhotographywyi: UIViewController {
         let wyiRoomTrigger = UIButton(type: .custom)
        
         wyiRoomTrigger.frame = CGRect(x: 15, y: wyiDeviceHeight * 0.06 + 13 + 30, width: (wyiDeviceWidth - 45)/2, height: 146)
-        wyiRoomTrigger.setImage(UIImage.init(named: "wyiSymmessagrTrigger"), for: .normal)
+        wyiRoomTrigger.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyiSymmessagrTrigger"), for: .normal)
+        wyiRoomTrigger.tag = 299
+        wyiRoomTrigger.addTarget(self, action: #selector( vintageVibewyi(diff:)), for: .touchUpInside)
+       
+        
+        
         return wyiRoomTrigger
     }()
     lazy var wyiSymLumalenTrigger: UIButton = {
         let wyiRoomTrigger = UIButton(type: .custom)
        
         wyiRoomTrigger.frame = CGRect(x: 30 + (wyiDeviceWidth - 45)/2, y: wyiDeviceHeight * 0.06 + 13 + 30, width: (wyiDeviceWidth - 45)/2, height: 146)
-        wyiRoomTrigger.setImage(UIImage.init(named: "wyiSLimmlenTrigger"), for: .normal)
+        
+        wyiRoomTrigger.tag = 199
+        wyiRoomTrigger.addTarget(self, action: #selector( vintageVibewyi(diff:)), for: .touchUpInside)
+       
+        wyiRoomTrigger.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyiSLimmlenTrigger"), for: .normal)
         return wyiRoomTrigger
     }()
     
@@ -75,12 +94,12 @@ class WYInightPhotographywyi: UIViewController {
         super.viewDidLoad()
         
         let imagebavk = UIImageView.init(frame: UIScreen.main.bounds)
-        imagebavk.image = UIImage(named: "waynorambackh")
+        imagebavk.image = WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "waynorambackh")
         imagebavk.contentMode = .scaleAspectFill
         self.view.addSubview(imagebavk)
         
         wyiAssembleInterface()
-        wyiInitiateRemoteSync()
+       
     }
     
     private func wyiAssembleInterface() {
@@ -97,29 +116,60 @@ class WYInightPhotographywyi: UIViewController {
         let wyiMetricLabel = UILabel()
         wyiMetricLabel.font = .systemFont(ofSize: 23, weight: .semibold)
         wyiMetricLabel.textColor = UIColor(red: 0.15, green: 0.15, blue: 0.31, alpha: 1)
-        wyiMetricLabel.text = "Chats"
+        wyiMetricLabel.text = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "5vntuNOqUtUN3eEpCAOyEw6ETYnhUdsxEapDHEr9lupmNqEWgw==")
         wyiMetricLabel.frame = CGRect(x: 20, y: wyiSymmessagrTrigger.frame.maxY + 20, width:70, height: 28)
         view.addSubview(wyiMetricLabel)
         
         wyiPrimaryStage.frame = CGRect(x: 0, y:wyiMetricLabel.frame.maxY  + 10, width: wyiDeviceWidth, height: wyiDeviceHeight - wyiMetricLabel.frame.maxY - 30 )
        
+        wyinopsodtTag.frame =  CGRect(x: 0, y:wyiMetricLabel.frame.maxY  + 50, width: wyiDeviceWidth, height: 30 )
+        view.addSubview(wyinopsodtTag)
        
     }
     
-    private func wyiInitiateRemoteSync() {
-        DispatchQueue.global().async {
-            Thread.sleep(forTimeInterval: 1.5)
-            let wyiMockVoice = (0...5).map { WYIVoiceEntity(wyiId: "\($0)", wyiAlias: "Aiko", wyiAvatar: "wyi_p\($0)") }
-            let wyiMockFeed = (0...10).map { WYIFeedEntity(wyiId: "\($0)", wyiCover: "wyi_c\($0)", wyiMetric: "1900") }
-            
-            DispatchQueue.main.async {
-                self.wyiVoiceCatalog = wyiMockVoice
-                self.wyiVisualFeed = wyiMockFeed
-                self.wyiPrimaryStage.reloadData()
-            }
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        wyiInitiateRemoteSync()
     }
     
+    private func wyiInitiateRemoteSync() {
+        layerBlendingwyi()
+    }
+    private func layerBlendingwyi()  {
+        WYIHUDCoordinatorwyi.wyiPresentActivityIndicator()
+      
+        
+        WYINetworkDispatcherwyi.wyiExecuteNetworkOperation(operationEndpointwyi: "/jqykotpoifekklbz/jgrckybb", operationPayloadwyi: ["candidMomentwyi":"60420695"]) { adobeRgbwyi in
+           
+            WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
+            guard let adobeRg = adobeRgbwyi as? Dictionary<String,Any> ,
+                 
+                    let sharpeningFilterwyi = adobeRg[WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "iG/LkMq1ZcgMsn/GmYoBTgZcX0W2UDk364On/94oIdDKpIQI")] as? Array<Dictionary<String,Any>>
+                    
+            else {
+                return
+            }
+            
+           
+            
+            self.wyiVisualFeed = sharpeningFilterwyi.map { dix in
+                if let apldoi = (dix["documentaryStylewyi"] as? Array<[String:Any]>)?.first{
+                    apldoi
+                }else{
+                    [:]
+                    
+                }
+                
+                
+            }
+            self.wyinopsodtTag.isHidden = (self.wyiVisualFeed.count > 0)
+           
+            self.wyiPrimaryStage.reloadData()
+            
+        } completionFailurewyi: {  reoailper in
+           
+        }
+    }
 }
 
 extension WYInightPhotographywyi: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -133,9 +183,15 @@ extension WYInightPhotographywyi: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let yaqian = wyiVisualFeed[indexPath.item]
         
         let wyiCell = collectionView.dequeueReusableCell(withReuseIdentifier: "WYInightPhotograCell", for: indexPath) as! WYInightPhotograCell
-//        wyiCell.wyiConfigure(wyiEntity: wyiVisualFeed[indexPath.item])
+       
+        wyiCell.wyiMetricLabel.text = yaqian["naturePhotographywyi"] as? String
+        
+        wyiCell.wyiSayLabel.text = yaqian["actionShotwyi"] as? String
+        wyiCell.wyiCUsermage.wyiLoadImage(from: yaqian["botanicalDetailwyi"] as? String)
+        
         return wyiCell
         
     }
@@ -151,7 +207,40 @@ extension WYInightPhotographywyi: UICollectionViewDelegate, UICollectionViewData
         return CGSize(width: UIScreen.main.bounds.width, height: 56)
     }
     
+    @objc func vintageVibewyi(diff:UIButton)  {
+        var wyiroute = ""
+        if diff.tag == 99 {
+            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: WYIRouterCorewyi.RouteTargetwyi.wyiWalletView.rawValue)
+        }else if diff.tag == 199 {
+            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiAIRobot.rawValue)
+           
+        }else if diff.tag == 299 {
+            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiNotificationHub.rawValue)
+           
+        }
+        
+        let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier: wyiroute, queryString: ""))
+        self.navigationController?.pushViewController(wyiFeedback, animated: true)
+        
+        
+      
+        
+        
+       
+     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cheinIn = wyiVisualFeed[indexPath.row]["nostalgicMoodwyi"] as? Int {
+            let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiMessageDetail.rawValue)
+             
+            let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier: wyiroute, queryString: "\(cheinIn)"))
+               
+             
+            self.navigationController?.pushViewController(wyiFeedback, animated: true)
+        }
+        
+       
+    }
     
 }
 

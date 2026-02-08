@@ -148,6 +148,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WyiakFualyny/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wyiak;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Document creative environments, capture lighting references, and take visual notes to enhance collaborative planning sessions with your team.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Facilitate audio discussions for creative brainstorming, conceptual development, and providing detailed feedback during collaborative work sessions.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access your visual collection to curate inspiration boards, reference materials, and share creative assets with your project partners.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -181,6 +184,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WyiakFualyny/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Wyiak;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Document creative environments, capture lighting references, and take visual notes to enhance collaborative planning sessions with your team.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Facilitate audio discussions for creative brainstorming, conceptual development, and providing detailed feedback during collaborative work sessions.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Access your visual collection to curate inspiration boards, reference materials, and share creative assets with your project partners.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

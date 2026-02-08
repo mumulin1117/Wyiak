@@ -13,21 +13,21 @@ class WYIGridiDesignCell: UICollectionViewCell {
     
     lazy var wywyiPrise: UIButton = {
         let wiyimg = UIButton.init(frame: CGRect(x: 14, y: 25, width: 52, height: 52))
-          
-       wiyimg.setImage(UIImage.init(named: "WYIokalikeun"), for: .normal)
+        wiyimg.isUserInteractionEnabled = false
+       wiyimg.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "WYIokalikeun"), for: .normal)
        return wiyimg
    }()
     lazy var wywyiCahcom: UIButton = {
         let wiyimg = UIButton.init(frame: CGRect(x: 14, y: 90, width:52, height: 52))
           
-       wiyimg.setImage(UIImage.init(named: "WYIokachaou"), for: .normal)
+       wiyimg.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "WYIokachaou"), for: .normal)
        return wiyimg
    }()
    
    lazy var wyiReort: UIButton = {
        let wiyimg = UIButton.init(frame: CGRect(x: 14, y: 155, width: 52, height: 52))
          
-      wiyimg.setImage(UIImage.init(named: "WYIokalmore"), for: .normal)
+      wiyimg.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "WYIokalmore"), for: .normal)
       return wiyimg
   }()
    
@@ -60,7 +60,7 @@ class WYIGridiDesignCell: UICollectionViewCell {
        wyiMetricLabel.frame = CGRect(x: 20, y: contentView.bounds.height - 40 - 14, width: contentView.bounds.width - 40, height: 40)
        contentView.addSubview(wyiMetricLabel)
        
-       let wyihatImage = UIImageView(image: UIImage.init(named: "WYIokaline"))
+       let wyihatImage = UIImageView(image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "WYIokaline"))
        wyihatImage.frame = CGRect(x: 20, y: contentView.bounds.height - 40 - 14 - 24 - 11, width: 24, height: 24)
        contentView.addSubview(wyihatImage)
        
@@ -92,7 +92,7 @@ class WYIGridiDesignCell: UICollectionViewCell {
     
     func wyifever()  {
         
-        let wyihatImage = UIImageView(image: UIImage.init(named: "VectorWYIoka"))
+        let wyihatImage = UIImageView(image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "VectorWYIoka"))
         wyihatImage.frame = CGRect(x: contentView.bounds.width - 80, y:  0, width: 80, height: 233)
         wyihatImage.contentMode = .scaleToFill
         contentView.addSubview(wyihatImage)
@@ -102,7 +102,7 @@ class WYIGridiDesignCell: UICollectionViewCell {
         wyihatImage.addSubview(wyiReort)
         wyihatImage.center.y = contentView.center.y - 40
         
-        let hemaPlauguin = UIImageView(image: UIImage.init(named: "hemaPlauguin"))
+        let hemaPlauguin = UIImageView(image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "hemaPlauguin"))
         hemaPlauguin.frame = CGRect(x: (contentView.bounds.width - 64)/2, y:  0, width: 64, height: 64)
         hemaPlauguin.center.y = contentView.center.y - 20
         contentView.addSubview(hemaPlauguin)
@@ -110,6 +110,11 @@ class WYIGridiDesignCell: UICollectionViewCell {
     }
     
    func wyiConfigure(wyiEntity: WYIFeedEntity) {
-       wyiMetricLabel.text = "❤️ \(wyiEntity.wyiMetric)ddddddddd"
+       wyiMeHatnameLabel.text = wyiEntity.alosgiju["etherealGlowwyi"] as? String
+       
+       wyiMetricLabel.text = wyiEntity.alosgiju["vintageVibewyi"] as? String
+       wyiCoverImage.wyiLoadImage(from: wyiEntity.alosgiju["moodBoardwyi"] as? String)
+       
+      
    }
 }

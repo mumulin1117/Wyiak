@@ -12,7 +12,7 @@ class WYIGridActionCell: UICollectionViewCell {
     lazy var wyiReort: UIButton = {
         let wiyimg = UIButton.init(frame: CGRect(x: 10, y: 10, width: 24, height: 24))
           
-       wiyimg.setImage(UIImage.init(named: "wyiAlert"), for: .normal)
+       wiyimg.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyiAlert"), for: .normal)
        return wiyimg
    }()
     
@@ -20,7 +20,7 @@ class WYIGridActionCell: UICollectionViewCell {
     lazy var wywyiCahcom: UIButton = {
         let wiyimg = UIButton.init(frame: CGRect(x: (UIScreen.main.bounds.width - 32 - 10)/2 - 32, y: 10, width: 24, height: 24))
           
-       wiyimg.setImage(UIImage.init(named: "wyiCahcom"), for: .normal)
+       wiyimg.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyiCahcom"), for: .normal)
        return wiyimg
    }()
    
@@ -57,7 +57,7 @@ class WYIGridActionCell: UICollectionViewCell {
         contentView.addSubview(wyiReort)
         contentView.addSubview(wywyiCahcom)
         
-        let wyihatImage = UIImageView(image: UIImage.init(named: "colocaih"))
+        let wyihatImage = UIImageView(image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "colocaih"))
         wyihatImage.frame = CGRect(x: 10, y:  contentView.bounds.height - 24, width: 11, height: 11)
         contentView.addSubview(wyihatImage)
         
@@ -71,7 +71,10 @@ class WYIGridActionCell: UICollectionViewCell {
     }
 
     func wyiConfigure(wyiEntity: WYIFeedEntity) {
-        wyiMetricLabel.text = "❤️ \(wyiEntity.wyiMetric)ddddddddd"
+        wyiMetricLabel.text = wyiEntity.alosgiju["vintageVibewyi"] as? String
+        wyiCoverImage.wyiLoadImage(from: (wyiEntity.alosgiju["keyLightwyi"] as? Array<String>)?.first)
+        
+        wyiMeHatCountLabel.text = "\(wyiEntity.alosgiju["ambientLightwyi"] as? Int ?? 0)"
     }
 }
 
@@ -81,4 +84,6 @@ struct WYIFeedEntity {
     let wyiId: String
     let wyiCover: String
     let wyiMetric: String
+    let alosgiju:Dictionary<String,Any>
+    
 }

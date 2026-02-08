@@ -7,14 +7,14 @@
 
 import UIKit
 
-import UIKit
+import CryptoKit
 
 class WYILoginViewController: UIViewController {
 
     // MARK: - Identity Artifacts
     private let wyiChromaBackdrop: UIImageView = {
         let wyiImg = UIImageView()
-        wyiImg.image = UIImage(named: "wyi_welcome_bg")
+        wyiImg.image = WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyi_welcome_bg")
         wyiImg.contentMode = .scaleAspectFill
         wyiImg.clipsToBounds = true
         return wyiImg
@@ -36,7 +36,7 @@ class WYILoginViewController: UIViewController {
     // MARK: - Input Nodes
     private let wyiUserVessel: UITextField = {
         let wyiMail = UITextField()
-        wyiMail.placeholder = "Email Address"
+        wyiMail.placeholder = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "LniAwglAqAYZgPRJS/ogPEi5Wk48/8dv77OFbs7ysN8fTw/tcFKYYydw/3Oc")
         wyiMail.backgroundColor = UIColor(red: 0.95, green: 0.96, blue: 0.97, alpha: 1)
         wyiMail.layer.cornerRadius = 25
         wyiMail.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 1))
@@ -47,9 +47,9 @@ class WYILoginViewController: UIViewController {
         return wyiMail
     }()
 
-    private let wyiSecretVessel: UITextField = {
+    private lazy var wyiSecretVessel: UITextField = {
         let wyiPass = UITextField()
-        wyiPass.placeholder = "Access Password"
+        wyiPass.placeholder = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "wvwnhlTb5r4oDiz7nVRSNKOiIoR1S+lMwh/coFSoVpR0YBDMz2fL9eKOHVmo/DQ=")
         wyiPass.backgroundColor = UIColor(red: 0.95, green: 0.96, blue: 0.97, alpha: 1)
         wyiPass.layer.cornerRadius = 25
         wyiPass.isSecureTextEntry = true
@@ -68,7 +68,7 @@ class WYILoginViewController: UIViewController {
 
     private let wyiGateKeeperBtn: UIButton = {
         let wyiBtn = UIButton(type: .custom)
-        wyiBtn.setTitle("SIGN IN", for: .normal)
+        wyiBtn.setTitle(WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "yW1NAaF/ajXUISFR41olYfEJMsx6JNeVv/h1O2lxyPeVR79Ck48e"), for: .normal)
         wyiBtn.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .black)
         wyiBtn.setTitleColor(.white, for: .normal)
         wyiBtn.layer.cornerRadius = 28
@@ -84,10 +84,11 @@ class WYILoginViewController: UIViewController {
         wyiBox.tintColor = UIColor(red: 0.95, green: 0.35, blue: 0.75, alpha: 1.0)
         return wyiBox
     }()
-
+  
+    
     private let wyiLegalNexus: UITextView = {
         let wyiTv = UITextView()
-        let wyiRaw = "Agree to the User Agreement and Privacy Agreement"
+        let wyiRaw = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "5ZxJwpLq1tgN01+IvRcsaTOQvIrlpIsgLvDnaxRg0j/ekfq4Htq5APka7fJgf1qm02jBy8zaMa4domiA/bXcl8JHl64jFikjkzjQeZac/voZ")
         let wyiAttr = NSMutableAttributedString(string: wyiRaw)
         
         let wyiLinkStyle: [NSAttributedString.Key: Any] = [
@@ -96,8 +97,8 @@ class WYILoginViewController: UIViewController {
         ]
         wyiAttr.addAttributes(wyiLinkStyle, range: NSMakeRange(0, wyiRaw.count))
         
-        let wyiUaRange = (wyiRaw as NSString).range(of: "User Agreement")
-        let wyiPaRange = (wyiRaw as NSString).range(of: "Privacy Agreement")
+        let wyiUaRange = (wyiRaw as NSString).range(of: WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "uAnu+GB/04CUzMKbGW7lvhxO94aA1hoe9uABsy7w1+qOmeSnr/FcyzhcbjAKAg=="))
+        let wyiPaRange = (wyiRaw as NSString).range(of: WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "K1sHcWAnj8QlziGCWOSr8Ll6L25w3LVC8dJjqGeKE6mudpVt/++cMtBn7gIIOI/+tw=="))
         
         wyiAttr.addAttribute(.link, value: "wyiauth://terms", range: wyiUaRange)
         wyiAttr.addAttribute(.link, value: "wyiauth://privacy", range: wyiPaRange)
@@ -113,7 +114,7 @@ class WYILoginViewController: UIViewController {
     }()
     private let wyiBrandMoniker: UILabel = {
             let wyiLbl = UILabel()
-            wyiLbl.text = "If there is no account, it will be automatically created for you"
+            wyiLbl.text = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "nfDwDux/PF4OiCM4lRaH4Dcr4rjeRCOZkB/HhFnCAY4KTco8tucEzPHFANPLCf9gC3phIzOi+MQ9q7CKhT7Pr6R0XLSG4b7jhiwrxN1isM/Q5h6SpnXnU80GcrK3yGqD")
         wyiLbl.font = UIFont.systemFont(ofSize: 11, weight: .light)
         wyiLbl.textColor = .lightGray
         wyiLbl.numberOfLines = 0
@@ -199,43 +200,118 @@ class WYILoginViewController: UIViewController {
     }
 
     @objc private func wyiInitiateAccessSequence() {
-        view.endEditing(true)
+        view.endEditing(false)
         
         let wyiCurrentMail = wyiUserVessel.text ?? ""
         let wyiCurrentKey = wyiSecretVessel.text ?? ""
         
         if !wyiCurrentMail.contains("@") || wyiCurrentMail.count < 5 {
-            wyiDispatchToast("Electronic Mail Format Error")
+            WYIHUDCoordinatorwyi.wyiPresentMessage(
+                messageText:"Electronic Mail Format Error",
+                messageType: .error,
+                timeoutInterval: 2.0
+            )
+         
+         
             return
         }
         
-        if wyiCurrentKey.count < 6 {
-            wyiDispatchToast("Security Key Requirements Not Met")
+        if wyiCurrentKey.count < 1 {
+           
+           
+            WYIHUDCoordinatorwyi.wyiPresentMessage(
+                messageText: "Security Key Requirements Not Met",
+                messageType: .error,
+                timeoutInterval: 2.0
+            )
+           
             return
         }
         
         guard wyiAccordTrigger.isSelected else {
-            wyiDispatchToast("Protocol Acknowledgement Required")
+          
+          
+            WYIHUDCoordinatorwyi.wyiPresentMessage(
+                messageText: "Protocol Acknowledgement Required",
+                messageType: .error,
+                timeoutInterval: 2.0
+            )
             return
         }
         
         wyiGateKeeperBtn.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.2) { self.wyiGateKeeperBtn.alpha = 0.6 }
         
-        // Mocking Authentication Latency
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
-            self.wyiGateKeeperBtn.isUserInteractionEnabled = true
-            self.wyiGateKeeperBtn.alpha = 1.0
-            self.wyiDispatchToast("Access Granted")
+       
+        WYIHUDCoordinatorwyi.wyiPresentActivityIndicator()
+        WYINetworkDispatcherwyi.wyiExecuteNetworkOperation(operationEndpointwyi: "/mlpsklanakpz/yaloleh", operationPayloadwyi: ["colorSpacewyi":"60420695","frameRatewyi":wyiCurrentMail,"bitDepthwyi":wyiCurrentKey]) { adobeRgbwyi in
+           
+            WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
+            guard let adobeRg = adobeRgbwyi as? Dictionary<String,Any> ,
+                 
+                  let sharpeningFilterwyi = adobeRg[WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "iG/LkMq1ZcgMsn/GmYoBTgZcX0W2UDk364On/94oIdDKpIQI")] as? Dictionary<String,Any>
+                    
+            else {
+                
+                WYIHUDCoordinatorwyi.wyiPresentMessage(
+                    messageText: WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "7RL4vZVkq9lcApxqaJ15Dxq1TcveBGBr+GHoZoDg3Ffp+/Noq35O3BM6xpZItfYhgOqnSicxHGTie7xblXBcXz2fKbCBKwHvPiSCkw=="),
+                    messageType: .error,
+                    timeoutInterval: 2.0
+                )
+                
+                return
+            }
+           
+          //tpken
+           
+            WYIRouterCorewyi.SessionHandlerwyi.wyiCurrentToken = sharpeningFilterwyi["highSpeedwyi"] as? String
+            
+            UserDefaults.standard.set(sharpeningFilterwyi["darkroomProcesswyi"] as? Int, forKey: "darkroomProcesswyi")
+            
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let sceneDelegate = windowScene.delegate as? SceneDelegate else {
+              
+                return
+            }
+            let wyarootwyi = UINavigationController(rootViewController:  WyiakMainViewController())
+            
+            
+            wyarootwyi.navigationBar.isHidden = true
+            sceneDelegate.window?.rootViewController = wyarootwyi
+           
+            UIView.transition(with: sceneDelegate.window ?? UIWindow(),
+                             duration: 0.3,
+                             options: .transitionCrossDissolve,
+                             animations: nil,
+                             completion: nil)
+             
+            
+        } completionFailurewyi: {  reoailper in
+            WYIHUDCoordinatorwyi.wyiPresentMessage(
+                messageText: reoailper.localizedDescription,
+                messageType: .error,
+                timeoutInterval: 2.0
+            )
         }
+        
+        
+        
+        
     }
 
     private func wyiDispatchToast(_ wyiInfo: String) {
-        let wyiFeedback = UIAlertController(title: nil, message: wyiInfo, preferredStyle: .alert)
-        present(wyiFeedback, animated: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-            wyiFeedback.dismiss(animated: true)
+        
+        var wyiroute = ""
+        if wyiInfo.contains(WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "8bPGoWAfu2k0y29AEHFX9aVjY0B5ro0p3LzBQ1gPCUg+iNuE8XGE")) {
+            wyiroute =  WYIRouterCorewyi.RouteTargetwyi.wyiTermsAgreement.rawValue
+        }else{
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiPrivacyAgreement.rawValue
+           
         }
+        
+        
+        let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier:WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:wyiroute) , queryString: ""))
+        self.navigationController?.pushViewController(wyiFeedback, animated: true)
     }
 
     // MARK: - Keyboard Artifacts
@@ -262,11 +338,13 @@ class WYILoginViewController: UIViewController {
 extension WYILoginViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         let wyiPath = URL.absoluteString
-        if wyiPath.contains("terms") {
+        if wyiPath.contains(WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "whJjaIvgIw5Yz6JNhR77W0v1ROyZKhxMgs7uOYjSh/lv8UYEFA==")) {
             wyiDispatchToast("Opening Service Agreement")
-        } else if wyiPath.contains("privacy") {
+        } else if wyiPath.contains(WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "9Y9rlAzWOg9ZRMTbbJhSR/fWFVaMl6wbU1LN1MaKVmamWifqxl6i")) {
             wyiDispatchToast("Opening Privacy Policy")
         }
         return false
     }
 }
+
+

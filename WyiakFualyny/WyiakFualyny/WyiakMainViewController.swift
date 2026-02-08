@@ -5,7 +5,7 @@ class WyiakMainViewController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         self.delegate = self
         
-        // 1. 【核心修复】使用 KVC 注入自定义 TabBar，防止 object_setClass 导致的 Runtime 崩溃
+   
         let customTabBar = WyiakFluidTabBar()
         self.setValue(customTabBar, forKey: "tabBar")
         
@@ -16,27 +16,25 @@ class WyiakMainViewController: UITabBarController, UITabBarControllerDelegate {
        
         let v1 = WYIExploreViewController()
        
-        v1.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "compassWyiakicon")?.withRenderingMode(.alwaysOriginal),selectedImage: UIImage(named: "compassWyiakiconsel")?.withRenderingMode(.alwaysOriginal))
+        v1.tabBarItem = UITabBarItem(title: nil, image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "compassWyiakicon")?.withRenderingMode(.alwaysOriginal),selectedImage: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "compassWyiakiconsel")?.withRenderingMode(.alwaysOriginal))
         
         let v2 = WYIGridinteriorDesignwyi()
-         v2.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "compassWyiakicon1")?.withRenderingMode(.alwaysOriginal),selectedImage: UIImage(named: "compassWyiakiconsel1")?.withRenderingMode(.alwaysOriginal))
+         v2.tabBarItem = UITabBarItem(title: nil, image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "compassWyiakicon1")?.withRenderingMode(.alwaysOriginal),selectedImage: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "compassWyiakiconsel1")?.withRenderingMode(.alwaysOriginal))
                                                                   
                                                                   
         let v3 = WYInightPhotographywyi()
-        v3.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "compassWyiakicon2")?.withRenderingMode(.alwaysOriginal),selectedImage: UIImage(named: "compassWyiakiconsel2")?.withRenderingMode(.alwaysOriginal))
+        v3.tabBarItem = UITabBarItem(title: nil, image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "compassWyiakicon2")?.withRenderingMode(.alwaysOriginal),selectedImage: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "compassWyiakiconsel2")?.withRenderingMode(.alwaysOriginal))
         
         let v4 = WYIProfileNexusController()
-        v4.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "compassWyiakicon3")?.withRenderingMode(.alwaysOriginal),selectedImage: UIImage(named: "compassWyiakiconsel3")?.withRenderingMode(.alwaysOriginal))
+        v4.tabBarItem = UITabBarItem(title: nil, image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "compassWyiakicon3")?.withRenderingMode(.alwaysOriginal),selectedImage: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "compassWyiakiconsel3")?.withRenderingMode(.alwaysOriginal))
         
         viewControllers = [v1, v2, v3, v4]
-        
-        // 初始选中第一个
+    
         if let customBar = self.tabBar as? WyiakFluidTabBar {
             customBar.currentSelectedIndex = 0
         }
     }
 
-    // 代理方法：同步点击索引
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if let customBar = self.tabBar as? WyiakFluidTabBar {
             customBar.currentSelectedIndex = self.selectedIndex

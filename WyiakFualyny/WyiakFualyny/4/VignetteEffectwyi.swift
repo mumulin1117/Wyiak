@@ -21,14 +21,14 @@ class WYIProfileNexusController: UIViewController {
     }()
 
     private let wyiChromaHeader: UIImageView = {
-        let wyiHeader = UIImageView.init(image: UIImage.init(named: "HeaderIJIyound"))
+        let wyiHeader = UIImageView.init(image: WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "HeaderIJIyound"))
         wyiHeader.contentMode = .scaleToFill
         return wyiHeader
     }()
 
     private let wyiAvatarOrb: UIImageView = {
         let wyiImg = UIImageView()
-        wyiImg.image = UIImage(named: "wyi_user_portrait")
+        wyiImg.image = WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "compassWyiakiconsel3")
         wyiImg.backgroundColor = .systemGray5
         wyiImg.contentMode = .scaleAspectFill
         wyiImg.layer.borderWidth = 4
@@ -39,7 +39,7 @@ class WYIProfileNexusController: UIViewController {
 
     private let wyiIdentityLabel: UILabel = {
         let wyiName = UILabel()
-        wyiName.text = "Bruno Pham"
+        wyiName.text = ""
         wyiName.font = UIFont.systemFont(ofSize: 24, weight: .black)
         wyiName.textColor = UIColor(white: 0.1, alpha: 1.0)
         wyiName.textAlignment = .center
@@ -48,7 +48,7 @@ class WYIProfileNexusController: UIViewController {
 
     private let wyiLocationTag: UILabel = {
         let wyiLoc = UILabel()
-        wyiLoc.text = "Da Nang, Vietnam"
+        wyiLoc.text = ""
         wyiLoc.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         wyiLoc.textColor = .systemGray
         wyiLoc.textAlignment = .center
@@ -72,23 +72,29 @@ class WYIProfileNexusController: UIViewController {
     
     
 
-    private let wyiEdistTrigger: UIButton = {
+    private lazy var wyiEdistTrigger: UIButton = {
         let wyiBtn = UIButton(type: .custom)
-        wyiBtn.setImage(UIImage(named: "wyiEdistTrigger"), for: .normal)
+        wyiBtn.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyiEdistTrigger"), for: .normal)
+        wyiBtn.tag = 299
+        wyiBtn.addTarget(self, action: #selector(vintageVibewyi(diff:)), for: .touchUpInside)
         
         return wyiBtn
     }()
     
-    private let wyiSettingsTrigger: UIButton = {
+    private lazy var wyiSettingsTrigger: UIButton = {
         let wyiBtn = UIButton(type: .custom)
-        wyiBtn.setImage(UIImage(named: "wyiSettingsTrigger"), for: .normal)
-        
+        wyiBtn.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyiSettingsTrigger"), for: .normal)
+        wyiBtn.tag = 199
+        wyiBtn.addTarget(self, action: #selector(vintageVibewyi(diff:)), for: .touchUpInside)
+       
         return wyiBtn
     }()
     
-    private let wyigiftsTrigger: UIButton = {
+    private lazy var wyigiftsTrigger: UIButton = {
         let wyiBtn = UIButton(type: .custom)
-        wyiBtn.setImage(UIImage(named: "wyigift"), for: .normal)
+        wyiBtn.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyigift"), for: .normal)
+        wyiBtn.tag = 99
+        wyiBtn.addTarget(self, action: #selector(vintageVibewyi(diff:)), for: .touchUpInside)
        
         return wyiBtn
     }()
@@ -99,7 +105,7 @@ class WYIProfileNexusController: UIViewController {
         let wyiBtn = UIButton(type: .custom)
      
         wyiBtn.isSelected = true
-        wyiBtn.setTitle("0 shots", for: .normal)
+        wyiBtn.setTitle(WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "YL+K5/LfFG9qfeZli5/raMKr4UexPzGChhj4Ls6tBndem6iHBu62"), for: .normal)
         wyiBtn.setTitleColor(UIColor.white, for: .selected)
         wyiBtn.setTitleColor(UIColor(red: 0.74, green: 0.74, blue: 0.74, alpha: 1), for: .normal)
         wyiBtn.backgroundColor =   UIColor(red: 1, green: 0.26, blue: 0.73, alpha: 1)
@@ -112,8 +118,8 @@ class WYIProfileNexusController: UIViewController {
     private lazy var wyividoefrTrigger: UIButton = {
         let wyiBtn = UIButton(type: .custom)
         wyiBtn.addTarget(self, action: #selector(sureWYIShia(yuepoiu:)), for: .touchUpInside)
-        wyiBtn.isSelected = true
-        wyiBtn.setTitle("0 Videos", for: .normal)
+        wyiBtn.isSelected = false
+        wyiBtn.setTitle(WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "FsDoOmvazqWDCJx2b6U5z9eof/hp/TOExxHFoP4cQXITdfuFbib/sw=="), for: .normal)
         wyiBtn.setTitleColor(UIColor.white, for: .selected)
         wyiBtn.setTitleColor(UIColor(red: 0.74, green: 0.74, blue: 0.74, alpha: 1), for: .normal)
         wyiBtn.backgroundColor =   .white
@@ -134,7 +140,7 @@ class WYIProfileNexusController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let imagebavk = UIImageView.init(frame: UIScreen.main.bounds)
-        imagebavk.image = UIImage(named: "waynorambackh")
+        imagebavk.image = WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "waynorambackh")
         imagebavk.contentMode = .scaleAspectFill
         self.view.addSubview(imagebavk)
         wyiSetupComponentTree()
@@ -142,7 +148,7 @@ class WYIProfileNexusController: UIViewController {
     }
     private let wyinopsodtTag: UILabel = {
         let wyiLoc = UILabel()
-        wyiLoc.text = "No post yet"
+        wyiLoc.text = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "/42nbPuOAIp3TC82n+4Mybw71dajjCTqITUV3PmMuyFIsqQesGKaMS0fKg==")
         wyiLoc.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         wyiLoc.textColor = .systemGray
         wyiLoc.textAlignment = .center
@@ -167,8 +173,8 @@ class WYIProfileNexusController: UIViewController {
         
         wyiEtherealScroll.addSubview(wyiShortssBar)
       
-        wyigiftsTrigger.addTarget(self, action: #selector(wyiLaunchEngineSettings), for: .touchUpInside)
-        wyiSettingsTrigger.addTarget(self, action: #selector(wyiLaunchEngineSettings), for: .touchUpInside)
+//        wyigiftsTrigger.addTarget(self, action: #selector(wyiLaunchEngineSettings), for: .touchUpInside)
+//        wyiSettingsTrigger.addTarget(self, action: #selector(wyiLaunchEngineSettings), for: .touchUpInside)
     }
 
     private func wyiApplyLayoutRatios() {
@@ -215,14 +221,22 @@ class WYIProfileNexusController: UIViewController {
     }
 
     private func wyiPopulateMetricData() {
-        let wyiFollowerNode = wyiBuildMetricNode(wyiVal: "220", wyiKey: "Followers", wyiX: 0)
-        let wyiFollowingNode = wyiBuildMetricNode(wyiVal: "150", wyiKey: "Following", wyiX: wyiSocialMetricsBar.frame.width / 2)
+        let wyiFollowerNode = wyiBuildMetricNode(wyiVal: "My", wyiKey: WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "a1rRMYFqCKSOKLId0oguTASkAH2zQJsQjrDsBKrSQLh+XOCavS9s/R8="), wyiX: 0)
+        
+        wyiFollowerNode.tag = 399
+        wyiFollowerNode.addTarget(self, action: #selector(vintageVibewyi(diff:)), for: .touchUpInside)
+       
+        let wyiFollowingNode = wyiBuildMetricNode(wyiVal: "My", wyiKey: WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "32721cVsXPtR1BtmUtT6zakRM2DzgYNM+zNlXz9fyRmNQMR3YGdB5FU="), wyiX: wyiSocialMetricsBar.frame.width / 2)
+        
+        wyiFollowingNode.tag = 499
+        wyiFollowingNode.addTarget(self, action: #selector(vintageVibewyi(diff:)), for: .touchUpInside)
+       
         wyiSocialMetricsBar.addSubview(wyiFollowerNode)
         wyiSocialMetricsBar.addSubview(wyiFollowingNode)
     }
 
-    private func wyiBuildMetricNode(wyiVal: String, wyiKey: String, wyiX: CGFloat) -> UIView {
-        let wyiContainer = UIView(frame: CGRect(x: wyiX, y: 0, width: wyiSocialMetricsBar.frame.width/2, height: 65))
+    private func wyiBuildMetricNode(wyiVal: String, wyiKey: String, wyiX: CGFloat) -> UIButton {
+        let wyiContainer = UIButton(frame: CGRect(x: wyiX, y: 0, width: wyiSocialMetricsBar.frame.width/2, height: 65))
         let wyiValLbl = UILabel(frame: CGRect(x: 0, y: 12, width: wyiContainer.frame.width, height: 22))
         wyiValLbl.text = wyiVal
         wyiValLbl.font = .systemFont(ofSize: 18, weight: .bold)
@@ -239,13 +253,72 @@ class WYIProfileNexusController: UIViewController {
         return wyiContainer
     }
 
-    @objc private func wyiLaunchEngineSettings() {
-        let wyiImpact = UIImpactFeedbackGenerator(style: .medium)
-        wyiImpact.impactOccurred()
+//    @objc private func wyiLaunchEngineSettings() {
+//        let wyiImpact = UIImpactFeedbackGenerator(style: .medium)
+//        wyiImpact.impactOccurred()
+//        
+//        let wyiAlert = UIAlertController(title: "Nexus System", message: "Preference module under synchronization.", preferredStyle: .actionSheet)
+//        wyiAlert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
+//        present(wyiAlert, animated: true)
+//    }
+    
+    
+    @objc func vintageVibewyi(diff:UIButton)  {
+        var wyiroute = ""
+        if diff.tag == 99 {
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiGiftHistory.rawValue
+        }else if diff.tag == 199 {//setting
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiSettingsPanel.rawValue
+           
+        }else if diff.tag == 299 {
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiAIEditor.rawValue
+           
+        }else if diff.tag == 399 {
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiFollowerList.rawValue
+           
+        }else if diff.tag == 499 {
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiFollowingList.rawValue
+           
+        }
         
-        let wyiAlert = UIAlertController(title: "Nexus System", message: "Preference module under synchronization.", preferredStyle: .actionSheet)
-        wyiAlert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
-        present(wyiAlert, animated: true)
+        let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier:WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:wyiroute) , queryString: ""))
+        self.navigationController?.pushViewController(wyiFeedback, animated: true)
+        
+        
+      
+        
+        
+       
+     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        wyiInitiateRemoteSync()
+    }
+    private func wyiInitiateRemoteSync() {
+        layerBlendingwyi()
+    }
+    private func layerBlendingwyi()  {
+        
+        guard let WYIid =  UserDefaults.standard.object(forKey: "darkroomProcesswyi") as? Int else { return  }
+        WYINetworkDispatcherwyi.wyiExecuteNetworkOperation(operationEndpointwyi: "/gqeubebvlhmlfqz/autkr", operationPayloadwyi: ["interiorDesignwyi":WYIid]) { adobeRgbwyi in
+           
+          
+            guard let adobeRg = adobeRgbwyi as? Dictionary<String,Any> ,
+                 
+                    let sharpeningFilterwyi = adobeRg[WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "iG/LkMq1ZcgMsn/GmYoBTgZcX0W2UDk364On/94oIdDKpIQI")] as? Dictionary<String,Any>
+                    
+            else {
+                return
+            }
+            
+            self.wyiIdentityLabel.text = sharpeningFilterwyi["lightPaintingwyi"] as? String
+            self.wyiAvatarOrb.wyiLoadImage(from: sharpeningFilterwyi["astrophotographywyi"] as? String ?? "")
+            self.wyiLocationTag.text = sharpeningFilterwyi["longDistancewyi"] as? String
+        } completionFailurewyi: {  reoailper in
+           
+        }
     }
 }
 
