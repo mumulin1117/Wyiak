@@ -2,7 +2,7 @@
 //  WYINetworkDispatcherwyi.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/8.
+//  Created by WyiakFualyny on 2026/2/8.
 //
 
 import UIKit
@@ -134,14 +134,14 @@ struct WYINetworkDispatcherwyi {
     }
     
     private static func wyiCreateSessionConfiguration() -> URLSessionConfiguration {
-        let configuration = wyiConfigurationPreset
-        configuration.timeoutIntervalForRequest = wyiTimeoutThreshold
-        configuration.timeoutIntervalForResource = wyiTimeoutThreshold * 2
+        let creatorwyi = wyiConfigurationPreset
+        creatorwyi.timeoutIntervalForRequest = wyiTimeoutThreshold
+        creatorwyi.timeoutIntervalForResource = wyiTimeoutThreshold * 2
         
-        configuration.httpAdditionalHeaders = [WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "4hMbfSo4LVw38YoU7tYLlTh1cMUzZoUWKJTPHNU9i9p9/ONi9Te3Y5D8"): wyiGenerateUserAgentString()]
-        configuration.requestCachePolicy = .useProtocolCachePolicy
+        creatorwyi.httpAdditionalHeaders = [WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "4hMbfSo4LVw38YoU7tYLlTh1cMUzZoUWKJTPHNU9i9p9/ONi9Te3Y5D8"): wyiGenerateUserAgentString()]
+        creatorwyi.requestCachePolicy = .useProtocolCachePolicy
         
-        return configuration
+        return creatorwyi
     }
     
     private static func wyiGenerateUserAgentString() -> String {

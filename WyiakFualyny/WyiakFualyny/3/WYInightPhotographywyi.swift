@@ -2,7 +2,7 @@
 //  WYInightPhotographywyi.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/7.
+//  Created by WyiakFualyny on 2026/2/7.
 //
 
 import UIKit
@@ -210,12 +210,12 @@ extension WYInightPhotographywyi: UICollectionViewDelegate, UICollectionViewData
     @objc func vintageVibewyi(diff:UIButton)  {
         var wyiroute = ""
         if diff.tag == 99 {
-            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: WYIRouterCorewyi.RouteTargetwyi.wyiWalletView.rawValue)
+            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: WYIRouterCorewyi.RouteTargetwyi.editorialwyi.rawValue)
         }else if diff.tag == 199 {
-            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiAIRobot.rawValue)
+            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.swyiEulaQuick.rawValue)
            
         }else if diff.tag == 299 {
-            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiNotificationHub.rawValue)
+            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.AssembleInterfa.rawValue)
            
         }
         
@@ -231,7 +231,7 @@ extension WYInightPhotographywyi: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cheinIn = wyiVisualFeed[indexPath.row]["nostalgicMoodwyi"] as? Int {
-            let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiMessageDetail.rawValue)
+            let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiDarkLounge.rawValue)
              
             let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier: wyiroute, queryString: "\(cheinIn)"))
                

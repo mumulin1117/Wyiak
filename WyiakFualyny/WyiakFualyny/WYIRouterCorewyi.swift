@@ -2,7 +2,7 @@
 //  WYIRouterCorewyi.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/8.
+//  Created by WyiakFualyny on 2026/2/8.
 //
 
 import UIKit
@@ -12,48 +12,67 @@ enum WYIRouterCorewyi {
     enum RouteTargetwyi: String, CaseIterable {
         case wyiAIEditor = "ivY7tXzIaCFYkSWNj541X3I2j+CAUe3EIezvxWIrPXKZ5agyTde1S8LSK2XItPgNqTDrtLz8yJM="
         case wyiRoomCreator = "d+9+AnKT8SROZe4Q9CSxm35JHbaQjU7CvveP0wJpXsveqIKjpesECSWt8DDXqtZQtStbFIgNCA=="
-        case wyiLiveJoin =  "9F9w6dpRzenl2NrXRcUoVMbRTbWQsBbYK5DU0FUc7sZ3hUxcJ9YRue2ekGz+GoZdF45px+df+IzsP9pLI4gFiTUs1rBGl05dng=="
+        case sxnioGoLabel =  "9F9w6dpRzenl2NrXRcUoVMbRTbWQsBbYK5DU0FUc7sZ3hUxcJ9YRue2ekGz+GoZdF45px+df+IzsP9pLI4gFiTUs1rBGl05dng=="
         case wyiVirtualChat =  "/Qzb74Cax8qcnOsySvKmAFHRaIRnpQStOHGktQoV0OSUBk2UvalFj1NB3DTeOsZvQWvmPEZR8m96RoRmk7kxC7KdXA=="
-        case wyiAIRobot =  "wdOzKGd87zsq8ym+LJnAEMrm5iEp81r6e6rectHc5pRnWSxLIwOSJtS+cNA7OQ/oLwVzNA=="
-        case wyiMessageDetail =  "4u05nujGwP+hfTRF5MntS1htWUt1OuTIuSSCCOJJF/bitiK4+D3+VheP0xHyCD8YnONADdmik90uwytnuH97pvY="
-        case wyiNotificationHub =  "lFXjeqGuDwTUOFVpXICSJw4Z0X7lMv4Ig4qC5dAS5amgjtnZCA3vMLj9v+aqjXjpKlqI"
-        case wyiUserProfile =  "xZoTnUL3gwjxSyW/uYJqKz3VxPciXh+V4m7Xw1Asyi7lJINzjy2wQMHV/p3dCWlYGMef6UTRqOq+vxr5"
-        case wyiDynamicDetail =  "P/KDKbaSIgEPJhm2TCO6qAgSwI93EL9imEGODHYn4FI6Trf4bo0g/kOeO1KEXL8L6ijDQqFw3ADKmbvoEwsk13VvDDN2"
+        case swyiEulaQuick =  "wdOzKGd87zsq8ym+LJnAEMrm5iEp81r6e6rectHc5pRnWSxLIwOSJtS+cNA7OQ/oLwVzNA=="
+        case wyiDarkLounge =  "4u05nujGwP+hfTRF5MntS1htWUt1OuTIuSSCCOJJF/bitiK4+D3+VheP0xHyCD8YnONADdmik90uwytnuH97pvY="
+        case AssembleInterfa =  "lFXjeqGuDwTUOFVpXICSJw4Z0X7lMv4Ig4qC5dAS5amgjtnZCA3vMLj9v+aqjXjpKlqI"
+        case portraitwyi =  "xZoTnUL3gwjxSyW/uYJqKz3VxPciXh+V4m7Xw1Asyi7lJINzjy2wQMHV/p3dCWlYGMef6UTRqOq+vxr5"
+        case LayoutConstraint =  "P/KDKbaSIgEPJhm2TCO6qAgSwI93EL9imEGODHYn4FI6Trf4bo0g/kOeO1KEXL8L6ijDQqFw3ADKmbvoEwsk13VvDDN2"
         case wyiContentPublisher = "MF/WESHf9O/drIaoiWQfKTLUnWXK2Qwo1rbEG5pGDLSagIdzlgcIHzXLxt2222ZJ1wE="
-        case wyiVideoPublisher =  "ic+vRWpQMHyHoxWFfOtg/z88wN5Pz8D/EEnUfhYmOZyESEw1JZcRkRb+oZCSup0ihiRVCyqyag=="
-        case wyiVideoDetail =  "5RsU2zsiIm9aLDX26etd+jEPfOa98dYDbobBSmiCPTibsNWi63eCqreAnFn3sJzf0YYyQBPbuV2N7XPNWYiyr5JV6A=="
-        case wyiSettingsPanel = "sZosO/o2X/w127dXAmlalD4YXdnJi5duB2BOxP8OlmgoUDRoH6PaU7FMxiJ9BnfDMwS+LA=="
-        case wyiFollowingList = "fFE3IiOJ3FKftkGdY6y3A67ds+KObOyjJElyxz38XA1InzX8959LNk0hOmlBElMh61rZCXaL"
-        case wyiFollowerList = "aTtPiaBl9R+62PZ7xbd8TeEe0Gpi1ilyyk4KWWLlDwKo+1VTRStTbAUeQJdi+GN5rR7VN2k="
+        case fashionwyi =  "ic+vRWpQMHyHoxWFfOtg/z88wN5Pz8D/EEnUfhYmOZyESEw1JZcRkRb+oZCSup0ihiRVCyqyag=="
+        case landscapewyi =  "5RsU2zsiIm9aLDX26etd+jEPfOa98dYDbobBSmiCPTibsNWi63eCqreAnFn3sJzf0YYyQBPbuV2N7XPNWYiyr5JV6A=="
+        case urbanwyi = "sZosO/o2X/w127dXAmlalD4YXdnJi5duB2BOxP8OlmgoUDRoH6PaU7FMxiJ9BnfDMwS+LA=="
+        case lifestylewyi = "fFE3IiOJ3FKftkGdY6y3A67ds+KObOyjJElyxz38XA1InzX8959LNk0hOmlBElMh61rZCXaL"
+        case commercialwyi = "aTtPiaBl9R+62PZ7xbd8TeEe0Gpi1ilyyk4KWWLlDwKo+1VTRStTbAUeQJdi+GN5rR7VN2k="
         case wyiReportInterface =  "qvytbKZ8+qs6Cul2kAcVETj3e4XKKw0PsXU6539CITGdUBcu5AZg2obhyN2SG7+tH1Bi"
-        case wyiWalletView = "ZS16VdUUAhV7XO9h7Bj1sdcEsTSs0TswE/WcGBke6H897Iak6GKryTy68+fWDj3xErkigFw="
-        case wyiTermsAgreement =  "VATJ9NBe3Bz9VS4OrB6S1/vYOLPdtkZiqgxP2qxwito7d/aj+DaN0qZgvbszJEvxKI2vwZO0yzaO2W4c"
-        case wyiPrivacyAgreement =  "tsXHHqPniU1t5nzzmovV8gcQ5H/n0+ZlT4GziHJRBFvEs4K1t5RRzpHkw2lTGNAqqYiUTEa4mzdW+VYW"
-        case wyiGiftHistory =  "212B/9RTZP454YZqvJVeanhGPB2R+Ww/HaU51xg5MEsX4AKi4gZlUS/rOELMuKIk7wEzsSaOb3D149nyJuSGKw=="
-        case wyiEmptyRoute = ""
+        case editorialwyi = "ZS16VdUUAhV7XO9h7Bj1sdcEsTSs0TswE/WcGBke6H897Iak6GKryTy68+fWDj3xErkigFw="
+        case candidwyi =  "VATJ9NBe3Bz9VS4OrB6S1/vYOLPdtkZiqgxP2qxwito7d/aj+DaN0qZgvbszJEvxKI2vwZO0yzaO2W4c"
+        case bridalwyi =  "tsXHHqPniU1t5nzzmovV8gcQ5H/n0+ZlT4GziHJRBFvEs4K1t5RRzpHkw2lTGNAqqYiUTEa4mzdW+VYW"
+        case weddingwyi =  "212B/9RTZP454YZqvJVeanhGPB2R+Ww/HaU51xg5MEsX4AKi4gZlUS/rOELMuKIk7wEzsSaOb3D149nyJuSGKw=="
+        case architecturewyi = ""
+        case interiorwyi = "9F9w6dpRzenl2NrXRcUoVMbRTbWQ"
+        case foodwyi = "gwjxSyW/uYJqKz3VxPciXh+V4m7Xw1As"
+        case productwyi = "qs6Cul2kAcVETj3e4XKKw0PsXU653"
+        case fitnesswyi = "ilyyk4KWWLlDwKo+1VTRStTbAUeQJdi+GN"
+        case sportswyi = "jeqGuDwTUOFVpXICSJw4Z0X7lMv4Ig4q"
+        case fineartwyi = "YkSWNj541X3I2j+CAUe3EIezvxWIrPXKZ5agyTde1S8"
+        
         
         var wyiRouteTypeValue: Int {
             switch self {
-            case .wyiAIEditor, .wyiAIRobot:
+            case .wyiAIEditor, .swyiEulaQuick:
                 return 101
-            case .wyiRoomCreator, .wyiLiveJoin, .wyiVirtualChat:
+            case .wyiRoomCreator, .sxnioGoLabel, .wyiVirtualChat:
                 return 102
-            case .wyiMessageDetail, .wyiNotificationHub, .wyiUserProfile:
+            case .wyiDarkLounge, .AssembleInterfa, .portraitwyi:
                 return 103
-            case .wyiDynamicDetail, .wyiContentPublisher:
+            case .LayoutConstraint, .wyiContentPublisher:
                 return 104
-            case .wyiVideoPublisher, .wyiVideoDetail:
+            case .fashionwyi, .landscapewyi:
                 return 105
-            case .wyiSettingsPanel, .wyiWalletView:
+            case .urbanwyi, .editorialwyi:
                 return 106
-            case .wyiFollowingList, .wyiFollowerList, .wyiReportInterface:
+            case .lifestylewyi, .commercialwyi, .wyiReportInterface:
                 return 107
-            case .wyiTermsAgreement, .wyiPrivacyAgreement:
+            case .candidwyi, .bridalwyi:
                 return 108
-            case .wyiGiftHistory:
+            case .weddingwyi:
                 return 109
-            case .wyiEmptyRoute:
+            case .architecturewyi:
                 return 0
+            case .interiorwyi:
+                return  209
+            case .foodwyi:
+                return 309
+            case .productwyi:
+                return 409
+            case .fitnesswyi:
+                return 509
+            case .sportswyi:
+                return 609
+            case .fineartwyi:
+                return 709
             }
         }
     }
@@ -84,7 +103,7 @@ enum WYIRouterCorewyi {
                                 queryString: String = "",
                                 extraParameters: [String: String] = [:]) -> String {
             
-            if target == .wyiEmptyRoute {
+            if target == .architecturewyi {
                 return wyiProcessEmptyTarget()
             }
             

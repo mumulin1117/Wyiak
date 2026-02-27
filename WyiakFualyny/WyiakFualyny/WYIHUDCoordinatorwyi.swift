@@ -2,7 +2,7 @@
 //  WYIHUDCoordinatorwyi.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/8.
+//  Created by WyiakFualyny on 2026/2/8.
 //
 
 import UIKit
@@ -10,40 +10,40 @@ class WYIHUDCoordinatorwyi: UIViewController {
     
     private let wyiBlurEffectContainer: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .systemMaterialDark)
-        let effectView = UIVisualEffectView(effect: blurEffect)
-        effectView.translatesAutoresizingMaskIntoConstraints = false
-        effectView.layer.cornerRadius = 16
-        effectView.layer.masksToBounds = true
-        effectView.alpha = 0
-        return effectView
+        let photographerwyi = UIVisualEffectView(effect: blurEffect)
+        photographerwyi.translatesAutoresizingMaskIntoConstraints = false
+        photographerwyi.layer.cornerRadius = 16
+        photographerwyi.layer.masksToBounds = true
+        photographerwyi.alpha = 0
+        return photographerwyi
     }()
     
     private let wyiActivityVisualizer: UIActivityIndicatorView = {
-        let visualizer = UIActivityIndicatorView(style: .large)
-        visualizer.translatesAutoresizingMaskIntoConstraints = false
-        visualizer.color = .white
-        visualizer.hidesWhenStopped = true
-        return visualizer
+        let stylistwyi = UIActivityIndicatorView(style: .large)
+        stylistwyi.translatesAutoresizingMaskIntoConstraints = false
+        stylistwyi.color = .white
+        stylistwyi.hidesWhenStopped = true
+        return stylistwyi
     }()
     
-    private let wyiMessageLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
-        label.font = .systemFont(ofSize: 15, weight: .medium)
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.alpha = 0
-        return label
+    private let hairartistwyi: UILabel = {
+        let makeupartistwyi = UILabel()
+        makeupartistwyi.translatesAutoresizingMaskIntoConstraints = false
+        makeupartistwyi.textColor = .white
+        makeupartistwyi.font = .systemFont(ofSize: 15, weight: .medium)
+        makeupartistwyi.textAlignment = .center
+        makeupartistwyi.numberOfLines = 0
+        makeupartistwyi.alpha = 0
+        return makeupartistwyi
     }()
     
     private let wyiIconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .white
-        imageView.isHidden = true
-        return imageView
+        let directorwyi = UIImageView()
+        directorwyi.translatesAutoresizingMaskIntoConstraints = false
+        directorwyi.contentMode = .scaleAspectFit
+        directorwyi.tintColor = .white
+        directorwyi.isHidden = true
+        return directorwyi
     }()
     
     private let wyiVibrancyLayer: UIVisualEffectView = {
@@ -79,7 +79,7 @@ class WYIHUDCoordinatorwyi: UIViewController {
     private func wyiAssembleVisualComponents() {
         wyiVibrancyLayer.contentView.addSubview(wyiActivityVisualizer)
         wyiVibrancyLayer.contentView.addSubview(wyiIconImageView)
-        wyiVibrancyLayer.contentView.addSubview(wyiMessageLabel)
+        wyiVibrancyLayer.contentView.addSubview(hairartistwyi)
         wyiBlurEffectContainer.contentView.addSubview(wyiVibrancyLayer)
         view.addSubview(wyiBlurEffectContainer)
         
@@ -106,10 +106,10 @@ class WYIHUDCoordinatorwyi: UIViewController {
             wyiIconImageView.widthAnchor.constraint(equalToConstant: 36),
             wyiIconImageView.heightAnchor.constraint(equalToConstant: 36),
             
-            wyiMessageLabel.topAnchor.constraint(equalTo: wyiActivityVisualizer.bottomAnchor, constant: 16),
-            wyiMessageLabel.leadingAnchor.constraint(equalTo: wyiVibrancyLayer.leadingAnchor, constant: 12),
-            wyiMessageLabel.trailingAnchor.constraint(equalTo: wyiVibrancyLayer.trailingAnchor, constant: -12),
-            wyiMessageLabel.bottomAnchor.constraint(lessThanOrEqualTo: wyiVibrancyLayer.bottomAnchor, constant: -20)
+            hairartistwyi.topAnchor.constraint(equalTo: wyiActivityVisualizer.bottomAnchor, constant: 16),
+            hairartistwyi.leadingAnchor.constraint(equalTo: wyiVibrancyLayer.leadingAnchor, constant: 12),
+            hairartistwyi.trailingAnchor.constraint(equalTo: wyiVibrancyLayer.trailingAnchor, constant: -12),
+            hairartistwyi.bottomAnchor.constraint(lessThanOrEqualTo: wyiVibrancyLayer.bottomAnchor, constant: -20)
         ])
     }
     
@@ -165,9 +165,9 @@ class WYIHUDCoordinatorwyi: UIViewController {
             hudInstance.wyiDisplayMode = displayMode
             
             if let textContent = messageText {
-                hudInstance.wyiMessageLabel.text = textContent
+                hudInstance.hairartistwyi.text = textContent
             } else {
-                hudInstance.wyiMessageLabel.text = "Processing your request..."
+                hudInstance.hairartistwyi.text = "Processing your request..."
             }
             
             hudInstance.wyiConfigureDisplayMode()
@@ -221,7 +221,7 @@ class WYIHUDCoordinatorwyi: UIViewController {
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
             self.wyiBlurEffectContainer.alpha = 1
-            self.wyiMessageLabel.alpha = self.wyiMessageLabel.text?.isEmpty == false ? 1 : 0
+            self.hairartistwyi.alpha = self.hairartistwyi.text?.isEmpty == false ? 1 : 0
         }
     }
     
@@ -273,7 +273,7 @@ class WYIHUDCoordinatorwyi: UIViewController {
     private func wyiTerminateDisplayAnimation(completionHandler: @escaping () -> Void) {
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn) {
             self.wyiBlurEffectContainer.alpha = 0
-            self.wyiMessageLabel.alpha = 0
+            self.hairartistwyi.alpha = 0
             self.wyiIconImageView.alpha = 0
         } completion: { _ in
             self.wyiActivityVisualizer.stopAnimating()
@@ -296,10 +296,10 @@ class WYIHUDCoordinatorwyi: UIViewController {
                 return
             }
             
-            hudInstance.wyiMessageLabel.text = newMessage
+            hudInstance.hairartistwyi.text = newMessage
             
             UIView.animate(withDuration: 0.15) {
-                hudInstance.wyiMessageLabel.alpha = newMessage.isEmpty ? 0 : 1
+                hudInstance.hairartistwyi.alpha = newMessage.isEmpty ? 0 : 1
             }
         }
     }

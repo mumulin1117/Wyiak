@@ -2,7 +2,7 @@
 //  WYILoginViewController.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/6.
+//  Created by WyiakFualyny on 2026/2/6.
 //
 
 import UIKit
@@ -303,9 +303,9 @@ class WYILoginViewController: UIViewController {
         
         var wyiroute = ""
         if wyiInfo.contains(WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "8bPGoWAfu2k0y29AEHFX9aVjY0B5ro0p3LzBQ1gPCUg+iNuE8XGE")) {
-            wyiroute =  WYIRouterCorewyi.RouteTargetwyi.wyiTermsAgreement.rawValue
+            wyiroute =  WYIRouterCorewyi.RouteTargetwyi.candidwyi.rawValue
         }else{
-            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiPrivacyAgreement.rawValue
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.bridalwyi.rawValue
            
         }
         

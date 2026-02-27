@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/5.
+//  Created by WyiakFualyny on 2026/2/5.
 //
 
 import UIKit

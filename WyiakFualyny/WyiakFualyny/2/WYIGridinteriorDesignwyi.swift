@@ -2,7 +2,7 @@
 //  WYIGridinteriorDesignwyi.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/7.
+//  Created by WyiakFualyny on 2026/2/7.
 //
 
 import UIKit
@@ -145,7 +145,7 @@ extension WYIGridinteriorDesignwyi: UICollectionViewDelegate, UICollectionViewDa
         
         if diff.tag >= 3000 {
             if let cheinIn = wyiVisualFeed[diff.tag - 3000].alosgiju["nostalgicMoodwyi"] as? String {
-                let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiMessageDetail.rawValue) 
+                let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiDarkLounge.rawValue) 
                  
                 let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier: wyiroute, queryString: "\(cheinIn)"))
                    
@@ -158,7 +158,7 @@ extension WYIGridinteriorDesignwyi: UICollectionViewDelegate, UICollectionViewDa
         
         var wyiroute = ""
         if diff.tag == 99 {
-            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiVideoPublisher.rawValue)
+            wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.fashionwyi.rawValue)
         }else if diff.tag == 299 {
             wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiReportInterface.rawValue)
            
@@ -177,7 +177,7 @@ extension WYIGridinteriorDesignwyi: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cheinIn = wyiVisualFeed[indexPath.item].alosgiju["cinematicLookwyi"] as? Int {
-            let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiVideoDetail.rawValue)
+            let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.landscapewyi.rawValue)
              
             let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier: wyiroute, queryString: "\(cheinIn)"))
                

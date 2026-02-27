@@ -2,7 +2,7 @@
 //  WYIExploreViewController.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/6.
+//  Created by WyiakFualyny on 2026/2/6.
 //
 
 
@@ -62,7 +62,7 @@ class WYIExploreViewController: UIViewController, WYIVoiceClusterCellDelegate {
        
        if diff.tag >= 3000 {
            if let cheinIn = wyiVisualFeed[diff.tag - 3000].alosgiju["nostalgicMoodwyi"] as? String {
-               let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: WYIRouterCorewyi.RouteTargetwyi.wyiMessageDetail.rawValue)
+               let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: WYIRouterCorewyi.RouteTargetwyi.wyiDarkLounge.rawValue)
                 
                let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier: wyiroute, queryString: "\(cheinIn)"))
                   
@@ -224,7 +224,7 @@ extension WYIExploreViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             if let cheinIn = wyiVisualFeed[indexPath.item].alosgiju["cinematicLookwyi"] as? Int {
-                let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.wyiDynamicDetail.rawValue)
+                let wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:WYIRouterCorewyi.RouteTargetwyi.LayoutConstraint.rawValue)
                  
                 let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier: wyiroute, queryString: "\(cheinIn)"))
                    

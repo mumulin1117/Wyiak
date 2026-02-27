@@ -2,7 +2,7 @@
 //  VignetteEffectwyi.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/7.
+//  Created by WyiakFualyny on 2026/2/7.
 //
 
 import UIKit
@@ -266,22 +266,33 @@ class WYIProfileNexusController: UIViewController {
     @objc func vintageVibewyi(diff:UIButton)  {
         var wyiroute = ""
         if diff.tag == 99 {
-            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiGiftHistory.rawValue
+            if let WYIid =  UserDefaults.standard.object(forKey: "darkroomProcesswyi") as? Int  {
+                
+                wyiroute = WYIRouterCorewyi.RouteTargetwyi.weddingwyi.rawValue + "\(WYIid)"
+                
+                let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier:wyiroute  , queryString: ""))
+                self.navigationController?.pushViewController(wyiFeedback, animated: true)
+                return
+            }
+                    
+           
         }else if diff.tag == 199 {//setting
-            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiSettingsPanel.rawValue
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.urbanwyi.rawValue
            
         }else if diff.tag == 299 {
             wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiAIEditor.rawValue
            
         }else if diff.tag == 399 {
-            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiFollowerList.rawValue
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.commercialwyi.rawValue
            
         }else if diff.tag == 499 {
-            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiFollowingList.rawValue
+            wyiroute = WYIRouterCorewyi.RouteTargetwyi.lifestylewyi.rawValue
            
         }
         
-        let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier:WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:wyiroute) , queryString: ""))
+                                                                                           
+        
+        let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier:WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:wyiroute)  , queryString: ""))
         self.navigationController?.pushViewController(wyiFeedback, animated: true)
         
         

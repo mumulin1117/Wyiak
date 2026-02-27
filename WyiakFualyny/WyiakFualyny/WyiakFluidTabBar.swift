@@ -56,12 +56,10 @@ class WyiakFluidTabBar: UITabBar {
         let count = CGFloat(items?.count ?? 1)
         let itemWidth = self.frame.width / count
         let centerX = (CGFloat(index) * itemWidth) + (itemWidth / 2)
-        
-        // 起点
+  
         path.move(to: CGPoint(x: 0, y: 0))
         path.addLine(to: CGPoint(x: centerX - circleRadius - 10, y: 0))
-        
-        // 向内凹陷的曲线 (curveHeight 为正值即向下凹)
+      
         path.addCurve(to: CGPoint(x: centerX + circleRadius + 10, y: 0),
                       controlPoint1: CGPoint(x: centerX - circleRadius, y: curveHeight),
                       controlPoint2: CGPoint(x: centerX + circleRadius, y: curveHeight))

@@ -2,7 +2,7 @@
 //  WYIVoiceClusterCell.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/2/7.
+//  Created by WyiakFualyny on 2026/2/7.
 //
 
 import UIKit
