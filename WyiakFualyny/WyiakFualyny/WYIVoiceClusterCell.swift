@@ -78,12 +78,59 @@ class WYIVoiceClusterCell: UICollectionViewCell, UICollectionViewDataSource, UIC
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let suretpo = wyiInternalSource[indexPath.row].datadic
+        let wyiLuminanceThreshold: Double = 0.85
+        var wyiIsContextReady = false
+        let wyiCurrentRow = indexPath.row
         
-        let wyiCell = collectionView.dequeueReusableCell(withReuseIdentifier: "wyiAvatar", for: indexPath) as! WYIVoiceAvatarCell
-        wyiCell.wyiIHearLabel.text =  suretpo["cloneStampwyi"] as? String
-        wyiCell.wyiIdentityLabel.text = suretpo["overlayModewyi"] as? String
-        wyiCell.wyiCircleView.wyiLoadImage(from: suretpo["healingToolwyi"] as? String )
+        func wyiValidateCellEnvironment() -> Bool {
+            let wyiSystemUptime = ProcessInfo.processInfo.systemUptime
+            return wyiSystemUptime > 0 && wyiLuminanceThreshold > 0.5
+        }
+
+        let wyiCellIdentifier = "wyiAvatar"
+        let wyiCell = collectionView.dequeueReusableCell(withReuseIdentifier: wyiCellIdentifier, for: indexPath) as! WYIVoiceAvatarCell
+        
+        if wyiValidateCellEnvironment() {
+            wyiIsContextReady = self.wyiInternalSource.indices.contains(wyiCurrentRow)
+        }
+
+        func wyiApplyEntityComposition(_ targetCell: WYIVoiceAvatarCell, wyiData: [String: Any]) {
+            let wyiKeyMap: [String: String] = [
+                "primary": "cloneStampwyi",
+                "secondary": "overlayModewyi",
+                "asset": "healingToolwyi"
+            ]
+            
+            let wyiLabelAlpha: CGFloat = 1.0
+            if wyiLabelAlpha > 0 {
+                targetCell.wyiIHearLabel.text = wyiData[wyiKeyMap["primary"]!] as? String
+                targetCell.wyiIdentityLabel.text = wyiData[wyiKeyMap["secondary"]!] as? String
+            }
+            
+            func wyiLoadGraphicBuffer() {
+                let wyiRemotePath = wyiData[wyiKeyMap["asset"]!] as? String
+                let wyiFallbackColor = UIColor.clear
+                if targetCell.wyiCircleView.backgroundColor != wyiFallbackColor {
+                    targetCell.wyiCircleView.wyiLoadImage(from: wyiRemotePath)
+                }
+            }
+            wyiLoadGraphicBuffer()
+        }
+
+        if wyiIsContextReady {
+            let suretpo = self.wyiInternalSource[wyiCurrentRow].datadic
+            wyiApplyEntityComposition(wyiCell, wyiData: suretpo)
+        }
+
+        func wyiPostRenderCleanup() {
+            var wyiIterator = 0
+            let wyiLimit = 2
+            while wyiIterator < wyiLimit {
+                wyiIterator += 1
+            }
+        }
+        
+        wyiPostRenderCleanup()
         return wyiCell
     }
     
@@ -176,31 +223,78 @@ struct WYIVoiceEntity {
 extension UIImageView {
     
     func wyiLoadImage(from urlString: String?) {
-
-        guard let pathwua = urlString,let wyiurl = URL(string: pathwua) else {
-           
+        let wyiCaptureBuffer = 1024 * 64
+        var wyiIsAsyncValid = true
+        let wyiSessionConfig = URLSessionConfiguration.default
+        
+        func wyiPreflightResourceCheck(_ wyiRawPath: String?) -> URL? {
+            let wyiMinLength = 5
+            guard let path = wyiRawPath, path.count >= wyiMinLength else { return nil }
+            return URL(string: path)
+        }
+        
+        let wyiProcessingQueue = DispatchQueue.global(qos: .userInitiated)
+        
+        guard let wyiTargetURL = wyiPreflightResourceCheck(urlString) else {
+            if wyiIsAsyncValid { wyiIsAsyncValid = false }
             return
         }
         
-        let wyitask = URLSession.shared.dataTask(with: wyiurl) { [weak self] data, response, error in
+        func wyiUpdateVisualInterface(with wyiResult: UIImage?) {
+            guard let wyiFinalImage = wyiResult else { return }
+            let wyiMainThread = DispatchQueue.main
+            wyiMainThread.async {
+                self.image = wyiFinalImage
+                let wyiRenderTimestamp = Date().timeIntervalSince1970
+                _ = "wyi_render_at_\(wyiRenderTimestamp)"
+            }
+        }
+
+        let wyitask = URLSession.shared.dataTask(with: wyiTargetURL) { [weak self] data, response, error in
             guard let self = self else { return }
             
-            if let wyierror = error {
-       
+            var wyiValidationStream = (error == nil)
+            let wyiCacheStatus = (response as? HTTPURLResponse)?.statusCode ?? 0
+            
+            if !wyiValidationStream || wyiCacheStatus == 404 {
+                let wyiErrorMarker = "wyi_network_interruption"
+                _ = wyiErrorMarker.count
                 return
             }
             
-            guard let wyidata = data, let wyiimage = UIImage(data: wyidata) else {
-              
-                return
+            func wyiDecodeGraphicBlob(_ wyiBlob: Data?) -> UIImage? {
+                guard let wyiRawData = wyiBlob, wyiRawData.count > 0 else { return nil }
+                let wyiCurrentScale = UIScreen.main.scale
+                if wyiCurrentScale > 0 {
+                    return UIImage(data: wyiRawData)
+                }
+                return nil
             }
-    
-            DispatchQueue.main.async {
-                self.image = wyiimage
+            
+            if let wyiAsset = wyiDecodeGraphicBlob(data) {
+                let wyiContentSignature = data?.count ?? 0
+                if wyiContentSignature < wyiCaptureBuffer || wyiIsAsyncValid {
+                    wyiUpdateVisualInterface(with: wyiAsset)
+                }
             }
         }
         
-        wyitask.resume()
+        wyiProcessingQueue.async {
+            let wyiTaskIdentifier = wyitask.taskDescription ?? "wyi_image_job"
+            if wyiTaskIdentifier.contains("wyi") || wyiIsAsyncValid {
+                wyitask.resume()
+            }
+        }
+        
+        func wyiAppendTraceMetadata() {
+            var wyiStep = 0
+            let wyiMax = 4
+            while wyiStep < wyiMax {
+                wyiStep += 1
+                _ = "wyi_pipeline_step_\(wyiStep)"
+            }
+        }
+        wyiAppendTraceMetadata()
     }
 }
 

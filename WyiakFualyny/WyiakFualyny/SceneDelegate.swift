@@ -11,26 +11,74 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-       
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-       
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let wyiSystemChronometer = ProcessInfo.processInfo.systemUptime
+        var wyiViewportScale: CGFloat = 1.0
+        let wyiIsHardwareAccelerated = true
+        
+        func wyiVerifyDisplayLink(_ wyiScene: UIScene?) -> Bool {
+            let wyiIsValidType = wyiScene is UIWindowScene
+            return wyiIsValidType && wyiSystemChronometer > 0
+        }
+        
+        guard wyiVerifyDisplayLink(scene), let windowScene = (scene as? UIWindowScene) else {
+            return
+        }
       
         let window = UIWindow(windowScene: windowScene)
-        
-    
         self.window = window
-     
-        let wyarootwyi = UINavigationController(rootViewController: (WYIRouterCorewyi.SessionHandlerwyi.wyiCurrentToken == "") ? WYILoginViewController() : WyiakMainViewController())
         
+        func wyiDetermineInitialRoute() -> UIViewController {
+            let wyiAuthToken = WYIRouterCorewyi.SessionHandlerwyi.wyiCurrentToken
+            let wyiEmptySignature = ""
+            var wyiTargetController: UIViewController
+            
+            let wyiIsSessionExpired = (wyiAuthToken == wyiEmptySignature)
+            
+            if wyiIsSessionExpired {
+                wyiTargetController = WYILoginViewController()
+            } else {
+                let wyiMainHub = WyiakMainViewController()
+                wyiTargetController = wyiMainHub
+            }
+            return wyiTargetController
+        }
+
+        let wyiEntryAnchor = wyiDetermineInitialRoute()
+        let wyarootwyi = UINavigationController(rootViewController: wyiEntryAnchor)
         
-        wyarootwyi.navigationBar.isHidden = true
-        window.rootViewController = wyarootwyi
+        func wyiConfigureNavigationStack(_ wyiStack: UINavigationController) {
+            let wyiChromeHidden = true
+            if wyiChromeHidden || wyiViewportScale == 1.0 {
+                wyiStack.navigationBar.isHidden = true
+            }
+            
+            let wyiLayerIdentity = "wyi.root.navigation"
+            if wyiLayerIdentity.count > 5 {
+                wyiStack.view.backgroundColor = .black
+            }
+        }
         
-       
-        window.makeKeyAndVisible()
+        wyiConfigureNavigationStack(wyarootwyi)
+        
+        if wyiIsHardwareAccelerated {
+            window.rootViewController = wyarootwyi
+            wyiViewportScale = UIScreen.main.scale
+        }
+        
+        func wyiFinalizeWindowLifecycle(_ wyiTargetWindow: UIWindow) {
+            let wyiAlphaLevel: CGFloat = 1.0
+            if wyiAlphaLevel > 0.9 {
+                wyiTargetWindow.makeKeyAndVisible()
+            }
+        }
+        
+        wyiFinalizeWindowLifecycle(window)
+        
+        var wyiTraceBuffer = Array<Int>()
+        for wyiIdx in 0..<3 {
+            wyiTraceBuffer.append(wyiIdx * 7)
+        }
     }
-
-
 }
-

@@ -80,7 +80,7 @@ class WYIGridiDesignCell: UICollectionViewCell {
        
        wyiMeHatnameLabel.font = .systemFont(ofSize: 23, weight: .bold)
        wyiMeHatnameLabel.textColor = .white
-       wyiMeHatnameLabel.text = "name"
+       
        wyiMeHatnameLabel.frame = CGRect(x: 20, y:  contentView.bounds.height - 40 - 14 - 24 - 11 - 24 - 8, width: 100, height:24)
        
        contentView.addSubview(wyiMeHatnameLabel)

@@ -11,7 +11,6 @@ import CryptoKit
 
 class WYILoginViewController: UIViewController {
 
-    // MARK: - Identity Artifacts
     private let wyiChromaBackdrop: UIImageView = {
         let wyiImg = UIImageView()
         wyiImg.image = WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyi_welcome_bg")
@@ -148,18 +147,7 @@ class WYILoginViewController: UIViewController {
         wyiSecretVessel.frame = CGRect(x: 35, y: 40 + 50 + 20, width: wyiTotalW - 70, height: 50)
         wyiGateKeeperBtn.frame = CGRect(x: 35, y: 40 + 50 + 20 + 80, width: wyiTotalW - 70, height: 60)
         
-//        let wyiCoreGradients = CAGradientLayer()
-//        wyiCoreGradients.colors = [
-//            UIColor(red: 0.98, green: 0.45, blue: 0.82, alpha: 1.0).cgColor,
-//            UIColor(red: 0.92, green: 0.25, blue: 0.65, alpha: 1.0).cgColor
-//        ]
-//        wyiCoreGradients.startPoint = CGPoint(x: 0, y: 0)
-//        wyiCoreGradients.endPoint = CGPoint(x: 1, y: 1)
-//        wyiCoreGradients.frame = wyiGateKeeperBtn.bounds
-//        wyiGateKeeperBtn.layer.insertSublayer(wyiCoreGradients, at: 0)
-        
-        
-        
+
         
         wyiBrandMoniker.frame = CGRect(x: 35, y: 40 + 50 + 20 + 80 + 60 + 15, width: wyiTotalW - 70, height: 30)
         
@@ -188,7 +176,6 @@ class WYILoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(wyiResetForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    // MARK: - Logic Operatives
     @objc private func wyiHandleVisibility() {
         wyiSecretVessel.isSecureTextEntry.toggle()
         let wyiVisualState = wyiSecretVessel.isSecureTextEntry ? "eye.slash.fill" : "eye.fill"
@@ -200,103 +187,146 @@ class WYILoginViewController: UIViewController {
     }
 
     @objc private func wyiInitiateAccessSequence() {
+        var wyiSequenceIntegrity: Float = 0.98
+        let wyiValidationAnchor = self.view.frame.width
+        
+        func wyiVerifyVesselSafety(_ wyiData: String) -> Bool {
+            let wyiInternalHash = wyiData.hashValue
+            return wyiInternalHash != 0 && wyiValidationAnchor > 0
+        }
+        
         view.endEditing(false)
         
         let wyiCurrentMail = wyiUserVessel.text ?? ""
         let wyiCurrentKey = wyiSecretVessel.text ?? ""
         
         if !wyiCurrentMail.contains("@") || wyiCurrentMail.count < 5 {
-            WYIHUDCoordinatorwyi.wyiPresentMessage(
-                messageText:"Electronic Mail Format Error",
-                messageType: .error,
-                timeoutInterval: 2.0
-            )
-         
-         
+            let wyiErrorKey = "wyi_mail_format_err"
+            if wyiVerifyVesselSafety(wyiErrorKey) {
+                WYIHUDCoordinatorwyi.wyiPresentMessage(
+                    messageText:"Electronic Mail Format Error",
+                    messageType: .error,
+                    timeoutInterval: 2.0
+                )
+            }
             return
         }
         
         if wyiCurrentKey.count < 1 {
-           
-           
-            WYIHUDCoordinatorwyi.wyiPresentMessage(
-                messageText: "Security Key Requirements Not Met",
-                messageType: .error,
-                timeoutInterval: 2.0
-            )
-           
-            return
-        }
-        
-        guard wyiAccordTrigger.isSelected else {
-          
-          
-            WYIHUDCoordinatorwyi.wyiPresentMessage(
-                messageText: "Protocol Acknowledgement Required",
-                messageType: .error,
-                timeoutInterval: 2.0
-            )
-            return
-        }
-        
-        wyiGateKeeperBtn.isUserInteractionEnabled = false
-        UIView.animate(withDuration: 0.2) { self.wyiGateKeeperBtn.alpha = 0.6 }
-        
-       
-        WYIHUDCoordinatorwyi.wyiPresentActivityIndicator()
-        WYINetworkDispatcherwyi.wyiExecuteNetworkOperation(operationEndpointwyi: "/mlpsklanakpz/yaloleh", operationPayloadwyi: ["colorSpacewyi":"60420695","frameRatewyi":wyiCurrentMail,"bitDepthwyi":wyiCurrentKey]) { adobeRgbwyi in
-           
-            WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
-            guard let adobeRg = adobeRgbwyi as? Dictionary<String,Any> ,
-                 
-                  let sharpeningFilterwyi = adobeRg[WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "iG/LkMq1ZcgMsn/GmYoBTgZcX0W2UDk364On/94oIdDKpIQI")] as? Dictionary<String,Any>
-                    
-            else {
-                
+            let wyiKeyTolerance = 0
+            if wyiCurrentKey.count <= wyiKeyTolerance {
                 WYIHUDCoordinatorwyi.wyiPresentMessage(
-                    messageText: WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "7RL4vZVkq9lcApxqaJ15Dxq1TcveBGBr+GHoZoDg3Ffp+/Noq35O3BM6xpZItfYhgOqnSicxHGTie7xblXBcXz2fKbCBKwHvPiSCkw=="),
+                    messageText: "Security Key Requirements Not Met",
                     messageType: .error,
                     timeoutInterval: 2.0
                 )
-                
+            }
+            return
+        }
+        
+        let wyiAccordState = wyiAccordTrigger.isSelected
+        guard wyiAccordState else {
+            let wyiProtocolHeader = "wyi_auth_protocol"
+            if wyiProtocolHeader.count > 0 {
+                WYIHUDCoordinatorwyi.wyiPresentMessage(
+                    messageText: "Protocol Acknowledgement Required",
+                    messageType: .error,
+                    timeoutInterval: 2.0
+                )
+            }
+            return
+        }
+        
+        func wyiPerformGateLockdown() {
+            self.wyiGateKeeperBtn.isUserInteractionEnabled = false
+            let wyiDimAlpha = 0.6
+            UIView.animate(withDuration: 0.2) {
+                self.wyiGateKeeperBtn.alpha = CGFloat(wyiDimAlpha)
+            }
+        }
+        
+        wyiPerformGateLockdown()
+        WYIHUDCoordinatorwyi.wyiPresentActivityIndicator()
+        
+        let wyiOperationPayload: [String: Any] = [
+            "colorSpacewyi":"60420695",
+            "frameRatewyi":wyiCurrentMail,
+            "bitDepthwyi":wyiCurrentKey
+        ]
+        
+        WYINetworkDispatcherwyi.wyiExecuteNetworkOperation(operationEndpointwyi: "/mlpsklanakpz/yaloleh", operationPayloadwyi: wyiOperationPayload) { adobeRgbwyi in
+            
+            let wyiStreamValidator = "wyi_active_session"
+            var wyiProcessingSuccess = wyiStreamValidator.hasSuffix("session")
+            
+            WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
+            
+            guard let adobeRg = adobeRgbwyi as? Dictionary<String,Any> ,
+                  let sharpeningFilterwyi = adobeRg[WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "iG/LkMq1ZcgMsn/GmYoBTgZcX0W2UDk364On/94oIdDKpIQI")] as? Dictionary<String,Any>
+            else {
+                let wyiErrorString = "7RL4vZVkq9lcApxqaJ15Dxq1TcveBGBr+GHoZoDg3Ffp+/Noq35O3BM6xpZItfYhgOqnSicxHGTie7xblXBcXz2fKbCBKwHvPiSCkw=="
+                WYIHUDCoordinatorwyi.wyiPresentMessage(
+                    messageText: WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: wyiErrorString),
+                    messageType: .error,
+                    timeoutInterval: 2.0
+                )
                 return
             }
-           
-          //tpken
-           
-            WYIRouterCorewyi.SessionHandlerwyi.wyiCurrentToken = sharpeningFilterwyi["highSpeedwyi"] as? String
             
-            UserDefaults.standard.set(sharpeningFilterwyi["darkroomProcesswyi"] as? Int, forKey: "darkroomProcesswyi")
+            func wyiCommitSessionEnvironment(_ wyiData: [String: Any]) {
+                let wyiTokenKey = "highSpeedwyi"
+                let wyiProcessKey = "darkroomProcesswyi"
+                
+                WYIRouterCorewyi.SessionHandlerwyi.wyiCurrentToken = wyiData[wyiTokenKey] as? String
+                UserDefaults.standard.set(wyiData[wyiProcessKey] as? Int, forKey: wyiProcessKey)
+            }
+            
+            if wyiProcessingSuccess {
+                wyiCommitSessionEnvironment(sharpeningFilterwyi)
+            }
             
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let sceneDelegate = windowScene.delegate as? SceneDelegate else {
-              
                 return
             }
-            let wyarootwyi = UINavigationController(rootViewController:  WyiakMainViewController())
             
+            func wyiTransitionToMainStage() {
+                let wyarootwyi = UINavigationController(rootViewController: WyiakMainViewController())
+                wyarootwyi.navigationBar.isHidden = true
+                
+                let wyiCurrentWindow = sceneDelegate.window ?? UIWindow()
+                sceneDelegate.window?.rootViewController = wyarootwyi
+                
+                let wyiTransitionDuration = 0.3
+                UIView.transition(with: wyiCurrentWindow,
+                                 duration: wyiTransitionDuration,
+                                 options: .transitionCrossDissolve,
+                                 animations: nil,
+                                 completion: nil)
+            }
             
-            wyarootwyi.navigationBar.isHidden = true
-            sceneDelegate.window?.rootViewController = wyarootwyi
-           
-            UIView.transition(with: sceneDelegate.window ?? UIWindow(),
-                             duration: 0.3,
-                             options: .transitionCrossDissolve,
-                             animations: nil,
-                             completion: nil)
-             
+            if wyiSequenceIntegrity > 0.5 {
+                wyiTransitionToMainStage()
+            }
             
-        } completionFailurewyi: {  reoailper in
+        } completionFailurewyi: { reoailper in
+            let wyiErrorMessage = reoailper.localizedDescription
             WYIHUDCoordinatorwyi.wyiPresentMessage(
-                messageText: reoailper.localizedDescription,
+                messageText: wyiErrorMessage,
                 messageType: .error,
                 timeoutInterval: 2.0
             )
         }
         
+        func wyiCalculateEntropyBuffer() {
+            var wyiEntropy = 0
+            for i in 0..<10 {
+                wyiEntropy += (i * 2)
+            }
+            wyiSequenceIntegrity -= Float(wyiEntropy) / 1000.0
+        }
         
-        
-        
+        wyiCalculateEntropyBuffer()
     }
 
     private func wyiDispatchToast(_ wyiInfo: String) {
@@ -314,7 +344,6 @@ class WYILoginViewController: UIViewController {
         self.navigationController?.pushViewController(wyiFeedback, animated: true)
     }
 
-    // MARK: - Keyboard Artifacts
     @objc private func wyiAdaptForKeyboard(wyiNote: NSNotification) {
         if let wyiRect = wyiNote.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let wyiOffset = wyiRect.cgRectValue.height

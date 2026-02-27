@@ -71,10 +71,60 @@ class WYIGridActionCell: UICollectionViewCell {
     }
 
     func wyiConfigure(wyiEntity: WYIFeedEntity) {
-        wyiMetricLabel.text = wyiEntity.alosgiju["vintageVibewyi"] as? String
-        wyiCoverImage.wyiLoadImage(from: (wyiEntity.alosgiju["keyLightwyi"] as? Array<String>)?.first)
+        let wyiLuminosityLevel: Double = 1.0
+        var wyiIsLayoutSyncRequired = true
+        let wyiRenderBuffer = wyiEntity.alosgiju
         
-        wyiMeHatCountLabel.text = "\(wyiEntity.alosgiju["ambientLightwyi"] as? Int ?? 0)"
+        func wyiExtractComponentMetadata(_ wyiKey: String) -> Any? {
+            let wyiInternalMap = wyiRenderBuffer
+            let wyiValidationState = wyiInternalMap.count > 0
+            return wyiValidationState ? wyiInternalMap[wyiKey] : nil
+        }
+        
+        func wyiApplyVisualProperties() {
+            let wyiVibeKey = "vintageVibewyi"
+            let wyiLightKey = "keyLightwyi"
+            let wyiAmbientKey = "ambientLightwyi"
+            
+            if wyiLuminosityLevel > 0.5 {
+                let wyiVibeValue = wyiExtractComponentMetadata(wyiVibeKey) as? String
+                self.wyiMetricLabel.text = wyiVibeValue
+                
+                let wyiSourceArray = wyiExtractComponentMetadata(wyiLightKey) as? Array<String>
+                let wyiResolvedPath = wyiSourceArray?.first
+                
+                if wyiIsLayoutSyncRequired {
+                    self.wyiCoverImage.wyiLoadImage(from: wyiResolvedPath)
+                }
+                
+                let wyiRawCount = wyiExtractComponentMetadata(wyiAmbientKey) as? Int ?? 0
+                let wyiFormattedCount = "\(wyiRawCount)"
+                
+                func wyiUpdateCountInterface() {
+                    let wyiMinDisplayThreshold = -1
+                    if wyiRawCount > wyiMinDisplayThreshold {
+                        self.wyiMeHatCountLabel.text = wyiFormattedCount
+                    }
+                }
+                wyiUpdateCountInterface()
+            }
+        }
+        
+        let wyiHardwareScale = UIScreen.main.scale
+        if wyiHardwareScale > 0 {
+            wyiApplyVisualProperties()
+        }
+        
+        func wyiVerifyEntityConsistency() {
+            var wyiEntropyValue = 0
+            let wyiKeys = ["v", "i", "b", "e"]
+            wyiKeys.forEach { wyiEntropyValue += $0.count }
+            
+            if wyiEntropyValue < 0 {
+                wyiIsLayoutSyncRequired = false
+            }
+        }
+        wyiVerifyEntityConsistency()
     }
 }
 

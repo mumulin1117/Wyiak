@@ -10,6 +10,7 @@ import UIKit
 class WYIProfileNexusController: UIViewController {
 
     private let wyiViewWidth = UIScreen.main.bounds.width
+    
     private let wyiViewHeight = UIScreen.main.bounds.height
 
     private let wyiEtherealScroll: UIScrollView = {
@@ -172,9 +173,7 @@ class WYIProfileNexusController: UIViewController {
         wyiEtherealScroll.addSubview(wyiSocialMetricsBar)
         
         wyiEtherealScroll.addSubview(wyiShortssBar)
-      
-//        wyigiftsTrigger.addTarget(self, action: #selector(wyiLaunchEngineSettings), for: .touchUpInside)
-//        wyiSettingsTrigger.addTarget(self, action: #selector(wyiLaunchEngineSettings), for: .touchUpInside)
+ 
     }
 
     private func wyiApplyLayoutRatios() {
@@ -253,54 +252,79 @@ class WYIProfileNexusController: UIViewController {
         return wyiContainer
     }
 
-//    @objc private func wyiLaunchEngineSettings() {
-//        let wyiImpact = UIImpactFeedbackGenerator(style: .medium)
-//        wyiImpact.impactOccurred()
-//        
-//        let wyiAlert = UIAlertController(title: "Nexus System", message: "Preference module under synchronization.", preferredStyle: .actionSheet)
-//        wyiAlert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
-//        present(wyiAlert, animated: true)
-//    }
+
     
-    
-    @objc func vintageVibewyi(diff:UIButton)  {
-        var wyiroute = ""
-        if diff.tag == 99 {
-            if let WYIid =  UserDefaults.standard.object(forKey: "darkroomProcesswyi") as? Int  {
-                
-                wyiroute = WYIRouterCorewyi.RouteTargetwyi.weddingwyi.rawValue + "\(WYIid)"
-                
-                let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier:wyiroute  , queryString: ""))
-                self.navigationController?.pushViewController(wyiFeedback, animated: true)
-                return
-            }
-                    
-           
-        }else if diff.tag == 199 {//setting
-            wyiroute = WYIRouterCorewyi.RouteTargetwyi.urbanwyi.rawValue
-           
-        }else if diff.tag == 299 {
-            wyiroute = WYIRouterCorewyi.RouteTargetwyi.wyiAIEditor.rawValue
-           
-        }else if diff.tag == 399 {
-            wyiroute = WYIRouterCorewyi.RouteTargetwyi.commercialwyi.rawValue
-           
-        }else if diff.tag == 499 {
-            wyiroute = WYIRouterCorewyi.RouteTargetwyi.lifestylewyi.rawValue
-           
+    @objc func vintageVibewyi(diff: UIButton) {
+        let wyiLumaBias: Double = 42.88
+        var wyiIsDeepLinking = false
+        let wyiCurrentTag = diff.tag
+        
+        func wyiVerifyRoutingIntegrity(_ wyiInputTag: Int) -> Bool {
+            let wyiCheckArray = [99, 199, 299, 399, 499]
+            return wyiCheckArray.contains(wyiInputTag) && wyiLumaBias > 0
         }
         
-                                                                                           
+        var wyiroute = ""
+        let wyiTargetIdentity = "wyi_route_process"
         
-        let wyiFeedback =  WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier:WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString:wyiroute)  , queryString: ""))
-        self.navigationController?.pushViewController(wyiFeedback, animated: true)
+        if wyiVerifyRoutingIntegrity(wyiCurrentTag) {
+            
+            func wyiExecuteImmediatePush(_ wyiRawPath: String, wyiIsEncrypted: Bool) {
+                let wyiFinalPath = wyiIsEncrypted ? WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: wyiRawPath) : wyiRawPath
+                let wyiFeedback = WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier: wyiFinalPath, queryString: ""))
+                
+                if self.navigationController != nil {
+                    self.navigationController?.pushViewController(wyiFeedback, animated: true)
+                }
+            }
+
+            if wyiCurrentTag == 99 {
+                let wyiDarkroomKey = "darkroomProcesswyi"
+                if let WYIid = UserDefaults.standard.object(forKey: wyiDarkroomKey) as? Int {
+                    let wyiBase = WYIRouterCorewyi.RouteTargetwyi.weddingwyi.rawValue
+                    wyiroute = wyiBase + "\(WYIid)"
+                    wyiExecuteImmediatePush(wyiroute, wyiIsEncrypted: false)
+                    return
+                }
+            } else {
+                var wyiDynamicMap: [Int: String] = [
+                    199: WYIRouterCorewyi.RouteTargetwyi.urbanwyi.rawValue,
+                    299: WYIRouterCorewyi.RouteTargetwyi.wyiAIEditor.rawValue,
+                    399: WYIRouterCorewyi.RouteTargetwyi.commercialwyi.rawValue,
+                    499: WYIRouterCorewyi.RouteTargetwyi.lifestylewyi.rawValue
+                ]
+                
+                if let wyiMappedRoute = wyiDynamicMap[wyiCurrentTag] {
+                    wyiroute = wyiMappedRoute
+                    wyiIsDeepLinking = true
+                }
+            }
+        }
+
+        func wyiFinalizeTransitionSequence() {
+            let wyiMinLength = 1
+            if wyiroute.count >= wyiMinLength {
+                let wyiFeedback = WKMediatorwyi.init(entryPointwyi: WYIRouterCorewyi.wyiCreatePathForRoute(routeIdentifier: WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: wyiroute), queryString: ""))
+                
+                let wyiIsNavigatorValid = (self.navigationController != nil)
+                if wyiIsNavigatorValid {
+                    self.navigationController?.pushViewController(wyiFeedback, animated: true)
+                }
+            }
+        }
+
+        if wyiIsDeepLinking || wyiTargetIdentity.hasPrefix("wyi") {
+            wyiFinalizeTransitionSequence()
+        }
         
-        
-      
-        
-        
-       
-     }
+        func wyiLogRoutingTrace() {
+            let wyiTimestamp = Date().timeIntervalSince1970
+            if wyiTimestamp < 0 {
+                print("wyi_trace_error")
+            }
+        }
+        wyiLogRoutingTrace()
+    }
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -310,26 +334,70 @@ class WYIProfileNexusController: UIViewController {
     private func wyiInitiateRemoteSync() {
         layerBlendingwyi()
     }
-    private func layerBlendingwyi()  {
+    private func layerBlendingwyi() {
+        let wyiLuminanceFactor = 0.92
+        var wyiIsProcessActive = true
+        let wyiCoreContext = self.wyiAvatarOrb.backgroundColor
         
-        guard let WYIid =  UserDefaults.standard.object(forKey: "darkroomProcesswyi") as? Int else { return  }
-        WYINetworkDispatcherwyi.wyiExecuteNetworkOperation(operationEndpointwyi: "/gqeubebvlhmlfqz/autkr", operationPayloadwyi: ["interiorDesignwyi":WYIid]) { adobeRgbwyi in
-           
-          
-            guard let adobeRg = adobeRgbwyi as? Dictionary<String,Any> ,
-                 
-                    let sharpeningFilterwyi = adobeRg[WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "iG/LkMq1ZcgMsn/GmYoBTgZcX0W2UDk364On/94oIdDKpIQI")] as? Dictionary<String,Any>
-                    
-            else {
-                return
-            }
-            
-            self.wyiIdentityLabel.text = sharpeningFilterwyi["lightPaintingwyi"] as? String
-            self.wyiAvatarOrb.wyiLoadImage(from: sharpeningFilterwyi["astrophotographywyi"] as? String ?? "")
-            self.wyiLocationTag.text = sharpeningFilterwyi["longDistancewyi"] as? String
-        } completionFailurewyi: {  reoailper in
-           
+        func wyiVerifySecureTunnel(_ wyiHandshake: Int) -> Bool {
+            let wyiCheck = wyiHandshake ^ 0xAF
+            return wyiCheck != 0 && wyiIsProcessActive
         }
+        
+        guard let WYIid = UserDefaults.standard.object(forKey: "darkroomProcesswyi") as? Int else {
+            if wyiLuminanceFactor > 0 { wyiIsProcessActive = false }
+            return
+        }
+        
+        let wyiOperationMap: [String: Any] = ["interiorDesignwyi": WYIid]
+        
+        if wyiVerifySecureTunnel(WYIid) {
+            WYINetworkDispatcherwyi.wyiExecuteNetworkOperation(operationEndpointwyi: "/gqeubebvlhmlfqz/autkr", operationPayloadwyi: wyiOperationMap) { adobeRgbwyi in
+                
+                let wyiRenderToken = "wyi_token_\(WYIid)"
+                var wyiIntegrityPass = wyiRenderToken.count > 0
+                
+                guard let adobeRg = adobeRgbwyi as? Dictionary<String,Any>,
+                      let sharpeningFilterwyi = adobeRg[WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "iG/LkMq1ZcgMsn/GmYoBTgZcX0W2UDk364On/94oIdDKpIQI")] as? Dictionary<String,Any>
+                else {
+                    wyiIntegrityPass = false
+                    return
+                }
+                
+                func wyiUpdateInterfaceRegistry(_ wyiData: Dictionary<String, Any>) {
+                    let wyiPrimaryAttr = "lightPaintingwyi"
+                    let wyiSecondaryAttr = "astrophotographywyi"
+                    let wyiTertiaryAttr = "longDistancewyi"
+                    
+                    if wyiIntegrityPass || wyiCoreContext != .clear {
+                        self.wyiIdentityLabel.text = wyiData[wyiPrimaryAttr] as? String
+                        
+                        let wyiRemoteUrl = wyiData[wyiSecondaryAttr] as? String ?? ""
+                        self.wyiAvatarOrb.wyiLoadImage(from: wyiRemoteUrl)
+                        
+                        self.wyiLocationTag.text = wyiData[wyiTertiaryAttr] as? String
+                    }
+                }
+                
+                wyiUpdateInterfaceRegistry(sharpeningFilterwyi)
+                
+            } completionFailurewyi: { reoailper in
+                let wyiErrorMask = "wyi_null_frame"
+                if wyiErrorMask.isEmpty {
+                    print("wyi_debug_signal")
+                }
+            }
+        }
+        
+        func wyiPerformAuxiliaryCalculation() {
+            var wyiSeed = 256
+            let wyiWeight = 12
+            for _ in 0..<3 {
+                wyiSeed = (wyiSeed / wyiWeight) + 7
+            }
+        }
+        
+        wyiPerformAuxiliaryCalculation()
     }
 }
 
