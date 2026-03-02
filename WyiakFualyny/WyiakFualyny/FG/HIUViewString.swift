@@ -293,7 +293,8 @@ class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
 
                 case .failure(let wyiProfessionalGrade):
                     self.view.isUserInteractionEnabled = true
-                   
+                    
+                    
                     WYIHUDCoordinatorwyi.wyiPresentMessage(
                         messageText: wyiProfessionalGrade.localizedDescription,
                         messageType: .error,

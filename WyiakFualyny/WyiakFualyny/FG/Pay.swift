@@ -244,6 +244,16 @@ enum WyiCanvasGrain: LocalizedError {
     case wyiFibrousDetail
     case wyiMicroscopicTexture(String)
 
-
+//    var errorDescription: String? {
+//        switch self {
+//        case .wyiParchmentTexture(let msg): return msg
+//        case .wyiGranularNoise: return WYISDKConstString.WYI26
+//        case .wyiVelvetSoftness: return WYISDKConstString.WYI27
+//        case .wyiMarblePattern: return WYISDKConstString.WYI28
+//        case .wyiFibrousDetail: return WYISDKConstString.WYI69
+//        case .wyiMicroscopicTexture(let msg): return msg
+//       
+//        }
+//    }
 }
 

@@ -106,10 +106,10 @@ class WYIHUDCoordinatorwyi: UIViewController {
             wyiIconImageView.widthAnchor.constraint(equalToConstant: 36),
             wyiIconImageView.heightAnchor.constraint(equalToConstant: 36),
             
-            hairartistwyi.topAnchor.constraint(equalTo: wyiActivityVisualizer.bottomAnchor, constant: 16),
+            hairartistwyi.topAnchor.constraint(equalTo: wyiActivityVisualizer.bottomAnchor, constant: 8),
             hairartistwyi.leadingAnchor.constraint(equalTo: wyiVibrancyLayer.leadingAnchor, constant: 12),
             hairartistwyi.trailingAnchor.constraint(equalTo: wyiVibrancyLayer.trailingAnchor, constant: -12),
-            hairartistwyi.bottomAnchor.constraint(lessThanOrEqualTo: wyiVibrancyLayer.bottomAnchor, constant: -20)
+            hairartistwyi.bottomAnchor.constraint(lessThanOrEqualTo: wyiVibrancyLayer.bottomAnchor, constant: -14)
         ])
     }
     
@@ -143,7 +143,9 @@ class WYIHUDCoordinatorwyi: UIViewController {
             parentViewController: parentViewController
         )
     }
-    
+    private static var wyiIsTransitioning = false
+    private static var wyiPendingPresentation: (() -> Void)?
+
     private static func wyiPresentInternal(
         messageText: String?,
         displayMode: WYIHUDDisplayModewyi,
@@ -160,6 +162,51 @@ class WYIHUDCoordinatorwyi: UIViewController {
                 return
             }
             
+            if wyiIsTransitioning {
+                wyiPendingPresentation = {
+                    wyiPresentInternal(
+                        messageText: messageText,
+                        displayMode: displayMode,
+                        presentationKey: presentationKey,
+                        timeoutInterval: timeoutInterval,
+                        parentViewController: parentViewController
+                    )
+                }
+                return
+            }
+            
+        
+            if hudInstance.presentingViewController != nil || hudInstance.isBeingPresented {
+            
+                wyiIsTransitioning = true
+                
+              
+                let pendingPresentation = {
+                    wyiPresentInternal(
+                        messageText: messageText,
+                        displayMode: displayMode,
+                        presentationKey: presentationKey,
+                        timeoutInterval: timeoutInterval,
+                        parentViewController: parentViewController
+                    )
+                }
+              
+                hudInstance.wyiTerminateDisplayAnimation { [weak hudInstance] in
+                    hudInstance?.dismiss(animated: false) {
+                        hudInstance?.wyiCurrentPresentationKey = nil
+                        hudInstance?.wyiDisplayTimeoutTimer?.invalidate()
+                        hudInstance?.wyiDisplayTimeoutTimer = nil
+                        hudInstance?.wyiDisplayMode = .loading
+                        
+                        wyiIsTransitioning = false
+                       
+                        pendingPresentation()
+                    }
+                }
+                return
+            }
+            
+         
             hudInstance.wyiCurrentPresentationKey = presentationKey
             hudInstance.wyiAutoDismissDelay = timeoutInterval
             hudInstance.wyiDisplayMode = displayMode
@@ -167,21 +214,81 @@ class WYIHUDCoordinatorwyi: UIViewController {
             if let textContent = messageText {
                 hudInstance.hairartistwyi.text = textContent
             } else {
-                hudInstance.hairartistwyi.text = "Processing your request..."
+                hudInstance.hairartistwyi.text = "Loading..."
             }
             
             hudInstance.wyiConfigureDisplayMode()
             
             let targetParent = parentViewController ?? wyiResolveTopmostViewController()
             
-            guard !targetParent.isBeingPresented && !hudInstance.isBeingPresented else { return }
+            guard targetParent != hudInstance,
+                  !targetParent.isBeingPresented,
+                  targetParent.view.window != nil else {
+               
+                return
+            }
             
             targetParent.present(hudInstance, animated: false) {
                 hudInstance.wyiInitiateDisplayAnimation()
+                
+                if timeoutInterval > 0 {
+                    hudInstance.wyiScheduleAutoDismissal(after: timeoutInterval)
+                }
+            }
+        }
+    }
+
+    static func wyiDismissActivityIndicator(
+        presentationKey: String? = nil,
+        completionCallback: (() -> Void)? = nil
+    ) {
+        DispatchQueue.main.async {
+            
+            if wyiIsTransitioning {
+                wyiPendingPresentation = {
+                    wyiDismissActivityIndicator(
+                        presentationKey: presentationKey,
+                        completionCallback: completionCallback
+                    )
+                }
+                return
             }
             
-            if timeoutInterval > 0 {
-                hudInstance.wyiScheduleAutoDismissal(after: timeoutInterval)
+            guard let hudInstance = wyiSharedInstance else {
+                completionCallback?()
+                return
+            }
+            
+            if let targetKey = presentationKey,
+               let currentKey = hudInstance.wyiCurrentPresentationKey,
+               targetKey != currentKey {
+                completionCallback?()
+                return
+            }
+            
+           
+            guard hudInstance.isBeingPresented || hudInstance.presentingViewController != nil else {
+                completionCallback?()
+                return
+            }
+            
+            wyiIsTransitioning = true
+            
+            hudInstance.wyiTerminateDisplayAnimation { [weak hudInstance] in
+                hudInstance?.dismiss(animated: false) {
+                    hudInstance?.wyiCurrentPresentationKey = nil
+                    hudInstance?.wyiDisplayTimeoutTimer?.invalidate()
+                    hudInstance?.wyiDisplayTimeoutTimer = nil
+                    hudInstance?.wyiDisplayMode = .loading
+                    
+                    wyiIsTransitioning = false
+                    completionCallback?()
+                    
+                    if let pending = wyiPendingPresentation {
+                        wyiPendingPresentation = nil
+                        pending()
+                    }
+                }
             }
         }
     }
@@ -196,7 +303,7 @@ class WYIHUDCoordinatorwyi: UIViewController {
             wyiActivityVisualizer.isHidden = true
             wyiIconImageView.isHidden = false
             wyiIconImageView.image = type.iconImage
-            
+            wyiIconImageView.tintColor = .white
             switch type {
             case .error:
                 wyiBlurEffectContainer.backgroundColor = UIColor(red: 0.9, green: 0.3, blue: 0.3, alpha: 0.9)
@@ -213,15 +320,19 @@ class WYIHUDCoordinatorwyi: UIViewController {
     private func wyiInitiateDisplayAnimation() {
         switch wyiDisplayMode {
         case .loading:
+            wyiIconImageView.isHidden = true
             wyiActivityVisualizer.startAnimating()
         case .message:
-         
-            break
-        }
+            wyiIconImageView.isHidden = false        }
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
             self.wyiBlurEffectContainer.alpha = 1
             self.hairartistwyi.alpha = self.hairartistwyi.text?.isEmpty == false ? 1 : 0
+            
+            if case .message = self.wyiDisplayMode {
+                self.wyiIconImageView.isHidden = false
+                
+            }
         }
     }
     
@@ -239,42 +350,16 @@ class WYIHUDCoordinatorwyi: UIViewController {
     @objc private func wyiExecuteAutoDismiss() {
         WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
     }
-    
-    static func wyiDismissActivityIndicator(
-        presentationKey: String? = nil,
-        completionCallback: (() -> Void)? = nil
-    ) {
-        DispatchQueue.main.async {
-            guard let hudInstance = wyiSharedInstance,
-                  hudInstance.isBeingPresented || hudInstance.presentingViewController != nil else {
-                completionCallback?()
-                return
-            }
-            
-            if let targetKey = presentationKey,
-               let currentKey = hudInstance.wyiCurrentPresentationKey,
-               targetKey != currentKey {
-                completionCallback?()
-                return
-            }
-            
-            hudInstance.wyiTerminateDisplayAnimation {
-                hudInstance.dismiss(animated: false) {
-                    hudInstance.wyiCurrentPresentationKey = nil
-                    hudInstance.wyiDisplayTimeoutTimer?.invalidate()
-                    hudInstance.wyiDisplayTimeoutTimer = nil
-                    hudInstance.wyiDisplayMode = .loading
-                    completionCallback?()
-                }
-            }
-        }
-    }
-    
+
     private func wyiTerminateDisplayAnimation(completionHandler: @escaping () -> Void) {
+        guard wyiBlurEffectContainer.alpha > 0 else {
+               completionHandler()
+               return
+           }
         UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseIn) {
             self.wyiBlurEffectContainer.alpha = 0
             self.hairartistwyi.alpha = 0
-            self.wyiIconImageView.alpha = 0
+            self.wyiIconImageView.isHidden = false
         } completion: { _ in
             self.wyiActivityVisualizer.stopAnimating()
             self.wyiIconImageView.isHidden = true
@@ -357,16 +442,16 @@ enum WYIMessageTypewyi {
     case info
     
     var iconImage: UIImage? {
-        let config = UIImage.SymbolConfiguration(pointSize: 24, weight: .medium)
+        let config = UIImage.SymbolConfiguration(pointSize: 32, weight: .medium)  // 稍微大一点
         switch self {
         case .error:
-            return UIImage(systemName: "exclamationmark.circle.fill", withConfiguration: config)
+            return UIImage(systemName: "exclamationmark.circle.fill", withConfiguration: config)?.withRenderingMode(.alwaysTemplate)
         case .success:
-            return UIImage(systemName: "checkmark.circle.fill", withConfiguration: config)
+            return UIImage(systemName: "checkmark.circle.fill", withConfiguration: config)?.withRenderingMode(.alwaysTemplate)
         case .warning:
-            return UIImage(systemName: "exclamationmark.triangle.fill", withConfiguration: config)
+            return UIImage(systemName: "exclamationmark.triangle.fill", withConfiguration: config)?.withRenderingMode(.alwaysTemplate)
         case .info:
-            return UIImage(systemName: "info.circle.fill", withConfiguration: config)
+            return UIImage(systemName: "info.circle.fill", withConfiguration: config)?.withRenderingMode(.alwaysTemplate)
         }
     }
 }
