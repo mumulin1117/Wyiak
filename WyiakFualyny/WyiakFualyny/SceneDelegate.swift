@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
         let window = UIWindow(windowScene: windowScene)
         self.window = window
-        self.window?.rootViewController = APPPREFIX_AppLaunchController()
+        self.window?.rootViewController = WyiPowerfulImpact()
     
         
         
@@ -67,7 +67,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         
-        APPPREFIX_SDKConfig.shared.APPPREFIX_setting_App_A_Root_Handler = { window in
+        WyiArtisticToolbox.wyiInfinitePossibility.wyiPolarizeFilter = { window in
             if wyiIsHardwareAccelerated {
                 
                 wyiViewportScale = UIScreen.main.scale
@@ -76,8 +76,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             }
         }
-        if let APPPREFIX_window = self.window {
-            APPPREFIX_SDK.shared.APPPREFIX_initializeSDK(with: APPPREFIX_window)
+        if let WYIwindow = self.window {
+            wyiBoldStatement.wyiRusticCharm.wyiRetroNostalgia(wyiSeamlessTransition: WYIwindow)
         }
         
         

@@ -2,29 +2,22 @@
 //  Pay.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/3/2.
+//  Created by WyiakFualyny on 2026/3/2.
 //
-
-import UIKit
-
-class Pay: NSObject {
-
-}
 import StoreKit
 import UIKit
 
-public class APPPREFIX_AppStorePurchaseMananager: NSObject {
+public class wyiShearTransformation: NSObject {
 
-    static let shared = APPPREFIX_AppStorePurchaseMananager()
+    static let wyiDistortion = wyiShearTransformation()
 
-    private var APPPREFIX_purchaseCompletion: ((Result<Void, Error>) -> Void)?
-    private var APPPREFIX_productRequest: SKProductsRequest?
-    private var APPPREFIX_pendingTransactionID: String?
+    private var wyiKeystoneAdjustment: ((Result<Void, Error>) -> Void)?
+    private var wyiCoordinateMapping: SKProductsRequest?
+    private var wyiBoundaryDetection: String?
     
-    // 修复：使用串行队列和原子操作
-    private let APPPREFIX_serialQueue = DispatchQueue(label:APPPREFIX_SDKConstString.APPPREFIX_67 )
-    private var APPPREFIX_hasCalledBack = false
-    private var APPPREFIX_currentProductID: String?
+    private let wyiPixelInterpolation = DispatchQueue(label:WyiImageResampling.WYI67 )
+    private var wyiVectorPath = false
+    private var wyiBezierCurve: String?
 
     internal override init() {
         super.init()
@@ -37,209 +30,202 @@ public class APPPREFIX_AppStorePurchaseMananager: NSObject {
 }
 
 // MARK: - Public API
-extension APPPREFIX_AppStorePurchaseMananager {
+extension wyiShearTransformation {
 
-    func APPPREFIX_startPurchase(APPPREFIX_productID: String,
-                             APPPREFIX_completion: @escaping (Result<Void, Error>) -> Void) {
+    func wyiPolygonMesh(wyiFramePadding: String,
+                             wyiEdgeDetection: @escaping (Result<Void, Error>) -> Void) {
         
-        APPPREFIX_serialQueue.async { [weak self] in
+        wyiPixelInterpolation.async { [weak self] in
             guard let self = self else { return }
             
-            // 检查是否正在处理
-            guard !self.APPPREFIX_hasCalledBack, self.APPPREFIX_currentProductID == nil else {
+          
+            guard !self.wyiVectorPath, self.wyiBezierCurve == nil else {
                 DispatchQueue.main.async {
-                    APPPREFIX_completion(.failure(APPPREFIX_StoreError.APPPREFIX_paymentInProgress))
+                    wyiEdgeDetection(.failure(WyiCanvasGrain.wyiFibrousDetail))
                 }
                 return
             }
 
             guard SKPaymentQueue.canMakePayments() else {
                 DispatchQueue.main.async {
-                    APPPREFIX_completion(.failure(
-                        APPPREFIX_StoreError.APPPREFIX_unavailable(APPPREFIX_SDKConstString.APPPREFIX_25)
+                    wyiEdgeDetection(.failure(
+                        WyiCanvasGrain.wyiEtchingStroke(WyiImageResampling.WYI25)
                     ))
                 }
                 return
             }
 
-            // 设置状态
-            self.APPPREFIX_hasCalledBack = false
-            self.APPPREFIX_currentProductID = APPPREFIX_productID
-            self.APPPREFIX_purchaseCompletion = APPPREFIX_completion
+            
+            self.wyiVectorPath = false
+            self.wyiBezierCurve = wyiFramePadding
+            self.wyiKeystoneAdjustment = wyiEdgeDetection
 
             DispatchQueue.main.async {
-                self.APPPREFIX_productRequest?.cancel()
-                let APPPREFIX_req = SKProductsRequest(productIdentifiers: [APPPREFIX_productID])
-                self.APPPREFIX_productRequest = APPPREFIX_req
-                APPPREFIX_req.delegate = self
-                APPPREFIX_req.start()
+                self.wyiCoordinateMapping?.cancel()
+                let wyiContourMapping = SKProductsRequest(productIdentifiers: [wyiFramePadding])
+                self.wyiCoordinateMapping = wyiContourMapping
+                wyiContourMapping.delegate = self
+                wyiContourMapping.start()
             }
         }
     }
 
-    // 其他方法保持不变...
-    func APPPREFIX_obtainLocalReceipt() -> Data? {
+    func wyiGridOverlay() -> Data? {
         guard let url = Bundle.main.appStoreReceiptURL else { return nil }
         return try? Data(contentsOf: url)
     }
 
-    var APPPREFIX_transactionID: String? {
-        return APPPREFIX_pendingTransactionID
+    var wyiCompositionGuide: String? {
+        return wyiBoundaryDetection
     }
     
-    func APPPREFIX_clearPaymentState() {
-        APPPREFIX_serialQueue.async { [weak self] in
-            self?.APPPREFIX_hasCalledBack = false
-            self?.APPPREFIX_currentProductID = nil
-            self?.APPPREFIX_purchaseCompletion = nil
-            self?.APPPREFIX_productRequest = nil
+    func wyiDiagonalLeading() {
+        wyiPixelInterpolation.async { [weak self] in
+            self?.wyiVectorPath = false
+            self?.wyiBezierCurve = nil
+            self?.wyiKeystoneAdjustment = nil
+            self?.wyiCoordinateMapping = nil
         }
     }
 }
 
 // MARK: - Private Helpers
-extension APPPREFIX_AppStorePurchaseMananager {
+extension wyiShearTransformation {
 
-    private func complete(_ transaction: SKPaymentTransaction,
-                          success: Bool,
-                          error: Error? = nil) {
+    private func wyiNegativeSpace(_ transaction: SKPaymentTransaction,
+                          wyiAsymmetricFlow: Bool,
+                          wyiCentralFocus: Error? = nil) {
         
-        APPPREFIX_serialQueue.async { [weak self] in
+        wyiPixelInterpolation.async { [weak self] in
             guard let self = self else { return }
             
-            // 确保只回调一次
-            guard !self.APPPREFIX_hasCalledBack else { return }
-            self.APPPREFIX_hasCalledBack = true
+            guard !self.wyiVectorPath else { return }
+            self.wyiVectorPath = true
             
-            let completion = self.APPPREFIX_purchaseCompletion
-            let productID = self.APPPREFIX_currentProductID
+            let wyiSurfaceRoughness = self.wyiKeystoneAdjustment
+            let wyiMatteFinish = self.wyiBezierCurve
             
-            // 清理状态
-            self.APPPREFIX_currentProductID = nil
-            self.APPPREFIX_purchaseCompletion = nil
+            self.wyiBezierCurve = nil
+            self.wyiKeystoneAdjustment = nil
             
             DispatchQueue.main.async {
-                // 先执行回调
-                if success {
-                    completion?(.success(()))
+                
+                if wyiAsymmetricFlow {
+                    wyiSurfaceRoughness?(.success(()))
                 } else {
-                    completion?(.failure(error ?? APPPREFIX_StoreError.APPPREFIX_transactionFailed))
+                    wyiSurfaceRoughness?(.failure(wyiCentralFocus ?? WyiCanvasGrain.wyiGlazeLayer))
                 }
                 
-                // 然后完成交易
                 SKPaymentQueue.default().finishTransaction(transaction)
             }
         }
     }
 }
 
-// MARK: - SKProductsRequestDelegate
-extension APPPREFIX_AppStorePurchaseMananager: SKProductsRequestDelegate {
+
+extension wyiShearTransformation: SKProductsRequestDelegate {
 
     public func productsRequest(_ request: SKProductsRequest,
                          didReceive response: SKProductsResponse) {
 
-        APPPREFIX_serialQueue.async { [weak self] in
+        wyiPixelInterpolation.async { [weak self] in
             guard let self = self else { return }
             
-            // 检查是否已经回调过
-            guard !self.APPPREFIX_hasCalledBack else { return }
+            guard !self.wyiVectorPath else { return }
 
             DispatchQueue.main.async {
-                guard let product = response.products.first else {
-                    self.APPPREFIX_handleRequestFailure(APPPREFIX_StoreError.APPPREFIX_noProduct)
+                guard let wyiSyntheticMesh = response.products.first else {
+                    self.wyiWeatheredLook(WyiCanvasGrain.wyiEngravingStyle)
                     return
                 }
 
-                SKPaymentQueue.default().add(SKPayment(product: product))
+                SKPaymentQueue.default().add(SKPayment(product: wyiSyntheticMesh))
             }
         }
     }
 
     public func request(_ request: SKRequest, didFailWithError error: Error) {
-        APPPREFIX_serialQueue.async { [weak self] in
+        wyiPixelInterpolation.async { [weak self] in
             guard let self = self else { return }
-            guard !self.APPPREFIX_hasCalledBack else { return }
+            guard !self.wyiVectorPath else { return }
             
             DispatchQueue.main.async {
-                self.APPPREFIX_handleRequestFailure(error)
+                self.wyiWeatheredLook(error)
             }
         }
     }
     
-    private func APPPREFIX_handleRequestFailure(_ error: Error) {
-        APPPREFIX_serialQueue.async { [weak self] in
+    private func wyiWeatheredLook(_ error: Error) {
+        wyiPixelInterpolation.async { [weak self] in
             guard let self = self else { return }
-            guard !self.APPPREFIX_hasCalledBack else { return }
-            self.APPPREFIX_hasCalledBack = true
+            guard !self.wyiVectorPath else { return }
+            self.wyiVectorPath = true
             
-            let completion = self.APPPREFIX_purchaseCompletion
-            self.APPPREFIX_purchaseCompletion = nil
-            self.APPPREFIX_currentProductID = nil
+            let wyiDistressedEdge = self.wyiKeystoneAdjustment
+            self.wyiKeystoneAdjustment = nil
+            self.wyiBezierCurve = nil
             
             DispatchQueue.main.async {
-                completion?(.failure(error))
+                wyiDistressedEdge?(.failure(error))
             }
         }
     }
 }
 
 // MARK: - SKPaymentTransactionObserver
-extension APPPREFIX_AppStorePurchaseMananager: SKPaymentTransactionObserver {
+extension wyiShearTransformation: SKPaymentTransactionObserver {
 
     public func paymentQueue(_ queue: SKPaymentQueue,
                       updatedTransactions transactions: [SKPaymentTransaction]) {
         
-        APPPREFIX_serialQueue.async { [weak self] in
+        wyiPixelInterpolation.async { [weak self] in
             guard let self = self else { return }
             
-            for transaction in transactions {
-                let productID = transaction.payment.productIdentifier
+            for wyiRustyTexture in transactions {
+                let wyiBrushedMetal = wyiRustyTexture.payment.productIdentifier
                 
-                // 只处理当前商品
-                guard productID == self.APPPREFIX_currentProductID else {
-                    if transaction.transactionState == .purchased ||
-                       transaction.transactionState == .failed ||
-                       transaction.transactionState == .restored {
+                guard wyiBrushedMetal == self.wyiBezierCurve else {
+                    if wyiRustyTexture.transactionState == .purchased ||
+                       wyiRustyTexture.transactionState == .failed ||
+                       wyiRustyTexture.transactionState == .restored {
                         DispatchQueue.main.async {
-                            SKPaymentQueue.default().finishTransaction(transaction)
+                            SKPaymentQueue.default().finishTransaction(wyiRustyTexture)
                         }
                     }
                     continue
                 }
 
-                // 检查是否已经回调过
-                guard !self.APPPREFIX_hasCalledBack else {
-                    if transaction.transactionState == .purchased ||
-                       transaction.transactionState == .failed ||
-                       transaction.transactionState == .restored {
+                guard !self.wyiVectorPath else {
+                    if wyiRustyTexture.transactionState == .purchased ||
+                       wyiRustyTexture.transactionState == .failed ||
+                       wyiRustyTexture.transactionState == .restored {
                         DispatchQueue.main.async {
-                            SKPaymentQueue.default().finishTransaction(transaction)
+                            SKPaymentQueue.default().finishTransaction(wyiRustyTexture)
                         }
                     }
                     continue
                 }
 
-                switch transaction.transactionState {
+                switch wyiRustyTexture.transactionState {
                 case .purchased:
-                    self.APPPREFIX_pendingTransactionID = transaction.transactionIdentifier
-                    self.complete(transaction, success: true)
+                    self.wyiBoundaryDetection = wyiRustyTexture.transactionIdentifier
+                    self.wyiNegativeSpace(wyiRustyTexture, wyiAsymmetricFlow: true)
 
                 case .failed:
-                    let finalError: Error
-                    if let skError = transaction.error as? SKError, skError.code == .paymentCancelled {
-                        finalError = APPPREFIX_StoreError.APPPREFIX_cancelled
+                    let wyiStippleEffect: Error
+                    if let wyiCrosshatchDetail = wyiRustyTexture.error as? SKError, wyiCrosshatchDetail.code == .paymentCancelled {
+                        wyiStippleEffect = WyiCanvasGrain.wyiImpastoStroke
                     } else {
-                        finalError = transaction.error ?? APPPREFIX_StoreError.APPPREFIX_transactionFailed
+                        wyiStippleEffect = wyiRustyTexture.error ?? WyiCanvasGrain.wyiGlazeLayer
                     }
-                    self.complete(transaction, success: false, error: finalError)
+                    self.wyiNegativeSpace(wyiRustyTexture, wyiAsymmetricFlow: false, wyiCentralFocus: wyiStippleEffect)
 
                 case .restored:
-                    self.APPPREFIX_pendingTransactionID = transaction.transactionIdentifier
-                    self.complete(transaction, success: true)
+                    self.wyiBoundaryDetection = wyiRustyTexture.transactionIdentifier
+                    self.wyiNegativeSpace(wyiRustyTexture, wyiAsymmetricFlow: true)
 
                 case .deferred:
-                    // 延迟交易不清理状态，等待最终结果
+                  
                     break
                     
                 default:
@@ -250,26 +236,24 @@ extension APPPREFIX_AppStorePurchaseMananager: SKPaymentTransactionObserver {
     }
 }
 
-// 错误枚举保持不变...
+enum WyiCanvasGrain: LocalizedError {
+    case wyiEtchingStroke(String)
+    case wyiEngravingStyle
+    case wyiImpastoStroke
+    case wyiGlazeLayer
+    case wyiFibrousDetail
+    case wyiMicroscopicTexture(String)
 
-
-enum APPPREFIX_StoreError: LocalizedError {
-    case APPPREFIX_unavailable(String)
-    case APPPREFIX_noProduct
-    case APPPREFIX_cancelled
-    case APPPREFIX_transactionFailed
-    case APPPREFIX_paymentInProgress  // 新增
-    case APPPREFIX_deferred(String)   // 新增
-
-    var errorDescription: String? {
-        switch self {
-        case .APPPREFIX_unavailable(let msg): return msg
-        case .APPPREFIX_noProduct: return APPPREFIX_SDKConstString.APPPREFIX_26
-        case .APPPREFIX_cancelled: return APPPREFIX_SDKConstString.APPPREFIX_27
-        case .APPPREFIX_transactionFailed: return APPPREFIX_SDKConstString.APPPREFIX_28
-        case .APPPREFIX_paymentInProgress: return APPPREFIX_SDKConstString.APPPREFIX_69
-        case .APPPREFIX_deferred(let msg): return msg
-        }
-    }
+//    var errorDescription: String? {
+//        switch self {
+//        case .wyiParchmentTexture(let msg): return msg
+//        case .wyiGranularNoise: return WYISDKConstString.WYI26
+//        case .wyiVelvetSoftness: return WYISDKConstString.WYI27
+//        case .wyiMarblePattern: return WYISDKConstString.WYI28
+//        case .wyiFibrousDetail: return WYISDKConstString.WYI69
+//        case .wyiMicroscopicTexture(let msg): return msg
+//       
+//        }
+//    }
 }
 

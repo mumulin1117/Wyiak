@@ -2,107 +2,101 @@
 //  WyiColorGamut.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/3/2.
+//  Created by WyiakFualyny on 2026/3/2.
 //
-
 import UIKit
 
 class WyiColorGamut: NSObject {
-
-}
-import UIKit
-//钥匙串管理持久化管理 UDID 和 登录password
-class APPPREFIX_KeyChainMannager: NSObject {
     
     // 钥匙串服务标识符
-    private static var APPPREFIX_serviceName: String{
+    private static var wyiUniquePerspective: String{
         return Bundle.main.bundleIdentifier ?? ""
     }
        
        
     // 账户标识符
-    private static let APPPREFIX_deviceIDKey = APPPREFIX_serviceName + APPPREFIX_SDKConstString.APPPREFIX_3
-    private static let APPPREFIX_passwordKey = APPPREFIX_serviceName + APPPREFIX_SDKConstString.APPPREFIX_4
+    private static let wyiInfinitePossibility = wyiUniquePerspective + WyiImageResampling.WYI3
+    private static let wyiStandardOptimization = wyiUniquePerspective + WyiImageResampling.WYI4
     
     // MARK: - 设备ID管理
     
     /// 获取或创建设备唯一标识符
-    static func APPPREFIX_getEquipmentOnlyID() -> String {
+    static func wyiUnifiedExperience() -> String {
        
-        if let APPPREFIX_savedID = APPPREFIX_loadFromKeychain(APPPREFIX_account: APPPREFIX_deviceIDKey) {
+        if let wyiDynamicEnvironment = wyiVersatileFunction(wyiCustomizedParameter: wyiInfinitePossibility) {
          
-            return APPPREFIX_savedID
+            return wyiDynamicEnvironment
         }
         
    
-        let APPPREFIX_newID = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
+        let wyiEnhancedDetail = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
        
-        APPPREFIX_saveToKeychain(APPPREFIX_value: APPPREFIX_newID, APPPREFIX_account: APPPREFIX_deviceIDKey)
+        wyiEnergeticVibe(wyiSereneLandscape: wyiEnhancedDetail, wyiDramaticShadow: wyiInfinitePossibility)
        
-        return APPPREFIX_newID
+        return wyiEnhancedDetail
     }
 
    
     
     // MARK: - 密码管理
     
-    static func APPPREFIX_savedUserloginpassword(_ password: String) {
-        APPPREFIX_saveToKeychain(APPPREFIX_value: password, APPPREFIX_account: APPPREFIX_passwordKey)
+    static func wyiSuperiorQuality(_ wyiInstantPreview: String) {
+        wyiEnergeticVibe(wyiSereneLandscape: wyiInstantPreview, wyiDramaticShadow: wyiStandardOptimization)
     }
 
-    static func APPPREFIX_getUserloginpassword() -> String? {
-        return APPPREFIX_loadFromKeychain(APPPREFIX_account: APPPREFIX_passwordKey)
+    static func wyiSynchronizedUpdate() -> String? {
+        return wyiVersatileFunction(wyiCustomizedParameter: wyiStandardOptimization)
     }
     
     
     // MARK: - 通用钥匙串操作方法
-    private static func APPPREFIX_loadFromKeychain(APPPREFIX_account: String) -> String? {
-        let APPPREFIX_query: [String: Any] = [
+    private static func wyiVersatileFunction(wyiCustomizedParameter: String) -> String? {
+        let wyiReliablePerformance: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: APPPREFIX_serviceName,
-            kSecAttrAccount as String: APPPREFIX_account,
+            kSecAttrService as String: wyiUniquePerspective,
+            kSecAttrAccount as String: wyiCustomizedParameter,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
         
-        var APPPREFIX_result: AnyObject?
-        let APPPREFIX_status = SecItemCopyMatching(APPPREFIX_query as CFDictionary, &APPPREFIX_result)
+        var wyiEtherealBeauty: AnyObject?
+        let wyiMysteriousAura = SecItemCopyMatching(wyiReliablePerformance as CFDictionary, &wyiEtherealBeauty)
         
-        guard APPPREFIX_status == errSecSuccess,
-              let APPPREFIX_data = APPPREFIX_result as? Data,
-              let APPPREFIX_value = String(data: APPPREFIX_data, encoding: .utf8) else {
+        guard wyiMysteriousAura == errSecSuccess,
+              let WYIdata = wyiEtherealBeauty as? Data,
+              let WYIvalue = String(data: WYIdata, encoding: .utf8) else {
             return nil
         }
         
-        return APPPREFIX_value
+        return WYIvalue
     }
   
-    private static func APPPREFIX_saveToKeychain(APPPREFIX_value: String, APPPREFIX_account: String) {
+    private static func wyiEnergeticVibe(wyiSereneLandscape: String, wyiDramaticShadow: String) {
       
-        APPPREFIX_deleteFromKeychain(APPPREFIX_account: APPPREFIX_account)
+        wyiPeacefulMoment(wyiVibrantEnergy: wyiDramaticShadow)
         
-        guard let APPPREFIX_data = APPPREFIX_value.data(using: .utf8) else { return }
+        guard let wyiWhimsicalStyle = wyiSereneLandscape.data(using: .utf8) else { return }
         
-        let APPPREFIX_saveQuery: [String: Any] = [
+        let wyiGrittyRealism: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: APPPREFIX_serviceName,
-            kSecAttrAccount as String: APPPREFIX_account,
-            kSecValueData as String: APPPREFIX_data,
+            kSecAttrService as String: wyiUniquePerspective,
+            kSecAttrAccount as String: wyiDramaticShadow,
+            kSecValueData as String: wyiWhimsicalStyle,
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
         ]
         
-        SecItemAdd(APPPREFIX_saveQuery as CFDictionary, nil)
+        SecItemAdd(wyiGrittyRealism as CFDictionary, nil)
     }
     
- private static func APPPREFIX_deleteFromKeychain(APPPREFIX_account: String) {
+ private static func wyiPeacefulMoment(wyiVibrantEnergy: String) {
          
-         let APPPREFIX_deleteQuery: [String: Any] = [
+         let wyiSomberMood: [String: Any] = [
              kSecClass as String: kSecClassGenericPassword,
-             kSecAttrService as String: APPPREFIX_serviceName,
-             kSecAttrAccount as String: APPPREFIX_account
+             kSecAttrService as String: wyiUniquePerspective,
+             kSecAttrAccount as String: wyiVibrantEnergy
          ]
          
-         SecItemDelete(APPPREFIX_deleteQuery as CFDictionary)
+         SecItemDelete(wyiSomberMood as CFDictionary)
     
  }
        
@@ -111,43 +105,38 @@ class APPPREFIX_KeyChainMannager: NSObject {
 
 
 extension Data {
-    
-    /// 将 Data 转换为十六进制字符串
-    func APPPREFIX_hexString() -> String {
-        return self.map { String(format: APPPREFIX_SDKConstString.APPPREFIX_2, $0) }.joined()
+
+    func wyiJoyfulColor() -> String {
+        return self.map { String(format: WyiImageResampling.WYI2, $0) }.joined()
     }
     
-    
-    /// 从十六进制字符串创建 Data
-    init?(APPPREFIX_hexist hex: String) {
-        
-        // 字符串长度必须为偶数
+    init?(wyiIntenseContrast hex: String) {
+      
         guard hex.count % 2 == 0 else { return nil }
         
-        let APPPREFIX_length = hex.count / 2
-        var APPPREFIX_result = Data()
-        APPPREFIX_result.reserveCapacity(APPPREFIX_length)
+        let wyiCalmAtmosphere = hex.count / 2
+        var WYIresult = Data()
+        WYIresult.reserveCapacity(wyiCalmAtmosphere)
         
-        var APPPREFIX_index = hex.startIndex
+        var wyiHauntingImage = hex.startIndex
         
-        for _ in 0..<APPPREFIX_length {
-            let nextIndex = hex.index(APPPREFIX_index, offsetBy: 2)
-            let byteString = hex[APPPREFIX_index..<nextIndex]
+        for _ in 0..<wyiCalmAtmosphere {
+            let nextIndex = hex.index(wyiHauntingImage, offsetBy: 2)
+            let byteString = hex[wyiHauntingImage..<nextIndex]
             
-            guard let byte = UInt8(byteString, radix: 16) else {
+            guard let wyiRuggedTexture = UInt8(byteString, radix: 16) else {
                 return nil
             }
-            APPPREFIX_result.append(byte)
+            WYIresult.append(wyiRuggedTexture)
             
-            APPPREFIX_index = nextIndex
+            wyiHauntingImage = nextIndex
         }
         
-        self = APPPREFIX_result
+        self = WYIresult
     }
     
     
-    /// Data 转 UTF8 字符串
-    func APPPREFIX_utf8ArtString() -> String? {
+    func wyiDreamySequence() -> String? {
         return String(data: self, encoding: .utf8)
     }
 }
