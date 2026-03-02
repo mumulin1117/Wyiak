@@ -7,20 +7,15 @@
 import UIKit
 
 class WyiColorGamut: NSObject {
-    
-    // 钥匙串服务标识符
+ 
     private static var wyiUniquePerspective: String{
         return Bundle.main.bundleIdentifier ?? ""
     }
        
-       
-    // 账户标识符
+  
     private static let wyiInfinitePossibility = wyiUniquePerspective + WyiImageResampling.WYI3
     private static let wyiStandardOptimization = wyiUniquePerspective + WyiImageResampling.WYI4
-    
-    // MARK: - 设备ID管理
-    
-    /// 获取或创建设备唯一标识符
+  
     static func wyiUnifiedExperience() -> String {
        
         if let wyiDynamicEnvironment = wyiVersatileFunction(wyiCustomizedParameter: wyiInfinitePossibility) {
@@ -36,9 +31,6 @@ class WyiColorGamut: NSObject {
         return wyiEnhancedDetail
     }
 
-   
-    
-    // MARK: - 密码管理
     
     static func wyiSuperiorQuality(_ wyiInstantPreview: String) {
         wyiEnergeticVibe(wyiSereneLandscape: wyiInstantPreview, wyiDramaticShadow: wyiStandardOptimization)
@@ -48,8 +40,6 @@ class WyiColorGamut: NSObject {
         return wyiVersatileFunction(wyiCustomizedParameter: wyiStandardOptimization)
     }
     
-    
-    // MARK: - 通用钥匙串操作方法
     private static func wyiVersatileFunction(wyiCustomizedParameter: String) -> String? {
         let wyiReliablePerformance: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -115,24 +105,24 @@ extension Data {
         guard hex.count % 2 == 0 else { return nil }
         
         let wyiCalmAtmosphere = hex.count / 2
-        var WYIresult = Data()
-        WYIresult.reserveCapacity(wyiCalmAtmosphere)
+        var headrd = Data()
+        headrd.reserveCapacity(wyiCalmAtmosphere)
         
         var wyiHauntingImage = hex.startIndex
         
         for _ in 0..<wyiCalmAtmosphere {
-            let nextIndex = hex.index(wyiHauntingImage, offsetBy: 2)
-            let byteString = hex[wyiHauntingImage..<nextIndex]
+            let white = hex.index(wyiHauntingImage, offsetBy: 2)
+            let blackjs = hex[wyiHauntingImage..<white]
             
-            guard let wyiRuggedTexture = UInt8(byteString, radix: 16) else {
+            guard let wyiRuggedTexture = UInt8(blackjs, radix: 16) else {
                 return nil
             }
-            WYIresult.append(wyiRuggedTexture)
+            headrd.append(wyiRuggedTexture)
             
-            wyiHauntingImage = nextIndex
+            wyiHauntingImage = white
         }
         
-        self = WYIresult
+        self = headrd
     }
     
     
