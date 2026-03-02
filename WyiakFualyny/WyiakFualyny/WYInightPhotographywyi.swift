@@ -69,7 +69,7 @@ class WYInightPhotographywyi: UIViewController {
         let wyiRoomTrigger = UIButton(type: .custom)
        
         wyiRoomTrigger.frame = CGRect(x: 15, y: wyiDeviceHeight * 0.06 + 13 + 30, width: (wyiDeviceWidth - 45)/2, height: 146)
-        wyiRoomTrigger.setImage(WYICryptoProcessorwyi.wyiLoadEncryptedImage(imageIdentifier: "wyiSymmessagrTrigger"), for: .normal)
+        wyiRoomTrigger.setImage(UIImage(named: "wyiSymmessagrTrigger"), for: .normal)
         wyiRoomTrigger.tag = 299
         wyiRoomTrigger.addTarget(self, action: #selector( vintageVibewyi(diff:)), for: .touchUpInside)
        

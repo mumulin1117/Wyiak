@@ -282,7 +282,7 @@ class WYIProfileNexusController: UIViewController {
                 let wyiDarkroomKey = "darkroomProcesswyi"
                 if let WYIid = UserDefaults.standard.object(forKey: wyiDarkroomKey) as? Int {
                     let wyiBase = WYIRouterCorewyi.RouteTargetwyi.weddingwyi.rawValue
-                    wyiroute = wyiBase + "\(WYIid)"
+                    wyiroute = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: wyiBase) + "\(WYIid)"
                     wyiExecuteImmediatePush(wyiroute, wyiIsEncrypted: false)
                     return
                 }

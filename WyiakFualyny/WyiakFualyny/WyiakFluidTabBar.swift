@@ -1,7 +1,7 @@
 import UIKit
 
 class WyiakFluidTabBar: UITabBar {
-    private var shapeLayer: CAShapeLayer?
+    private var sortwyi: CAShapeLayer?
     private let gradientLayer = CAGradientLayer()
     
   
@@ -18,7 +18,7 @@ class WyiakFluidTabBar: UITabBar {
         super.layoutSubviews()
         guard self.bounds.width > 0 else { return }
         
-        if shapeLayer == nil {
+        if sortwyi == nil {
             setupTabBar()
         }
         
@@ -44,7 +44,7 @@ class WyiakFluidTabBar: UITabBar {
         let shape = CAShapeLayer()
         shape.fillColor = UIColor.black.cgColor
         gradientLayer.mask = shape
-        self.shapeLayer = shape
+        self.sortwyi = shape
         
         self.backgroundImage = UIImage()
         self.shadowImage = UIImage()
@@ -73,7 +73,7 @@ class WyiakFluidTabBar: UITabBar {
     }
 
     private func animatePath(to newPath: CGPath) {
-        guard let shape = shapeLayer else { return }
+        guard let shape = sortwyi else { return }
         let animation = CABasicAnimation(keyPath: "path")
         animation.toValue = newPath
         animation.duration = 0.3

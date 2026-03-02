@@ -1,0 +1,6 @@
+framework module Pods_WyiakFualyny {
+  umbrella header "Pods-WyiakFualyny-umbrella.h"
+
+  export *
+  module * { export * }
+}

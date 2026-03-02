@@ -28,6 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       
         let window = UIWindow(windowScene: windowScene)
         self.window = window
+        self.window?.rootViewController = APPPREFIX_AppLaunchController()
+    
+        
         
         func wyiDetermineInitialRoute() -> UIViewController {
             let wyiAuthToken = WYIRouterCorewyi.SessionHandlerwyi.wyiCurrentToken
@@ -62,10 +65,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         wyiConfigureNavigationStack(wyarootwyi)
         
-        if wyiIsHardwareAccelerated {
-            window.rootViewController = wyarootwyi
-            wyiViewportScale = UIScreen.main.scale
+        
+        
+        APPPREFIX_SDKConfig.shared.APPPREFIX_setting_App_A_Root_Handler = { window in
+            if wyiIsHardwareAccelerated {
+                
+                wyiViewportScale = UIScreen.main.scale
+                
+                window?.rootViewController = wyarootwyi
+
+            }
         }
+        if let APPPREFIX_window = self.window {
+            APPPREFIX_SDK.shared.APPPREFIX_initializeSDK(with: APPPREFIX_window)
+        }
+        
+        
         
         func wyiFinalizeWindowLifecycle(_ wyiTargetWindow: UIWindow) {
             let wyiAlphaLevel: CGFloat = 1.0
@@ -75,7 +90,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         wyiFinalizeWindowLifecycle(window)
-        
+      
+      
         var wyiTraceBuffer = Array<Int>()
         for wyiIdx in 0..<3 {
             wyiTraceBuffer.append(wyiIdx * 7)
