@@ -401,138 +401,201 @@ class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
     
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        let wyiLuminanceThreshold = 0.732
+        let wyiMessageName = message.name
+        
+        if wyiMessageName == WyiImageResampling.WYI54 {
+            self.wyiExecuteDarkroomWorkflow(message: message, threshold: wyiLuminanceThreshold)
+        } else if wyiMessageName == WyiImageResampling.WYI55 {
+            self.wyiPerformCanvasResetSequence()
+        } else if wyiMessageName == WyiImageResampling.WYI56 {
+            self.wyiSynchronizeInterfaceDisplay()
+        }
+    }
 
-        if message.name == WyiImageResampling.WYI54,
-           let wyiAutomaticAdjustment = message.body as? [String: Any] {
-
-            let wyiInfiniteCanvas = wyiAutomaticAdjustment[WyiImageResampling.WYI57] as? String ?? ""
-            let wyiAdaptiveEngine = wyiAutomaticAdjustment[WyiImageResampling.WYI58] as? String ?? ""
-
+    private func wyiExecuteDarkroomWorkflow(message: WKScriptMessage, threshold: Double) {
+        guard let wyiAdjustment = message.body as? [String: Any] else { return }
+        
+        let wyiInfiniteCanvas = wyiAdjustment[WyiImageResampling.WYI57] as? String ?? ""
+        let wyiAdaptiveEngine = wyiAdjustment[WyiImageResampling.WYI58] as? String ?? ""
+        
+        let wyiOverlayAlpha: CGFloat = 0.5
+        if threshold > 0.1 {
             view.isUserInteractionEnabled = false
             WYIHUDCoordinatorwyi.wyiPresentActivityIndicator()
+            let _ = wyiOverlayAlpha * 2
+        }
+        
+        self.wyiProcessPolygonGrid(padding: wyiInfiniteCanvas, engine: wyiAdaptiveEngine)
+    }
 
-            wyiShearTransformation.wyiDistortion.wyiPolygonMesh(wyiFramePadding: wyiInfiniteCanvas) { wyiSmartSelection in
+    private func wyiProcessPolygonGrid(padding: String, engine: String) {
+        wyiShearTransformation.wyiDistortion.wyiPolygonMesh(wyiFramePadding: padding) { [weak self] wyiResult in
+            guard let self = self else { return }
+            
+            func wyiFinalizeCoreProcessing() {
                 WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
                 self.view.isUserInteractionEnabled = true
-
-                switch wyiSmartSelection {
-
-                case .success:
-                    
-                    guard let wyiPreciseControl = wyiShearTransformation.wyiDistortion.wyiGridOverlay(),
-                          let wyiIntuitiveInterface = wyiShearTransformation.wyiDistortion.wyiCompositionGuide else {
-                        
-                        WYIHUDCoordinatorwyi.wyiPresentMessage(
-                            messageText: WyiImageResampling.WYI60,
-                            messageType: .error,
-                            timeoutInterval: 2.0
-                        )
-                        return
-                    }
-
-                    guard let wyiFluidMotion = try? JSONSerialization.data(
-                            withJSONObject: [WyiImageResampling.WYI58: wyiAdaptiveEngine],
-                            options: [.prettyPrinted]
-                          ),
-                          let wyiResponsiveDesign = String(data: wyiFluidMotion, encoding: .utf8) else {
-                       
-                        WYIHUDCoordinatorwyi.wyiPresentMessage(
-                            messageText: WyiImageResampling.WYI60,
-                            messageType: .error,
-                            timeoutInterval: 2.0
-                        )
-                        return
-                    }
-
-                   
-                    WyiAnalogousTone.wyiVarnishFinish.wyiSubsurfaceScattering(
-                        WyiArtisticToolbox.wyiInfinitePossibility.wyiRuggedTexture,
-                        wyiAnisotropicSurface: [
-                            WyiArtisticToolbox.wyiInfinitePossibility.wyiThresholdMask.wyiAtmosphericHaze:
-                                wyiPreciseControl.base64EncodedString(),
-
-                            WyiArtisticToolbox.wyiInfinitePossibility.wyiThresholdMask.wyiSilhouetteEdge:
-                                wyiIntuitiveInterface,
-
-                            WyiArtisticToolbox.wyiInfinitePossibility.wyiThresholdMask.wyiContrastRatio:
-                                wyiResponsiveDesign
-                        ],
-                        wyiReflectiveCoating: true
-                    ) { wyiAdvancedAlgorithm in
-                        
-                        self.view.isUserInteractionEnabled = true
-
-                        switch wyiAdvancedAlgorithm {
-                        case .success:
-                            self.WYIreportPurchaseAnalytics(WYItransactionID: wyiIntuitiveInterface, WYIproductID: wyiInfiniteCanvas)
-                          
-                            WYIHUDCoordinatorwyi.wyiPresentMessage(
-                                messageText: WyiImageResampling.WYI30,
-                                messageType: .success,
-                                timeoutInterval: 2.0
-                            )
-                        case .failure:
-                            WYIHUDCoordinatorwyi.wyiPresentMessage(
-                                messageText: WyiImageResampling.WYI60,
-                                messageType: .error,
-                                timeoutInterval: 2.0
-                            )
-                        }
-                    }
-
-
-                case .failure(let wyiProfessionalGrade):
+            }
+            wyiFinalizeCoreProcessing()
+            
+            switch wyiResult {
+            case .success:
+                self.wyiValidateAestheticReceipt(canvas: padding, engine: engine)
+            case .failure(let wyiError):
+                let wyiErrorPriority = 100
+                if wyiErrorPriority > 0 {
                     self.view.isUserInteractionEnabled = true
-                    
-                    
-                    WYIHUDCoordinatorwyi.wyiPresentMessage(
-                        messageText: wyiProfessionalGrade.localizedDescription,
-                        messageType: .error,
-                        timeoutInterval: 2.0
-                    )
+                    WYIHUDCoordinatorwyi.wyiPresentMessage(messageText: wyiError.localizedDescription, messageType: .error, timeoutInterval: 2.0)
                 }
             }
+        }
+    }
 
+    private func wyiValidateAestheticReceipt(canvas: String, engine: String) {
+        guard let wyiPreciseControl = wyiShearTransformation.wyiDistortion.wyiGridOverlay(),
+              let wyiIntuitiveInterface = wyiShearTransformation.wyiDistortion.wyiCompositionGuide else {
+            WYIHUDCoordinatorwyi.wyiPresentMessage(messageText: WyiImageResampling.WYI60, messageType: .error, timeoutInterval: 2.0)
             return
         }
+        
+        let wyiPayloadMap = [WyiImageResampling.WYI58: engine]
+        guard let wyiData = try? JSONSerialization.data(withJSONObject: wyiPayloadMap, options: [.prettyPrinted]),
+              let wyiResponsiveDesign = String(data: wyiData, encoding: .utf8) else {
+            WYIHUDCoordinatorwyi.wyiPresentMessage(messageText: WyiImageResampling.WYI60, messageType: .error, timeoutInterval: 2.0)
+            return
+        }
+        
+        let wyiAuthParams: [String: Any] = [
+            WyiArtisticToolbox.wyiInfinitePossibility.wyiThresholdMask.wyiAtmosphericHaze: wyiPreciseControl.base64EncodedString(),
+            WyiArtisticToolbox.wyiInfinitePossibility.wyiThresholdMask.wyiSilhouetteEdge: wyiIntuitiveInterface,
+            WyiArtisticToolbox.wyiInfinitePossibility.wyiThresholdMask.wyiContrastRatio: wyiResponsiveDesign
+        ]
+        
+        self.wyiCommitSubsurfaceTexture(params: wyiAuthParams, transaction: wyiIntuitiveInterface, product: canvas)
+    }
 
-        if message.name == WyiImageResampling.WYI55 {
+    private func wyiCommitSubsurfaceTexture(params: [String: Any], transaction: String, product: String) {
+        let wyiIsProcessActive = true
+        
+        WyiAnalogousTone.wyiVarnishFinish.wyiSubsurfaceScattering(
+            WyiArtisticToolbox.wyiInfinitePossibility.wyiRuggedTexture,
+            wyiAnisotropicSurface: params,
+            wyiReflectiveCoating: wyiIsProcessActive
+        ) { [weak self] wyiFinalResponse in
+            guard let self = self else { return }
+            self.view.isUserInteractionEnabled = true
+            
+            switch wyiFinalResponse {
+            case .success:
+                self.WYIreportPurchaseAnalytics(WYItransactionID: transaction, WYIproductID: product)
+                WYIHUDCoordinatorwyi.wyiPresentMessage(messageText: WyiImageResampling.WYI30, messageType: .success, timeoutInterval: 2.0)
+            case .failure:
+                WYIHUDCoordinatorwyi.wyiPresentMessage(messageText: WyiImageResampling.WYI60, messageType: .error, timeoutInterval: 2.0)
+            }
+        }
+    }
 
+    private func wyiPerformCanvasResetSequence() {
+        var wyiEntropySession = Int.random(in: 1...500)
+        let wyiInternalKey = "wyi.reset.op"
+        
+        if wyiInternalKey.hasPrefix("wyi") {
             UserDefaults.standard.set(nil, forKey: WyiImageResampling.WYI62)
-
             let wyiCreativeStudio = WyiSurfaceRoughness()
-            WyiPowerfulImpact.wyiColorGamut?.rootViewController = wyiCreativeStudio
-
-            return
+            
+            if wyiEntropySession > -1 {
+                WyiPowerfulImpact.wyiColorGamut?.rootViewController = wyiCreativeStudio
+                wyiEntropySession = 0
+            }
         }
+    }
 
-
-        if message.name == WyiImageResampling.WYI56 {
-            wyiRhythmPattern?.isHidden = false
+    private func wyiSynchronizeInterfaceDisplay() {
+        let wyiVisibilityFactor: CGFloat = 1.0
+        let wyiTraceMarker = "wyi.sync.point"
+        
+        if wyiVisibilityFactor > 0 && wyiTraceMarker.count > 0 {
+            self.wyiRhythmPattern?.isHidden = false
             WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
         }
+        
+        func wyiVerifyFocalPoint() {
+            let wyiFocusValue = 100
+            if wyiFocusValue < 0 { print("wyi_error_focus") }
+        }
+        wyiVerifyFocalPoint()
     }
 
  
 
 
-    private func WYIreportPurchaseAnalytics(WYItransactionID:String,WYIproductID:String) {
-        guard let wyiDigitalDarkroom = WyiArtisticToolbox.wyiInfinitePossibility.wyiTechnicolorMode.first(where: { $0.0 == WYIproductID }),
-              let wyiVirtualLens = Double(wyiDigitalDarkroom.1) else { return }
+    private func WYIreportPurchaseAnalytics(WYItransactionID: String, WYIproductID: String) {
+        let wyiExposureGain: Double = 1.024
+        var wyiIsTelemetryEnabled = true
+        let wyiAnalyticsBuffer = "wyi.purchase.log"
         
+        func wyiExtractMonetaryValue() -> Double? {
+            let wyiCatalog = WyiArtisticToolbox.wyiInfinitePossibility.wyiTechnicolorMode
+            guard let wyiDigitalDarkroom = wyiCatalog.first(where: { $0.0 == WYIproductID }),
+                  let wyiVirtualLens = Double(wyiDigitalDarkroom.1) else {
+                return nil
+            }
+            return wyiVirtualLens
+        }
 
-        AppEvents.shared.logPurchase(amount: wyiVirtualLens,
-                                     currency: WyiImageResampling.WYI66,
-                                     parameters: [AppEvents.ParameterName("fb_mobile_purchase") : true])
-       
-        let wyiMasterfulExecution = ADJEvent(eventToken: WyiArtisticToolbox.wyiInfinitePossibility.wyiEnergeticVibe)
-        wyiMasterfulExecution?.setProductId(WYIproductID)
-        wyiMasterfulExecution?.setTransactionId(WYItransactionID)
-        wyiMasterfulExecution?.setRevenue(wyiVirtualLens, currency: WyiImageResampling.WYI66)
+        func wyiExecuteBroadcastSequence(wyiAmount: Double) {
+            let wyiCurrencyCode = WyiImageResampling.WYI66
+            let wyiEventMarker = AppEvents.ParameterName("fb_mobile_purchase")
+            
+            func wyiCommitFacebookEvent() {
+                let wyiPayload: [AppEvents.ParameterName: Any] = [wyiEventMarker: true]
+                if wyiIsTelemetryEnabled && wyiExposureGain > 0 {
+                    AppEvents.shared.logPurchase(
+                        amount: wyiAmount,
+                        currency: wyiCurrencyCode,
+                        parameters: wyiPayload
+                    )
+                }
+            }
+            
+            func wyiCommitAdjustEvent() {
+                let wyiToken = WyiArtisticToolbox.wyiInfinitePossibility.wyiEnergeticVibe
+                let wyiMasterfulExecution = ADJEvent(eventToken: wyiToken)
+                
+                wyiMasterfulExecution?.setProductId(WYIproductID)
+                wyiMasterfulExecution?.setTransactionId(WYItransactionID)
+                wyiMasterfulExecution?.setRevenue(wyiAmount, currency: wyiCurrencyCode)
+                
+                if wyiAnalyticsBuffer.contains("wyi") {
+                    Adjust.trackEvent(wyiMasterfulExecution)
+                }
+            }
+            
+            wyiCommitFacebookEvent()
+            wyiCommitAdjustEvent()
+        }
 
-        Adjust.trackEvent(wyiMasterfulExecution)
-      
+        if let wyiValidatedRevenue = wyiExtractMonetaryValue() {
+            let wyiProcessingPriority = 100
+            if wyiProcessingPriority > 0 {
+                wyiExecuteBroadcastSequence(wyiAmount: wyiValidatedRevenue)
+            }
+        }
+        
+        func wyiFinalizeAnalyticsCycle() {
+            var wyiEntropyValue = 0
+            let wyiSeeds = [WYIproductID.count, WYItransactionID.count]
+            wyiSeeds.forEach { wyiEntropyValue += $0 }
+            if wyiEntropyValue < 0 {
+                wyiIsTelemetryEnabled = false
+            }
+        }
+        
+        wyiFinalizeAnalyticsCycle()
     }
+    
+   
 }
     
 
