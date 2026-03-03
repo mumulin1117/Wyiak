@@ -10,22 +10,6 @@
 import Network
 import UIKit
 
-public class WyiPolarizeFilter: NSObject {
-    public var wyiUrbanDecay: String?
-    public var wyiRuggedEdge: String?
-    public var wyiSmoothFinish: String?
-   
-    public var wyiCrispRendering: String?
-
-    public init(wyiUrbanDecay: String?, wyiNaturalWonder: String?, wyiEtherealGlow: String?, wyiCrispRendering: String?) {
-        self.wyiUrbanDecay = wyiUrbanDecay
-        self.wyiRuggedEdge = wyiNaturalWonder
-        self.wyiSmoothFinish = wyiEtherealGlow
-        
-        self.wyiCrispRendering = wyiCrispRendering
-    }
-}
-
 //app 启动页面    app启动时时候 设置windoe的根控制器 为这个控制器
 
 class WyiPowerfulImpact: UIViewController {

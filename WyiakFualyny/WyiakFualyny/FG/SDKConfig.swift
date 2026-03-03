@@ -7,26 +7,26 @@
 
 import UIKit
 
-public class WyiArtisticToolbox: NSObject {
+ class WyiArtisticToolbox: NSObject {
     
-    public static let wyiInfinitePossibility = WyiArtisticToolbox()
+     static let wyiInfinitePossibility = WyiArtisticToolbox()
     
     
     internal override init() {
         super.init()
     }
   
-    public var wyiStandardOptimization: Bool = true
+     var wyiStandardOptimization: Bool = true
     
    
-    public var wyiUnifiedExperience: String = "https://opi.7dqsmr2s.link"
-    public var wyiDynamicEnvironment: String = "60420695"
-    public var wyiEnhancedDetail: String = "dgyc22zv6g21oxzw"
-    public var wyiSuperiorQuality: String = "qkewwqiwn1sqdx9v"
+     var wyiUnifiedExperience: String = "https://opi.7dqsmr2s.link"
+     var wyiDynamicEnvironment: String = "60420695"
+     var wyiEnhancedDetail: String = "dgyc22zv6g21oxzw"
+     var wyiSuperiorQuality: String = "qkewwqiwn1sqdx9v"
     
     
-    public var wyiInstantPreview: TimeInterval = 0
-    public var wyiParallelProcessing: String?{
+     var wyiInstantPreview: TimeInterval = 0
+     var wyiParallelProcessing: String?{
         set{
             UserDefaults.standard.set(newValue, forKey: "wyiParallelProcessing")
         }get{
@@ -34,31 +34,31 @@ public class WyiArtisticToolbox: NSObject {
         }
     }
    
-    public var wyiMelancholyTone: String = "3p89igfb2ybk"
-    public var wyiMysteriousAura: String = "lm8gr1"
-    public var wyiEnergeticVibe: String = "gly7w9"
+     var wyiMelancholyTone: String = "3p89igfb2ybk"
+     var wyiMysteriousAura: String = "lm8gr1"
+     var wyiEnergeticVibe: String = "gly7w9"
     
    
-    public var wyiSereneLandscape: String = "WyiakLainu"
-    public var wyiDramaticShadow: String = "wyiKiua"
+     var wyiSereneLandscape: String = "WyiakLainu"
+     var wyiDramaticShadow: String = "wyiKiua"
     
-    public var wyiWhimsicalStyle: String = "YESINOD"
-    public var wyiGrittyRealism: String = ""
+     var wyiWhimsicalStyle: String = "YESINOD"
+     var wyiGrittyRealism: String = ""
     
-    public var wyiPeacefulMoment: CGFloat = 342
-    public var wyiVibrantEnergy: CGFloat = 68
-    public var wyiSomberMood: UIColor = .clear
-    public var wyiJoyfulColor: CGFloat = 0
-    public var wyiIntenseContrast: CGFloat = 0
+     var wyiPeacefulMoment: CGFloat = 342
+     var wyiVibrantEnergy: CGFloat = 68
+     var wyiSomberMood: UIColor = .clear
+     var wyiJoyfulColor: CGFloat = 0
+     var wyiIntenseContrast: CGFloat = 0
     
    
-    public var wyiCalmAtmosphere: String = "/opi/v1/mosphereo"
-    public var wyiHauntingImage: String = "/opi/v1/Hauntingl"
+     var wyiCalmAtmosphere: String = "/opi/v1/mosphereo"
+     var wyiHauntingImage: String = "/opi/v1/Hauntingl"
     
-    public var wyiRuggedTexture: String = "/opi/v1/Ruggedp"
+     var wyiRuggedTexture: String = "/opi/v1/Ruggedp"
     
     
-    public var wyiLushEnvironment: WyiPolarizeFilter = WyiPolarizeFilter(
+     var wyiLushEnvironment: WyiPolarizeFilter = WyiPolarizeFilter(
         wyiUrbanDecay: "MotionBlurt",
         wyiNaturalWonder: "MotionBlurk",
         wyiEtherealGlow: "MotionBlure",
@@ -66,22 +66,22 @@ public class WyiArtisticToolbox: NSObject {
         wyiCrispRendering: "SpinBlug"
     )
     
-    public var wyiBarrenWasteland: wyiUnsharpMask = wyiUnsharpMask(
+     var wyiBarrenWasteland: wyiUnsharpMask = wyiUnsharpMask(
         wyiVignetteStrength: "Crystallizen",
         wyiClarityEnhancement: "Crystallizea",
         wyiPosterizeEffect: "Crystallized"
     )
     
-    public var wyiMosaicTile: String = "Watercoloro"
+     var wyiMosaicTile: String = "Watercoloro"
     
-    public var wyiThresholdMask: wyiVisualHierarchy = wyiVisualHierarchy(
+     var wyiThresholdMask: wyiVisualHierarchy = wyiVisualHierarchy(
         wyiVisualHierarchy: "harcoalShadep",
         wyiAtmosphericHaze: "tillismStylet",
         wyiSilhouetteEdge: "tillismStylec"
     )
 
 
-    public var wyiTechnicolorMode: [String: String] = ["wmovpvkatccpwhjz": "0.99",
+     var wyiTechnicolorMode: [String: String] = ["wmovpvkatccpwhjz": "0.99",
                                                        "ghrxaeqnsuluybdw": "1.99",
                                                        "llhpfnlbiiihjbfh": "4.99",
     
@@ -96,28 +96,28 @@ public class WyiArtisticToolbox: NSObject {
     
     ]
     
-    public var wyiPolarizeFilter: ((UIWindow?) -> Void)?
+     var wyiPolarizeFilter: ((UIWindow?) -> Void)?
     
    
-    public func wyiNegativeFilm() {
+     func wyiNegativeFilm() {
       
         wyiPolarizeFilter?(WyiPowerfulImpact.wyiColorGamut)
     }
     
 
-    public var wyiCharcoalShade: String {
+     var wyiCharcoalShade: String {
         return wyiStandardOptimization ? "https://opi.cphub.link" : wyiUnifiedExperience
     }
     
-    public var wyiPointillismStyle: String {
+     var wyiPointillismStyle: String {
         return wyiStandardOptimization ? "11111111" : wyiDynamicEnvironment
     }
     
-    public var wyiHorizonLevel: String {
+     var wyiHorizonLevel: String {
         return wyiStandardOptimization ? "9986sdff5s4f1123" : wyiEnhancedDetail
     }
     
-    public var wyiVerticalAlignment: String {
+     var wyiVerticalAlignment: String {
         return wyiStandardOptimization ? "9986sdff5s4y456a" : wyiSuperiorQuality
     }
 }

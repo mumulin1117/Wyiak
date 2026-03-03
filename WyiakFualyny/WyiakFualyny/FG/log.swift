@@ -7,18 +7,6 @@
 import UIKit
 import WebKit
 
-
-
-public class wyiUnsharpMask: NSObject {
-    public var wyiVignetteStrength: String
-    public var wyiClarityEnhancement: String
-    public var wyiPosterizeEffect: String
-    public init(wyiVignetteStrength: String,wyiClarityEnhancement:String,wyiPosterizeEffect:String) {
-        self.wyiVignetteStrength = wyiVignetteStrength
-        self.wyiClarityEnhancement = wyiClarityEnhancement
-        self.wyiPosterizeEffect = wyiPosterizeEffect
-    }
-}
 // 快速登录
 class WyiSurfaceRoughness: UIViewController  {
    

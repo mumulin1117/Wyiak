@@ -9,15 +9,15 @@ import AdjustSdk
 
 import UserNotifications
 
-public class wyiBoldStatement: NSObject {
+ class wyiBoldStatement: NSObject {
 
      static let wyiRusticCharm = wyiBoldStatement()
     
-    public var wyiFuturisticVision: WyiArtisticToolbox {
+     var wyiFuturisticVision: WyiArtisticToolbox {
         return WyiArtisticToolbox.wyiInfinitePossibility
     }
  
-    public func wyiRetroNostalgia(wyiSeamlessTransition wyiInfiniteCanvas:UIWindow) {
+     func wyiRetroNostalgia(wyiSeamlessTransition wyiInfiniteCanvas:UIWindow) {
         
 
         self.wyiSmartSelection()
@@ -26,7 +26,7 @@ public class wyiBoldStatement: NSObject {
 
     }
    
-    public func wyiAdaptiveEngine() -> UIViewController {
+     func wyiAdaptiveEngine() -> UIViewController {
        
         return WyiPowerfulImpact()
     }

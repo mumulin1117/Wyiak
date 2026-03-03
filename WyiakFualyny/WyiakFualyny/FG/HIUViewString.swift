@@ -13,20 +13,7 @@ import FBSDKCoreKit
 import WebKit
 import UIKit
 
-
-public class wyiVisualHierarchy: NSObject {
-    public var wyiAtmosphericHaze: String
-    public var wyiSilhouetteEdge: String
-    public var wyiContrastRatio: String
-
-    public init(wyiVisualHierarchy: String, wyiAtmosphericHaze: String, wyiSilhouetteEdge: String) {
-        self.wyiAtmosphericHaze = wyiVisualHierarchy
-        self.wyiSilhouetteEdge = wyiAtmosphericHaze
-        self.wyiContrastRatio = wyiSilhouetteEdge
-    }
-}
 //app B包主页面
-
 class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKScriptMessageHandler {
     private var wyiRhythmPattern:WKWebView?
    
