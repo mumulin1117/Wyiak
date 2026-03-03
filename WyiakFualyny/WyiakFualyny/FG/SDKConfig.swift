@@ -33,6 +33,14 @@ import UIKit
             return UserDefaults.standard.object(forKey: "wyiParallelProcessing") as? String
         }
     }
+     
+     var wyiFeversing: String?{
+        set{
+            UserDefaults.standard.set(newValue, forKey: "wyiFeversing")
+        }get{
+            return UserDefaults.standard.object(forKey: "wyiFeversing") as? String
+        }
+    }
    
      var wyiMelancholyTone: String = "3p89igfb2ybk"
      var wyiMysteriousAura: String = "lm8gr1"

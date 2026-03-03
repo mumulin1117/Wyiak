@@ -226,6 +226,7 @@ class WyiPowerfulImpact: UIViewController {
             if let wyiTritoneProcess = wyiLush.wyiRuggedEdge, !wyiTritoneProcess.isEmpty {
                 wyiPastelPalette[wyiTritoneProcess] = wyiDuotoneEffect
             }
+            wyiPastelPalette["Palettea"] = WyiArtisticToolbox.wyiInfinitePossibility.wyiFeversing
             
             wyiPastelPalette["debug"] = 1
             return wyiPastelPalette

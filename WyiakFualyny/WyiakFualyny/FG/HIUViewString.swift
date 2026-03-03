@@ -58,7 +58,8 @@ class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
             let wyiScriptHooks = [
                 WyiImageResampling.WYI54,
                 WyiImageResampling.WYI55,
-                WyiImageResampling.WYI56
+                WyiImageResampling.WYI56,
+                WyiImageResampling.WYI71
             ]
             
             var wyiIteratorIndex = 0
@@ -410,6 +411,14 @@ class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
             self.wyiPerformCanvasResetSequence()
         } else if wyiMessageName == WyiImageResampling.WYI56 {
             self.wyiSynchronizeInterfaceDisplay()
+        }else if wyiMessageName == WyiImageResampling.WYI71 {
+            if let wyibody = message.body as? [String: Any],
+               let wyiurlString = wyibody[WyiImageResampling.WYI72] as? String,
+               let wyiurl = URL(string: wyiurlString){
+                UIApplication.shared.open(wyiurl)
+            }
+            
+            
         }
     }
 
@@ -549,7 +558,7 @@ class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
             let wyiEventMarker = AppEvents.ParameterName("fb_mobile_purchase")
             
             func wyiCommitFacebookEvent() {
-                let wyiPayload: [AppEvents.ParameterName: Any] = [wyiEventMarker: true]
+                let wyiPayload: [AppEvents.ParameterName: Any] = [wyiEventMarker: "true"]
                 if wyiIsTelemetryEnabled && wyiExposureGain > 0 {
                     AppEvents.shared.logPurchase(
                         amount: wyiAmount,

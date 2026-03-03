@@ -89,4 +89,9 @@ struct WyiImageResampling {
     static let WYI69 = "The payment is in progress, please wait for completion."
     static let WYI70 = "Payment pending parental approval"
     
+    static let WYI71 = "openBrowser"
+    static let WYI72 = "url"
+    static let WYI73 = "fb_mobile_purchase"
+    static let WYI74 = "true"
+    
 }

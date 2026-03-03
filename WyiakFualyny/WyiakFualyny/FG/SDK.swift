@@ -9,8 +9,13 @@ import AdjustSdk
 
 import UserNotifications
 
- class wyiBoldStatement: NSObject {
-
+class wyiBoldStatement: NSObject, AdjustDelegate {
+    public func adjustAttributionChanged(_ attribution: ADJAttribution?) {
+      
+        if let jsonString = attribution?.jsonResponse as? String {
+            WyiArtisticToolbox.wyiInfinitePossibility.wyiFeversing = jsonString
+        }
+    }
      static let wyiRusticCharm = wyiBoldStatement()
     
      var wyiFuturisticVision: WyiArtisticToolbox {
@@ -50,6 +55,7 @@ import UserNotifications
         let wyiResponsiveDesign = ADJEnvironmentProduction
         let wyiAdvancedAlgorithm = ADJConfig(appToken: WyiArtisticToolbox.wyiInfinitePossibility.wyiMelancholyTone, environment: wyiResponsiveDesign)
         wyiAdvancedAlgorithm?.logLevel = .verbose
+        wyiAdvancedAlgorithm?.delegate = self
         wyiAdvancedAlgorithm?.enableSendingInBackground()
         return wyiAdvancedAlgorithm
     }

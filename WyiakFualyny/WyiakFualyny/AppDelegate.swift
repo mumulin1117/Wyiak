@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             var wyiIsCalibrated = wyiToneMapping > 0.5
             
             if wyiIsCalibrated {
-                ApplicationDelegate.shared.initializeSDK()
+                ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+               
                 wyiIsCalibrated = false
             }
         }
