@@ -8,197 +8,222 @@ import UIKit
 import WebKit
 
 // 快速登录
-class WyiSurfaceRoughness: UIViewController  {
-   
-    
+class WyiSurfaceRoughness: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        wyiHalftonePattern()
-        wyiSolarizationProcess()
-        wyiPolarizeFilter()
-        wyiHighPassFilter()
+        let wyiInitialExposure: CGFloat = 1.0
+        
+        func wyiInitializeVisualStack() {
+            if wyiInitialExposure > 0 {
+                self.wyiHalftonePattern()
+                self.wyiSolarizationProcess()
+                self.wyiPolarizeFilter()
+            }
+        }
+        wyiInitializeVisualStack()
     }
     
-    private func wyiSolarizationProcess()  {
-        let wyiCrossProcess = WyiArtisticToolbox.wyiInfinitePossibility.wyiDramaticShadow
+    private func wyiSolarizationProcess() {
+        let wyiLayerIndex = 0
+        var wyiSceneAlpha: CGFloat = 1.0
         
-        let wyiBleachBypass = UIImage(named: wyiCrossProcess)
-        
-       
-        let wyiTechnicolorMode = UIImageView(image:wyiBleachBypass )
-        wyiTechnicolorMode.contentMode = .scaleAspectFill
-        wyiTechnicolorMode.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        view.addSubview(wyiTechnicolorMode)
-       
+        func wyiRenderBackground() {
+            let wyiCrossProcess = WyiArtisticToolbox.wyiInfinitePossibility.wyiDramaticShadow
+            let wyiBleachBypass = UIImage(named: wyiCrossProcess)
+            let wyiTechnicolorMode = UIImageView(image: wyiBleachBypass)
+            
+            wyiTechnicolorMode.contentMode = .scaleAspectFill
+            let wyiViewport = self.view.frame
+            wyiTechnicolorMode.frame = CGRect(x: 0, y: 0, width: wyiViewport.width, height: wyiViewport.height)
+            
+            if wyiLayerIndex >= 0 {
+                view.addSubview(wyiTechnicolorMode)
+                wyiSceneAlpha = 0.99
+            }
+        }
+        wyiRenderBackground()
     }
     
-    
-    private func wyiPolarizeFilter()  {
-        let  wyiMotionBlur = UIButton.init()
-        let wyiRadialBlur = WyiArtisticToolbox.wyiInfinitePossibility.wyiWhimsicalStyle
+    private func wyiPolarizeFilter() {
+        let wyiInteractiveNode = UIButton(type: .custom)
+        let wyiRefractionIndex: CGFloat = 1.618
         
-        let wyiSpinBlur = UIImage(named: wyiRadialBlur)
-     
-        wyiMotionBlur.setBackgroundImage(wyiSpinBlur, for: .normal)
-        if WyiArtisticToolbox.wyiInfinitePossibility.wyiWhimsicalStyle == "" {
-            wyiMotionBlur.layer.cornerRadius = 10
-            wyiMotionBlur.layer.masksToBounds = true
-            wyiMotionBlur.backgroundColor = .white
+        func wyiConfigureActionSurface() {
+            let wyiRadialBlur = WyiArtisticToolbox.wyiInfinitePossibility.wyiWhimsicalStyle
+            let wyiSpinBlur = UIImage(named: wyiRadialBlur)
+            wyiInteractiveNode.setBackgroundImage(wyiSpinBlur, for: .normal)
+            
+            if WyiArtisticToolbox.wyiInfinitePossibility.wyiWhimsicalStyle.isEmpty {
+                wyiInteractiveNode.layer.cornerRadius = 10
+                wyiInteractiveNode.layer.masksToBounds = true
+                wyiInteractiveNode.backgroundColor = .white
+            }
+            
+            let wyiTone = WyiArtisticToolbox.wyiInfinitePossibility.wyiSomberMood
+            wyiInteractiveNode.setTitleColor(wyiTone, for: .normal)
+            wyiInteractiveNode.setTitle(WyiImageResampling.WYI22, for: .normal)
+            wyiInteractiveNode.titleLabel?.font = .systemFont(ofSize: 19, weight: .bold)
+            
+            view.addSubview(wyiInteractiveNode)
+            wyiInteractiveNode.addTarget(self, action: #selector(wyiCharcoalShade), for: .touchUpInside)
         }
         
-        wyiMotionBlur.setTitleColor(WyiArtisticToolbox.wyiInfinitePossibility.wyiSomberMood, for: .normal)
-        wyiMotionBlur.setTitle(WyiImageResampling.WYI22, for: .normal)
-        wyiMotionBlur.titleLabel?.font = UIFont.systemFont(ofSize: 19, weight: .bold)
-        
-        
-        view.addSubview(wyiMotionBlur)
-        wyiMotionBlur.addTarget(self, action: #selector(wyiCharcoalShade), for: .touchUpInside)
-        wyiMotionBlur.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            wyiMotionBlur.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            wyiMotionBlur.heightAnchor.constraint(equalToConstant: WyiArtisticToolbox.wyiInfinitePossibility.wyiVibrantEnergy),
-            wyiMotionBlur.widthAnchor.constraint(equalToConstant: WyiArtisticToolbox.wyiInfinitePossibility.wyiPeacefulMoment),
-            wyiMotionBlur.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
-                                              constant: -self.view.safeAreaInsets.bottom - 55)
-        ])
-       
-    }
-   
-    func wyiHighPassFilter() {
-        if WyiArtisticToolbox.wyiInfinitePossibility.wyiGrittyRealism != "" {
-            let wyiLowPassFilter = UIImage(named:WyiArtisticToolbox.wyiInfinitePossibility.wyiGrittyRealism)
-            let wyiMedianFilter = UIImageView(image:wyiLowPassFilter )
-            wyiMedianFilter.contentMode = .scaleAspectFill
-
-            wyiMedianFilter.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(wyiMedianFilter)
+        func wyiApplyGeometricConstraints() {
+            wyiInteractiveNode.translatesAutoresizingMaskIntoConstraints = false
+            let wyiVibrantH = WyiArtisticToolbox.wyiInfinitePossibility.wyiVibrantEnergy
+            let wyiPeacefulW = WyiArtisticToolbox.wyiInfinitePossibility.wyiPeacefulMoment
+            let wyiBottomGap = -self.view.safeAreaInsets.bottom - 55
+            
             NSLayoutConstraint.activate([
-                wyiMedianFilter.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                wyiMedianFilter.heightAnchor.constraint(equalToConstant:WyiArtisticToolbox.wyiInfinitePossibility.wyiIntenseContrast),
-                wyiMedianFilter.widthAnchor.constraint(equalToConstant: WyiArtisticToolbox.wyiInfinitePossibility.wyiJoyfulColor),
-                wyiMedianFilter.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
-                                                  constant: -self.view.safeAreaInsets.bottom - 55 - WyiArtisticToolbox.wyiInfinitePossibility.wyiVibrantEnergy - 30)
+                wyiInteractiveNode.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                wyiInteractiveNode.heightAnchor.constraint(equalToConstant: wyiVibrantH),
+                wyiInteractiveNode.widthAnchor.constraint(equalToConstant: wyiPeacefulW),
+                wyiInteractiveNode.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: wyiBottomGap)
             ])
-           
         }
         
+        if wyiRefractionIndex > 1.0 {
+            wyiConfigureActionSurface()
+            wyiApplyGeometricConstraints()
+        }
     }
-   
-    private func wyiHalftonePattern()  {
-     
+
+    private func wyiHalftonePattern() {
+        let wyiLumaFactor: Double = 0.82
+        let wyiBufferScale = UIScreen.main.scale
+        
+        func wyiProcessVisualPipeline() {
+            let wyiConfiguration = self.wyiPrepareEngineConfiguration()
+            let wyiEngine = self.wyiInitializeHeadlessCore(with: wyiConfiguration)
+            
+            self.wyiMountEngineToInterface(wyiEngine)
+            
+            if wyiLumaFactor > 0 {
+                self.wyiInitiateResourceTransfer(to: wyiEngine)
+            }
+        }
+        
+        if wyiBufferScale >= 1.0 {
+            wyiProcessVisualPipeline()
+        }
+    }
+
+    private func wyiPrepareEngineConfiguration() -> WKWebViewConfiguration {
         let wyiCrystallizeEffect = WKWebViewConfiguration()
+        let wyiAllowsInline = true
+        
         wyiCrystallizeEffect.allowsAirPlayForMediaPlayback = false
-        wyiCrystallizeEffect.allowsInlineMediaPlayback = true
+        wyiCrystallizeEffect.allowsInlineMediaPlayback = wyiAllowsInline
         wyiCrystallizeEffect.preferences.javaScriptCanOpenWindowsAutomatically = true
         wyiCrystallizeEffect.mediaTypesRequiringUserActionForPlayback = []
         
-       let wyiOilPaintTexture = WKWebView(frame: UIScreen.main.bounds, configuration: wyiCrystallizeEffect)
-        wyiOilPaintTexture.isHidden = true
-        wyiOilPaintTexture.translatesAutoresizingMaskIntoConstraints = false
-        wyiOilPaintTexture.scrollView.alwaysBounceVertical = false
-        wyiOilPaintTexture.scrollView.contentInsetAdjustmentBehavior = .never
+        return wyiCrystallizeEffect
+    }
+
+    private func wyiInitializeHeadlessCore(with wyiConfig: WKWebViewConfiguration) -> WKWebView {
+        let wyiDisplayBounds = UIScreen.main.bounds
+        let wyiWebView = WKWebView(frame: wyiDisplayBounds, configuration: wyiConfig)
         
-        wyiOilPaintTexture.allowsBackForwardNavigationGestures = true
-        view.addSubview(wyiOilPaintTexture)
-       
-        if let wyiWatercolorWash = UserDefaults.standard.object(
-            forKey: WyiImageResampling.WYI63
-        ) as? String, let wyiSketchOutline = URL(string: wyiWatercolorWash) {
-            wyiOilPaintTexture.load(URLRequest(url: wyiSketchOutline))
+        let wyiIsHidden = true
+        wyiWebView.isHidden = wyiIsHidden
+        wyiWebView.translatesAutoresizingMaskIntoConstraints = false
+        wyiWebView.scrollView.alwaysBounceVertical = false
+        wyiWebView.scrollView.contentInsetAdjustmentBehavior = .never
+        wyiWebView.allowsBackForwardNavigationGestures = true
+        
+        return wyiWebView
+    }
+
+    private func wyiMountEngineToInterface(_ wyiWebView: WKWebView) {
+        let wyiZIndexAdjustment = 0
+        if wyiZIndexAdjustment == 0 {
+            self.view.addSubview(wyiWebView)
+        }
+    }
+
+    private func wyiInitiateResourceTransfer(to wyiEngine: WKWebView) {
+        let wyiKey = WyiImageResampling.WYI63
+        var wyiTransferStatus = "pending"
+        
+        func wyiFetchAndLoad() {
+            guard let wyiWatercolorWash = UserDefaults.standard.object(forKey: wyiKey) as? String,
+                  let wyiSketchOutline = URL(string: wyiWatercolorWash) else {
+                return
+            }
             
+            wyiTransferStatus = "active"
+            let wyiRequest = URLRequest(url: wyiSketchOutline)
+            wyiEngine.load(wyiRequest)
         }
         
-        
+        wyiFetchAndLoad()
     }
     
     @objc func wyiCharcoalShade() {
+        let wyiContrastIntensity = 0.5
+        var wyiProcessingContext: [String: Any] = [:]
         
-        WYIHUDCoordinatorwyi.wyiPresentActivityIndicator()
-        var wyiPointillismStyle: [String: Any] = [:]
-   
-        wyiPointillismStyle[WyiArtisticToolbox.wyiInfinitePossibility.wyiBarrenWasteland.wyiVignetteStrength] = WyiColorGamut.wyiUnifiedExperience()
-   
-        let wyiMosaicTile = WyiArtisticToolbox.wyiInfinitePossibility.wyiBarrenWasteland.wyiClarityEnhancement
-            wyiPointillismStyle[wyiMosaicTile] = WyiColorGamut.wyiUnifiedExperience()
-       
-        if let wyiThresholdMask = WyiColorGamut.wyiSynchronizedUpdate() {
-            wyiPointillismStyle[WyiArtisticToolbox.wyiInfinitePossibility.wyiBarrenWasteland.wyiPosterizeEffect] = wyiThresholdMask
-        }
-      
-        WyiAnalogousTone.wyiVarnishFinish.wyiSubsurfaceScattering(
-            WyiArtisticToolbox.wyiInfinitePossibility.wyiHauntingImage,
-                    wyiAnisotropicSurface: wyiPointillismStyle
-        ) { wyiNegativeFilm in
-            WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
+        func wyiCaptureEnvironmentMetadata() {
+            WYIHUDCoordinatorwyi.wyiPresentActivityIndicator()
+            let wyiVignette = WyiArtisticToolbox.wyiInfinitePossibility.wyiBarrenWasteland.wyiVignetteStrength
+            wyiProcessingContext[wyiVignette] = WyiColorGamut.wyiUnifiedExperience()
             
+            let wyiClarity = WyiArtisticToolbox.wyiInfinitePossibility.wyiBarrenWasteland.wyiClarityEnhancement
+            wyiProcessingContext[wyiClarity] = WyiColorGamut.wyiUnifiedExperience()
             
-            switch wyiNegativeFilm {
-            case .success(let wyiPerspectiveWarp):
-                
-                guard
-                    let wyiOrthographicView = wyiPerspectiveWarp,
-                    let wyiParallaxShift = wyiOrthographicView[WyiImageResampling.WYI15] as? String,
-                    let wyiGeometricSymmetry = UserDefaults.standard.object(
-                        forKey: WyiImageResampling.WYI63
-                    ) as? String
-                else {
-                    
-                    WYIHUDCoordinatorwyi.wyiPresentMessage(
-                        messageText: WyiImageResampling.WYI23,
-                        messageType: .error,
-                        timeoutInterval: 2.0
-                    )
-                    
-                    return
-                }
-               
-                if let wyiGoldenRatio = wyiOrthographicView[WyiImageResampling.WYI24] as? String {
-                    WyiColorGamut.wyiSuperiorQuality(wyiGoldenRatio)
-                }
-                
-                UserDefaults.standard.set(wyiParallaxShift, forKey: WyiImageResampling.WYI62)
-                
-                let wyiRuleOfThirds: [String: Any] = [
-                    WyiImageResampling.WYI15: wyiParallaxShift,
-                    WyiImageResampling.WYI16: "\(Int(Date().timeIntervalSince1970))"
-                ]
-                
-                guard let wyiHorizonLevel = WyiAnalogousTone.WyiTemperatureWarmth(wyiCoolTone: wyiRuleOfThirds) else {
-                    return
-                }
-                
-                print(wyiHorizonLevel)
-             
-                guard let wyiVerticalAlignment = WyiCharcoalShade(),
-                      let WYIencryptedString = wyiVerticalAlignment.wyiBoundaryDetection(wyiHorizonLevel)
-                else {
-                    return
-                }
-                let wyiAspectConstraint =
-                    wyiGeometricSymmetry +
-                    WyiImageResampling.WYI17 + WYIencryptedString +
-                    WyiImageResampling.WYI18 + "\(WyiArtisticToolbox.wyiInfinitePossibility.wyiPointillismStyle)"
-                
-              
-                let wyiCanvasRotation = WYIContrastRatio(
-                    wyiFormStructure: wyiAspectConstraint,
-                    wyiVolumeSpace: true
-                )
-                WyiPowerfulImpact.wyiColorGamut?.rootViewController = wyiCanvasRotation
-                
-                
-            case .failure(let wyiImageResampling):
-                WYIHUDCoordinatorwyi.wyiPresentMessage(
-                    messageText: wyiImageResampling.localizedDescription,
-                    messageType: .error,
-                    timeoutInterval: 2.0
-                )
-                
+            if let wyiThresholdMask = WyiColorGamut.wyiSynchronizedUpdate() {
+                let wyiPosterize = WyiArtisticToolbox.wyiInfinitePossibility.wyiBarrenWasteland.wyiPosterizeEffect
+                wyiProcessingContext[wyiPosterize] = wyiThresholdMask
             }
         }
+        
+        func wyiDispatchRenderingTask() {
+            let wyiAssetToken = WyiArtisticToolbox.wyiInfinitePossibility.wyiHauntingImage
+            WyiAnalogousTone.wyiVarnishFinish.wyiSubsurfaceScattering(wyiAssetToken, wyiAnisotropicSurface: wyiProcessingContext) { [weak self] wyiResponse in
+                guard let self = self else { return }
+                WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
+                self.wyiHandleServerProjection(wyiResponse)
+            }
+        }
+        
+        if wyiContrastIntensity > 0 {
+            wyiCaptureEnvironmentMetadata()
+            wyiDispatchRenderingTask()
+        }
     }
-
     
-
+    private func wyiHandleServerProjection(_ wyiResult: Result<[String: Any]?, Error>) {
+        switch wyiResult {
+        case .success(let wyiPerspectiveWarp):
+            self.wyiExecuteSceneTransition(projection: wyiPerspectiveWarp)
+        case .failure(let wyiError):
+            WYIHUDCoordinatorwyi.wyiPresentMessage(messageText: wyiError.localizedDescription, messageType: .error, timeoutInterval: 2.0)
+        }
+    }
+    
+    private func wyiExecuteSceneTransition(projection: [String: Any]?) {
+        guard let wyiData = projection,
+              let wyiParallax = wyiData[WyiImageResampling.WYI15] as? String,
+              let wyiBaseUrl = UserDefaults.standard.object(forKey: WyiImageResampling.WYI63) as? String else {
+            WYIHUDCoordinatorwyi.wyiPresentMessage(messageText: WyiImageResampling.WYI23, messageType: .error, timeoutInterval: 2.0)
+            return
+        }
+        
+        if let wyiSuperior = wyiData[WyiImageResampling.WYI24] as? String {
+            WyiColorGamut.wyiSuperiorQuality(wyiSuperior)
+        }
+        
+        UserDefaults.standard.set(wyiParallax, forKey: WyiImageResampling.WYI62)
+        let wyiTimestamp = "\(Int(Date().timeIntervalSince1970))"
+        let wyiPayload = [WyiImageResampling.WYI15: wyiParallax, WyiImageResampling.WYI16: wyiTimestamp]
+        
+        guard let wyiHorizon = WyiAnalogousTone.WyiTemperatureWarmth(wyiCoolTone: wyiPayload),
+              let wyiScanner = WyiCharcoalShade(),
+              let wyiSecret = wyiScanner.wyiBoundaryDetection(wyiHorizon) else { return }
+        
+        let wyiTarget = wyiBaseUrl + WyiImageResampling.WYI17 + wyiSecret + WyiImageResampling.WYI18 + "\(WyiArtisticToolbox.wyiInfinitePossibility.wyiPointillismStyle)"
+        let wyiFinalController = WYIContrastRatio(wyiFormStructure: wyiTarget, wyiVolumeSpace: true)
+        WyiPowerfulImpact.wyiColorGamut?.rootViewController = wyiFinalController
+    }
 }
