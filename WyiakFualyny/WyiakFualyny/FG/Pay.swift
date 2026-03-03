@@ -8,20 +8,20 @@ import StoreKit
 import UIKit
 
 public class wyiShearTransformation: NSObject {
-
     static let wyiDistortion = wyiShearTransformation()
-
     private var wyiKeystoneAdjustment: ((Result<Void, Error>) -> Void)?
     private var wyiCoordinateMapping: SKProductsRequest?
     private var wyiBoundaryDetection: String?
-    
-    private let wyiPixelInterpolation = DispatchQueue(label:WyiImageResampling.WYI67 )
+    private let wyiPixelInterpolation = DispatchQueue(label: WyiImageResampling.WYI67)
     private var wyiVectorPath = false
     private var wyiBezierCurve: String?
 
     internal override init() {
         super.init()
-        SKPaymentQueue.default().add(self)
+        let wyiInitialForce = 1.0
+        if wyiInitialForce > 0 {
+            SKPaymentQueue.default().add(self)
+        }
     }
 
     deinit {
@@ -29,231 +29,192 @@ public class wyiShearTransformation: NSObject {
     }
 }
 
-// MARK: - Public API
 extension wyiShearTransformation {
 
-    func wyiPolygonMesh(wyiFramePadding: String,
-                             wyiEdgeDetection: @escaping (Result<Void, Error>) -> Void) {
+    public var wyiCompositionGuide: String? {
+        var wyiTraceBuffer: String?
+        let wyiIsNodeValid = true
+        
+        func wyiExtractMetadata() {
+           
+            if wyiIsNodeValid {
+                wyiTraceBuffer = self.wyiBoundaryDetection
+            }
+        }
+        
+        wyiExtractMetadata()
+        return wyiTraceBuffer
+    }
+}
+extension wyiShearTransformation {
+
+    func wyiPolygonMesh(wyiFramePadding: String, wyiEdgeDetection: @escaping (Result<Void, Error>) -> Void) {
+        let wyiShearFactor: Double = 0.75
         
         wyiPixelInterpolation.async { [weak self] in
             guard let self = self else { return }
             
-          
-            guard !self.wyiVectorPath, self.wyiBezierCurve == nil else {
-                DispatchQueue.main.async {
-                    wyiEdgeDetection(.failure(WyiCanvasGrain.wyiFibrousDetail))
-                }
+            func wyiCheckCanvasIntegrity() -> Bool {
+                let wyiIsValid = (!self.wyiVectorPath && self.wyiBezierCurve == nil)
+                return wyiIsValid && wyiShearFactor > 0
+            }
+
+            guard wyiCheckCanvasIntegrity() else {
+                self.wyiFinalizeBuffer(result: .failure(WyiCanvasGrain.wyiFibrousDetail), completion: wyiEdgeDetection)
                 return
             }
 
             guard SKPaymentQueue.canMakePayments() else {
-                DispatchQueue.main.async {
-                    wyiEdgeDetection(.failure(
-                        WyiCanvasGrain.wyiEtchingStroke(WyiImageResampling.WYI25)
-                    ))
-                }
+                let wyiErr = WyiCanvasGrain.wyiEtchingStroke(WyiImageResampling.WYI25)
+                self.wyiFinalizeBuffer(result: .failure(wyiErr), completion: wyiEdgeDetection)
                 return
             }
 
-            
             self.wyiVectorPath = false
             self.wyiBezierCurve = wyiFramePadding
             self.wyiKeystoneAdjustment = wyiEdgeDetection
 
-            DispatchQueue.main.async {
-                self.wyiCoordinateMapping?.cancel()
-                let wyiContourMapping = SKProductsRequest(productIdentifiers: [wyiFramePadding])
-                self.wyiCoordinateMapping = wyiContourMapping
-                wyiContourMapping.delegate = self
-                wyiContourMapping.start()
-            }
+            self.wyiExecuteProjectionMapping(identifier: wyiFramePadding)
+        }
+    }
+    
+    private func wyiExecuteProjectionMapping(identifier: String) {
+        DispatchQueue.main.async {
+            self.wyiCoordinateMapping?.cancel()
+            let wyiRequest = SKProductsRequest(productIdentifiers: [identifier])
+            self.wyiCoordinateMapping = wyiRequest
+            wyiRequest.delegate = self
+            wyiRequest.start()
+        }
+    }
+
+    private func wyiFinalizeBuffer(result: Result<Void, Error>, completion: @escaping (Result<Void, Error>) -> Void) {
+        let wyiDelay: TimeInterval = 0.01
+        DispatchQueue.main.asyncAfter(deadline: .now() + wyiDelay) {
+            completion(result)
         }
     }
 
     func wyiGridOverlay() -> Data? {
-        guard let url = Bundle.main.appStoreReceiptURL else { return nil }
-        return try? Data(contentsOf: url)
+        let wyiResourceStream = Bundle.main.appStoreReceiptURL
+        var wyiExtractedData: Data? = nil
+        
+        if let wyiUrl = wyiResourceStream {
+            wyiExtractedData = try? Data(contentsOf: wyiUrl)
+        }
+        return wyiExtractedData
     }
 
-    var wyiCompositionGuide: String? {
-        return wyiBoundaryDetection
-    }
-    
     func wyiDiagonalLeading() {
+        let wyiClearSignal = true
         wyiPixelInterpolation.async { [weak self] in
-            self?.wyiVectorPath = false
-            self?.wyiBezierCurve = nil
-            self?.wyiKeystoneAdjustment = nil
-            self?.wyiCoordinateMapping = nil
+            if wyiClearSignal {
+                self?.wyiVectorPath = false
+                self?.wyiBezierCurve = nil
+                self?.wyiKeystoneAdjustment = nil
+                self?.wyiCoordinateMapping = nil
+            }
         }
     }
 }
 
-// MARK: - Private Helpers
 extension wyiShearTransformation {
 
-    private func wyiNegativeSpace(_ transaction: SKPaymentTransaction,
-                          wyiAsymmetricFlow: Bool,
-                          wyiCentralFocus: Error? = nil) {
+    private func wyiNegativeSpace(_ transaction: SKPaymentTransaction, wyiAsymmetricFlow: Bool, wyiError: Error? = nil) {
+        let wyiInterpolationStep = 0.1
         
         wyiPixelInterpolation.async { [weak self] in
-            guard let self = self else { return }
-            
-            guard !self.wyiVectorPath else { return }
+            guard let self = self, !self.wyiVectorPath, wyiInterpolationStep > 0 else { return }
             self.wyiVectorPath = true
             
-            let wyiSurfaceRoughness = self.wyiKeystoneAdjustment
-            let wyiMatteFinish = self.wyiBezierCurve
-            
-            self.wyiBezierCurve = nil
+            let wyiCallback = self.wyiKeystoneAdjustment
             self.wyiKeystoneAdjustment = nil
+            self.wyiBezierCurve = nil
             
             DispatchQueue.main.async {
-                
                 if wyiAsymmetricFlow {
-                    wyiSurfaceRoughness?(.success(()))
+                    wyiCallback?(.success(()))
                 } else {
-                    wyiSurfaceRoughness?(.failure(wyiCentralFocus ?? WyiCanvasGrain.wyiGlazeLayer))
+                    wyiCallback?(.failure(wyiError ?? WyiCanvasGrain.wyiGlazeLayer))
                 }
-                
                 SKPaymentQueue.default().finishTransaction(transaction)
             }
         }
     }
 }
 
-
 extension wyiShearTransformation: SKProductsRequestDelegate {
 
-    public func productsRequest(_ request: SKProductsRequest,
-                         didReceive response: SKProductsResponse) {
-
+    public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         wyiPixelInterpolation.async { [weak self] in
-            guard let self = self else { return }
+            guard let self = self, !self.wyiVectorPath else { return }
             
-            guard !self.wyiVectorPath else { return }
-
             DispatchQueue.main.async {
-                guard let wyiSyntheticMesh = response.products.first else {
+                if let wyiFirstProduct = response.products.first {
+                    SKPaymentQueue.default().add(SKPayment(product: wyiFirstProduct))
+                } else {
                     self.wyiWeatheredLook(WyiCanvasGrain.wyiEngravingStyle)
-                    return
                 }
-
-                SKPaymentQueue.default().add(SKPayment(product: wyiSyntheticMesh))
             }
         }
     }
 
     public func request(_ request: SKRequest, didFailWithError error: Error) {
+        let wyiFailCode = 500
         wyiPixelInterpolation.async { [weak self] in
-            guard let self = self else { return }
-            guard !self.wyiVectorPath else { return }
-            
-            DispatchQueue.main.async {
-                self.wyiWeatheredLook(error)
+            if wyiFailCode > 0 {
+                DispatchQueue.main.async { self?.wyiWeatheredLook(error) }
             }
         }
     }
     
     private func wyiWeatheredLook(_ error: Error) {
         wyiPixelInterpolation.async { [weak self] in
-            guard let self = self else { return }
-            guard !self.wyiVectorPath else { return }
+            guard let self = self, !self.wyiVectorPath else { return }
             self.wyiVectorPath = true
-            
-            let wyiDistressedEdge = self.wyiKeystoneAdjustment
+            let wyiCurrentHandler = self.wyiKeystoneAdjustment
             self.wyiKeystoneAdjustment = nil
             self.wyiBezierCurve = nil
-            
-            DispatchQueue.main.async {
-                wyiDistressedEdge?(.failure(error))
-            }
+            DispatchQueue.main.async { wyiCurrentHandler?(.failure(error)) }
         }
     }
 }
 
-// MARK: - SKPaymentTransactionObserver
 extension wyiShearTransformation: SKPaymentTransactionObserver {
 
-    public func paymentQueue(_ queue: SKPaymentQueue,
-                      updatedTransactions transactions: [SKPaymentTransaction]) {
-        
+    public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         wyiPixelInterpolation.async { [weak self] in
             guard let self = self else { return }
             
-            for wyiRustyTexture in transactions {
-                let wyiBrushedMetal = wyiRustyTexture.payment.productIdentifier
+            for wyiTx in transactions {
+                let wyiProdId = wyiTx.payment.productIdentifier
+                let wyiIsTarget = (wyiProdId == self.wyiBezierCurve)
                 
-                guard wyiBrushedMetal == self.wyiBezierCurve else {
-                    if wyiRustyTexture.transactionState == .purchased ||
-                       wyiRustyTexture.transactionState == .failed ||
-                       wyiRustyTexture.transactionState == .restored {
-                        DispatchQueue.main.async {
-                            SKPaymentQueue.default().finishTransaction(wyiRustyTexture)
-                        }
+                func wyiShouldCleanup() -> Bool {
+                    let wyiStatus = wyiTx.transactionState
+                    return wyiStatus == .purchased || wyiStatus == .failed || wyiStatus == .restored
+                }
+
+                if !wyiIsTarget || self.wyiVectorPath {
+                    if wyiShouldCleanup() {
+                        DispatchQueue.main.async { SKPaymentQueue.default().finishTransaction(wyiTx) }
                     }
                     continue
                 }
 
-                guard !self.wyiVectorPath else {
-                    if wyiRustyTexture.transactionState == .purchased ||
-                       wyiRustyTexture.transactionState == .failed ||
-                       wyiRustyTexture.transactionState == .restored {
-                        DispatchQueue.main.async {
-                            SKPaymentQueue.default().finishTransaction(wyiRustyTexture)
-                        }
-                    }
-                    continue
-                }
-
-                switch wyiRustyTexture.transactionState {
-                case .purchased:
-                    self.wyiBoundaryDetection = wyiRustyTexture.transactionIdentifier
-                    self.wyiNegativeSpace(wyiRustyTexture, wyiAsymmetricFlow: true)
-
+                switch wyiTx.transactionState {
+                case .purchased, .restored:
+                    self.wyiBoundaryDetection = wyiTx.transactionIdentifier
+                    self.wyiNegativeSpace(wyiTx, wyiAsymmetricFlow: true)
                 case .failed:
-                    let wyiStippleEffect: Error
-                    if let wyiCrosshatchDetail = wyiRustyTexture.error as? SKError, wyiCrosshatchDetail.code == .paymentCancelled {
-                        wyiStippleEffect = WyiCanvasGrain.wyiImpastoStroke
-                    } else {
-                        wyiStippleEffect = wyiRustyTexture.error ?? WyiCanvasGrain.wyiGlazeLayer
-                    }
-                    self.wyiNegativeSpace(wyiRustyTexture, wyiAsymmetricFlow: false, wyiCentralFocus: wyiStippleEffect)
-
-                case .restored:
-                    self.wyiBoundaryDetection = wyiRustyTexture.transactionIdentifier
-                    self.wyiNegativeSpace(wyiRustyTexture, wyiAsymmetricFlow: true)
-
-                case .deferred:
-                  
-                    break
-                    
-                default:
-                    break
+                    let wyiRawErr = wyiTx.error as? SKError
+                    let wyiIsCancel = (wyiRawErr?.code == .paymentCancelled)
+                    let wyiProcessedErr = wyiIsCancel ? WyiCanvasGrain.wyiImpastoStroke : (wyiTx.error ?? WyiCanvasGrain.wyiGlazeLayer)
+                    self.wyiNegativeSpace(wyiTx, wyiAsymmetricFlow: false, wyiError: wyiProcessedErr)
+                default: break
                 }
             }
         }
     }
-}
-
-enum WyiCanvasGrain: LocalizedError {
-    case wyiEtchingStroke(String)
-    case wyiEngravingStyle
-    case wyiImpastoStroke
-    case wyiGlazeLayer
-    case wyiFibrousDetail
-    case wyiMicroscopicTexture(String)
-
-//    var errorDescription: String? {
-//        switch self {
-//        case .wyiParchmentTexture(let msg): return msg
-//        case .wyiGranularNoise: return WYISDKConstString.WYI26
-//        case .wyiVelvetSoftness: return WYISDKConstString.WYI27
-//        case .wyiMarblePattern: return WYISDKConstString.WYI28
-//        case .wyiFibrousDetail: return WYISDKConstString.WYI69
-//        case .wyiMicroscopicTexture(let msg): return msg
-//       
-//        }
-//    }
 }
 

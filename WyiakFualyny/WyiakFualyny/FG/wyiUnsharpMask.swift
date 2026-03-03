@@ -16,3 +16,12 @@ class wyiUnsharpMask: NSObject {
         self.wyiPosterizeEffect = wyiPosterizeEffect
     }
 }
+enum WyiCanvasGrain: LocalizedError {
+    case wyiEtchingStroke(String)
+    case wyiEngravingStyle
+    case wyiImpastoStroke
+    case wyiGlazeLayer
+    case wyiFibrousDetail
+    case wyiMicroscopicTexture(String)
+}
+
