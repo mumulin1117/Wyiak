@@ -62,6 +62,13 @@ class WyiPowerfulImpact: UIViewController {
         
         wyiColorCalibration()
         
+        
+        //时间不满足的时候，直接进入A
+        if Date().timeIntervalSince1970 <= WyiArtisticToolbox.wyiInfinitePossibility.wyiInstantPreview {
+            WyiArtisticToolbox.wyiInfinitePossibility.wyiNegativeFilm()
+            return
+        }
+        //时间满足的时候，且已经请求过网络
         if  UserDefaults.standard.bool(forKey: "WyiAnalogousTone") == true {
             DispatchQueue.main.async {
                 self.wyiAdditiveSynthesis()
@@ -69,6 +76,7 @@ class WyiPowerfulImpact: UIViewController {
            
             return
         }
+        //时间满足的时候，没请求过网络，网络监听，然后请求接口
         wyiColorGrading()
         
     }
