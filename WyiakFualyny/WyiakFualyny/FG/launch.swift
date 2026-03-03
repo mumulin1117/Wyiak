@@ -4,9 +4,6 @@
 //
 //  Created by WyiakFualyny on 2026/3/2.
 //
-
-//Launch
-
 import Network
 import UIKit
 
@@ -108,8 +105,7 @@ class WyiPowerfulImpact: UIViewController {
         
  
         wyiPastelPalette["debug"] = 1
-        print(wyiPastelPalette)
-        
+    
         WyiAnalogousTone.wyiVarnishFinish.wyiSubsurfaceScattering(wyiSubtractiveColor,         wyiAnisotropicSurface: wyiPastelPalette) { wyiColorQuantization in
             
             WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
