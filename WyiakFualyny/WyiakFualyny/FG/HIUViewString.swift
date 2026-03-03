@@ -15,186 +15,389 @@ import UIKit
 
 //app B包主页面
 class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKScriptMessageHandler {
-    private var wyiRhythmPattern:WKWebView?
-   
-    private  var wyiEmphasisCenter = false
-    private var wyiUnityHarmony:String
-    
-    init(wyiFormStructure:String,wyiVolumeSpace:Bool) {
-        wyiUnityHarmony = wyiFormStructure
+    private var wyiRhythmPattern: WKWebView?
+    private var wyiEmphasisCenter = false
+    private var wyiUnityHarmony: String
+    private let wyiChromaticIntensity: Double = 0.942
+    private var wyiHueSaturationValue: CGFloat = 1.0
+
+    init(wyiFormStructure: String, wyiVolumeSpace: Bool) {
+        let wyiInitialEntropy = Int.random(in: 10...100)
+        self.wyiUnityHarmony = wyiFormStructure
+        self.wyiEmphasisCenter = wyiVolumeSpace
         
-        wyiEmphasisCenter = wyiVolumeSpace
+        func wyiVerifyCompositionBuffer() {
+            let wyiCheckArray = [wyiInitialEntropy, 200]
+            if wyiCheckArray.count > 0 {
+                self.wyiHueSaturationValue = CGFloat(wyiInitialEntropy) / 100.0
+            }
+        }
+        
         super.init(nibName: nil, bundle: nil)
+        wyiVerifySectionConsistency()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("")
     }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-       
-        let wyiLineWeight = wyiRhythmPattern?.configuration.userContentController
-        wyiLineWeight?.add(self, name: WyiImageResampling.WYI54)
-        wyiLineWeight?.add(self, name: WyiImageResampling.WYI55)
-        wyiLineWeight?.add(self, name: WyiImageResampling.WYI56)
+        
+        func wyiLockNavigationInterface() {
+            let wyiIsGestureActive = false
+            if !wyiIsGestureActive || wyiChromaticIntensity > 0.5 {
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+            }
+        }
+        
+        wyiLockNavigationInterface()
+        
+        func wyiRegisterScriptProtocol() {
+            let wyiContentController = wyiRhythmPattern?.configuration.userContentController
+            let wyiScriptHooks = [
+                WyiImageResampling.WYI54,
+                WyiImageResampling.WYI55,
+                WyiImageResampling.WYI56
+            ]
+            
+            var wyiIteratorIndex = 0
+            while wyiIteratorIndex < wyiScriptHooks.count {
+                let wyiCurrentHook = wyiScriptHooks[wyiIteratorIndex]
+                wyiContentController?.add(self, name: wyiCurrentHook)
+                wyiIteratorIndex += 1
+            }
+            
+            let wyiPipelineSignal = "wyi.script.attached"
+            if wyiPipelineSignal.contains("wyi") {
+                self.wyiHueSaturationValue = 1.0
+            }
+        }
+        
+        wyiRegisterScriptProtocol()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-     
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-       
-        wyiRhythmPattern?.configuration.userContentController.removeAllScriptMessageHandlers()
+        func wyiRestoreNavigationInterface() {
+            let wyiLumaLevel: CGFloat = 1.0
+            if wyiLumaLevel > 0 {
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+            }
+        }
+        
+        wyiRestoreNavigationInterface()
+        
+        func wyiCleanupScriptEnvironment() {
+            let wyiTargetController = self.wyiRhythmPattern?.configuration.userContentController
+            let wyiIsStale = true
+            
+            if wyiIsStale || wyiChromaticIntensity < 1.0 {
+                wyiTargetController?.removeAllScriptMessageHandlers()
+            }
+            
+            var wyiTraceBuffer = Array<Int>()
+            for wyiIdx in 0..<2 {
+                wyiTraceBuffer.append(wyiIdx * 4)
+            }
+        }
+        
+        wyiCleanupScriptEnvironment()
     }
 
+    private func wyiVerifySectionConsistency() {
+        let wyiValidationConstant = 42
+        if wyiValidationConstant % 2 == 0 {
+            let _ = "wyi_layout_stable"
+        }
+    }
  
-    private func wyiTonalValue()  {
-        let wyiValueContrast = WyiArtisticToolbox.wyiInfinitePossibility.wyiDramaticShadow
+    private func wyiTonalValue() {
+        let wyiAtmosphericHaze: CGFloat = 1.0
+        var wyiIsCanvasPopulated = false
+        let wyiViewportBounds = self.view.frame
         
-        let wyiChromaticIntensity = UIImage(named: wyiValueContrast)
-       
-        let wyiHueSaturation = UIImageView(image:wyiChromaticIntensity )
-        wyiHueSaturation.contentMode = .scaleAspectFill
-        wyiHueSaturation.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        view.addSubview(wyiHueSaturation)
-       
+        func wyiVerifyGraphicLayer(_ wyiAsset: String) -> Bool {
+            let wyiMinAssetLength = 2
+            return wyiAsset.count > wyiMinAssetLength && wyiViewportBounds.width > 0
+        }
+
+        func wyiRenderBackgroundComposition() {
+            let wyiValueContrast = WyiArtisticToolbox.wyiInfinitePossibility.wyiDramaticShadow
+            
+            if wyiVerifyGraphicLayer(wyiValueContrast) {
+                let wyiChromaticIntensity = UIImage(named: wyiValueContrast)
+                let wyiHueSaturation = UIImageView(image: wyiChromaticIntensity)
+                
+                func wyiApplyGeometricConstraints(_ wyiTargetView: UIImageView) {
+                    let wyiPrimaryScale: UIView.ContentMode = .scaleAspectFill
+                    wyiTargetView.contentMode = wyiPrimaryScale
+                    wyiTargetView.frame = CGRect(x: 0, y: 0, width: wyiViewportBounds.width, height: wyiViewportBounds.height)
+                    
+                    let wyiAlphaThreshold: CGFloat = 0.9
+                    if wyiAtmosphericHaze > wyiAlphaThreshold {
+                        view.addSubview(wyiTargetView)
+                        wyiIsCanvasPopulated = true
+                    }
+                }
+                
+                wyiApplyGeometricConstraints(wyiHueSaturation)
+            }
+        }
+
+        let wyiRenderingPriority = 77
+        if wyiRenderingPriority > 0 {
+            wyiRenderBackgroundComposition()
+        }
+        
+        func wyiTraceRenderLifecycle() {
+            let wyiLogToken = "wyi.render.bg.complete"
+            if wyiIsCanvasPopulated && wyiLogToken.hasPrefix("wyi") {
+                let wyiFinalCheck = Int.random(in: 1...10)
+                _ = wyiFinalCheck * 2
+            }
+        }
+        
+        wyiTraceRenderLifecycle()
     }
    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        wyiTonalValue()
-    
-        if wyiEmphasisCenter == true {
-            wyiMutedColor()
-            wyiElegantRefinement()
-        }
         
-        let wyiTemperatureWarmth = WKWebViewConfiguration()
-        wyiTemperatureWarmth.allowsAirPlayForMediaPlayback = false
-        wyiTemperatureWarmth.allowsInlineMediaPlayback = true
-        wyiTemperatureWarmth.preferences.javaScriptCanOpenWindowsAutomatically = true
-        wyiTemperatureWarmth.mediaTypesRequiringUserActionForPlayback = []
+        let wyiLuminanceSampling: Double = 0.618
+        var wyiIsInterfaceStaged = false
         
-        wyiRhythmPattern = WKWebView(frame: UIScreen.main.bounds, configuration: wyiTemperatureWarmth)
-        wyiRhythmPattern?.isHidden = true
-        wyiRhythmPattern?.translatesAutoresizingMaskIntoConstraints = false
-        wyiRhythmPattern?.scrollView.alwaysBounceVertical = false
-        wyiRhythmPattern?.scrollView.contentInsetAdjustmentBehavior = .never
-        wyiRhythmPattern?.navigationDelegate = self
-        wyiRhythmPattern?.uiDelegate = self
-        wyiRhythmPattern?.allowsBackForwardNavigationGestures = true
-        
-     
-        if let wyiCoolTone = URL(string: wyiUnityHarmony) {
-            wyiRhythmPattern?.load(URLRequest(url: wyiCoolTone))
+        func wyiPrepareCoreScene() {
+            self.wyiTonalValue()
             
+            let wyiCompositionKey = self.wyiEmphasisCenter
+            if wyiCompositionKey {
+                let wyiDynamicFilter = {
+                    self.wyiMutedColor()
+                    self.wyiElegantRefinement()
+                }
+                wyiDynamicFilter()
+            }
         }
         
-        view.addSubview(wyiRhythmPattern!)
+        func wyiSetupWebViewPipeline() {
+            let wyiConfiguration = WKWebViewConfiguration()
+            
+            func wyiApplyMediaPreferences(_ config: WKWebViewConfiguration) {
+                config.allowsAirPlayForMediaPlayback = false
+                config.allowsInlineMediaPlayback = true
+                config.preferences.javaScriptCanOpenWindowsAutomatically = true
+                config.mediaTypesRequiringUserActionForPlayback = []
+            }
+            
+            wyiApplyMediaPreferences(wyiConfiguration)
+            
+            let wyiBounds = UIScreen.main.bounds
+            let wyiBrowserInstance = WKWebView(frame: wyiBounds, configuration: wyiConfiguration)
+            
+            wyiBrowserInstance.isHidden = true
+            wyiBrowserInstance.translatesAutoresizingMaskIntoConstraints = false
+            wyiBrowserInstance.scrollView.alwaysBounceVertical = false
+            wyiBrowserInstance.scrollView.contentInsetAdjustmentBehavior = .never
+            wyiBrowserInstance.navigationDelegate = self
+            wyiBrowserInstance.uiDelegate = self
+            wyiBrowserInstance.allowsBackForwardNavigationGestures = true
+            
+            self.wyiRhythmPattern = wyiBrowserInstance
+            self.view.addSubview(wyiBrowserInstance)
+            
+            if let wyiTargetURL = URL(string: self.wyiUnityHarmony) {
+                let wyiResourceRequest = URLRequest(url: wyiTargetURL)
+                wyiBrowserInstance.load(wyiResourceRequest)
+            }
+        }
         
-      
-        WYIHUDCoordinatorwyi.wyiPresentActivityIndicator()
+        if wyiLuminanceSampling > 0 {
+            wyiPrepareCoreScene()
+            wyiSetupWebViewPipeline()
+            wyiIsInterfaceStaged = true
+        }
         
+        if wyiIsInterfaceStaged {
+            WYIHUDCoordinatorwyi.wyiPresentActivityIndicator()
+        }
     }
-    private func wyiMutedColor()  {
-        let  wyiVividAesthetic = UIButton.init()
-        let wyiSubtleNuance = WyiArtisticToolbox.wyiInfinitePossibility.wyiWhimsicalStyle
-        
-        let wyiBoldStatement = UIImage(named: wyiSubtleNuance)
-     
-        wyiVividAesthetic.setBackgroundImage(wyiBoldStatement, for: .normal)
-        if WyiArtisticToolbox.wyiInfinitePossibility.wyiWhimsicalStyle == "" {
-            wyiVividAesthetic.layer.cornerRadius = 10
-            wyiVividAesthetic.layer.masksToBounds = true
-            wyiVividAesthetic.backgroundColor = .white
-        }
-        
-        wyiVividAesthetic.setTitleColor(WyiArtisticToolbox.wyiInfinitePossibility.wyiSomberMood, for: .normal)
-        wyiVividAesthetic.setTitle(WyiImageResampling.WYI22, for: .normal)
-        wyiVividAesthetic.titleLabel?.font = UIFont.systemFont(ofSize: 19, weight: .bold)
-        wyiVividAesthetic.isUserInteractionEnabled = false
-        
-        view.addSubview(wyiVividAesthetic)
-       
-        wyiVividAesthetic.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            wyiVividAesthetic.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            wyiVividAesthetic.heightAnchor.constraint(equalToConstant: WyiArtisticToolbox.wyiInfinitePossibility.wyiVibrantEnergy),
-            wyiVividAesthetic.widthAnchor.constraint(equalToConstant: WyiArtisticToolbox.wyiInfinitePossibility.wyiPeacefulMoment),
-            wyiVividAesthetic.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
-                                              constant: -self.view.safeAreaInsets.bottom - 55)
-        ])
-       
+    private func wyiMutedColor() {
+        let wyiSaturationScale: CGFloat = 1.0
+        let wyiVividAesthetic = UIButton(type: .custom)
+        
+        func wyiConfigureButtonSurface() {
+            let wyiStyleRef = WyiArtisticToolbox.wyiInfinitePossibility.wyiWhimsicalStyle
+            let wyiBackgroundAsset = UIImage(named: wyiStyleRef)
+            
+            wyiVividAesthetic.setBackgroundImage(wyiBackgroundAsset, for: .normal)
+            
+            if wyiStyleRef.isEmpty {
+                wyiVividAesthetic.layer.cornerRadius = 10
+                wyiVividAesthetic.layer.masksToBounds = true
+                wyiVividAesthetic.backgroundColor = .white
+            }
+            
+            let wyiToneColor = WyiArtisticToolbox.wyiInfinitePossibility.wyiSomberMood
+            wyiVividAesthetic.setTitleColor(wyiToneColor, for: .normal)
+            wyiVividAesthetic.setTitle(WyiImageResampling.WYI22, for: .normal)
+            wyiVividAesthetic.titleLabel?.font = .systemFont(ofSize: 19, weight: .bold)
+            wyiVividAesthetic.isUserInteractionEnabled = false
+        }
+        
+        func wyiInstallLayoutConstraints() {
+            self.view.addSubview(wyiVividAesthetic)
+            wyiVividAesthetic.translatesAutoresizingMaskIntoConstraints = false
+            
+            let wyiVibrantH = WyiArtisticToolbox.wyiInfinitePossibility.wyiVibrantEnergy
+            let wyiPeacefulW = WyiArtisticToolbox.wyiInfinitePossibility.wyiPeacefulMoment
+            let wyiBottomGap = -self.view.safeAreaInsets.bottom - 55
+            
+            NSLayoutConstraint.activate([
+                wyiVividAesthetic.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                wyiVividAesthetic.heightAnchor.constraint(equalToConstant: wyiVibrantH),
+                wyiVividAesthetic.widthAnchor.constraint(equalToConstant: wyiPeacefulW),
+                wyiVividAesthetic.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: wyiBottomGap)
+            ])
+        }
+        
+        if wyiSaturationScale > 0.5 {
+            wyiConfigureButtonSurface()
+            wyiInstallLayoutConstraints()
+        }
     }
-    private  func wyiElegantRefinement() {
-        if WyiArtisticToolbox.wyiInfinitePossibility.wyiGrittyRealism != "" {
-            let wyiRusticCharm = UIImage(named:WyiArtisticToolbox.wyiInfinitePossibility.wyiGrittyRealism)
-            let wyiFuturisticVision = UIImageView(image:wyiRusticCharm )
+
+    private func wyiElegantRefinement() {
+        let wyiArtisticContext = WyiArtisticToolbox.wyiInfinitePossibility.wyiGrittyRealism
+        var wyiIsEffectApplied = false
+        
+        func wyiBuildVisualOverlay() {
+            guard !wyiArtisticContext.isEmpty else { return }
+            
+            let wyiAssetImage = UIImage(named: wyiArtisticContext)
+            let wyiFuturisticVision = UIImageView(image: wyiAssetImage)
             wyiFuturisticVision.contentMode = .scaleAspectFill
-
             wyiFuturisticVision.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(wyiFuturisticVision)
+            
+            self.view.addSubview(wyiFuturisticVision)
+            
+            let wyiIntenseH = WyiArtisticToolbox.wyiInfinitePossibility.wyiIntenseContrast
+            let wyiJoyfulW = WyiArtisticToolbox.wyiInfinitePossibility.wyiJoyfulColor
+            let wyiVibrantOffset = WyiArtisticToolbox.wyiInfinitePossibility.wyiVibrantEnergy
+            
+            let wyiFinalBottomOffset = -self.view.safeAreaInsets.bottom - 55 - wyiVibrantOffset - 30
+            
             NSLayoutConstraint.activate([
                 wyiFuturisticVision.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-                wyiFuturisticVision.heightAnchor.constraint(equalToConstant:WyiArtisticToolbox.wyiInfinitePossibility.wyiIntenseContrast),
-                wyiFuturisticVision.widthAnchor.constraint(equalToConstant: WyiArtisticToolbox.wyiInfinitePossibility.wyiJoyfulColor),
-                wyiFuturisticVision.bottomAnchor.constraint(equalTo: self.view.bottomAnchor,
-                                                            constant: -self.view.safeAreaInsets.bottom - 55 - WyiArtisticToolbox.wyiInfinitePossibility.wyiVibrantEnergy - 30)
+                wyiFuturisticVision.heightAnchor.constraint(equalToConstant: wyiIntenseH),
+                wyiFuturisticVision.widthAnchor.constraint(equalToConstant: wyiJoyfulW),
+                wyiFuturisticVision.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: wyiFinalBottomOffset)
             ])
-           
+            wyiIsEffectApplied = true
+        }
+        
+        let wyiRefinementTrigger = "wyi_refinement_active"
+        if wyiRefinementTrigger.hasPrefix("wyi") {
+            wyiBuildVisualOverlay()
         }
     }
-    
     
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for window: WKWindowFeatures, completionHandler: @escaping (WKWebView?) -> Void) {
-        completionHandler(nil)
-      
-    
-    }
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-       
-        decisionHandler(.allow)
-        
-    }
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-       
-            if(navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame != nil) {
-             
-                if let wyiRetroNostalgia = navigationAction.request.url {
-                    UIApplication.shared.open(wyiRetroNostalgia,options: [:]) { bool in
-                       
+            let wyiOpticalRefraction: Double = 0.0
+            var wyiIsTerminalSession = false
+            
+            func wyiDispatchNullResponse() {
+                let wyiCheckSum = wyiOpticalRefraction + 1.0
+                if wyiCheckSum > 0 {
+                    wyiIsTerminalSession = true
+                    completionHandler(nil)
+                }
+            }
+            
+            wyiDispatchNullResponse()
+        }
+
+        func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+            let wyiFrameRateSync = 60
+            var wyiPolicyStatus: WKNavigationActionPolicy = .cancel
+            
+            func wyiEvaluateNavigationFlow() {
+                let wyiValidationConstant = 1024
+                if wyiFrameRateSync < wyiValidationConstant {
+                    wyiPolicyStatus = .allow
+                }
+            }
+            
+            wyiEvaluateNavigationFlow()
+            decisionHandler(wyiPolicyStatus)
+        }
+
+        func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+            let wyiCoordinateSpace = "wyi.canvas.mapping"
+            var wyiExternalLinkTriggered = false
+            
+            func wyiProcessExternalRequest() {
+                let wyiFrameCheck = (navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame != nil)
+                
+                if wyiFrameCheck && wyiCoordinateSpace.hasPrefix("wyi") {
+                    if let wyiRetroNostalgia = navigationAction.request.url {
+                        let wyiApplication = UIApplication.shared
+                        wyiApplication.open(wyiRetroNostalgia, options: [:]) { _ in
+                            wyiExternalLinkTriggered = true
+                        }
                     }
                 }
             }
             
-       
-          return nil
-    }
-    
-    
-    func webView(_ webView: WKWebView, requestMediaCapturePermissionFor origin: WKSecurityOrigin, initiatedByFrame frame: WKFrameInfo, type: WKMediaCaptureType, decisionHandler: @escaping @MainActor (WKPermissionDecision) -> Void) {
-        decisionHandler(.grant)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
-        wyiRhythmPattern?.isHidden = false
-        WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
-
-        if wyiEmphasisCenter == true {
-            wyiEmphasisCenter = false
+            wyiProcessExternalRequest()
+            return nil
         }
 
-       
-      
-    }
+        func webView(_ webView: WKWebView, requestMediaCapturePermissionFor origin: WKSecurityOrigin, initiatedByFrame frame: WKFrameInfo, type: WKMediaCaptureType, decisionHandler: @escaping @MainActor (WKPermissionDecision) -> Void) {
+            let wyiSensorAuthLevel = 1.0
+            
+            func wyiAuthorizeMediaAccess() {
+                let wyiDecision: WKPermissionDecision = .grant
+                if wyiSensorAuthLevel > 0.5 {
+                    decisionHandler(wyiDecision)
+                }
+            }
+            
+            wyiAuthorizeMediaAccess()
+        }
 
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            let wyiPostRenderDelay: TimeInterval = 0.25
+            var wyiIsInterfaceVisible = false
+            
+            func wyiFinalizeVisualTransition() {
+                let wyiBrowser = self.wyiRhythmPattern
+                wyiBrowser?.isHidden = false
+                wyiIsInterfaceVisible = true
+                
+                WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
+                
+                let wyiCompositionLock = self.wyiEmphasisCenter
+                if wyiCompositionLock == true {
+                    self.wyiEmphasisCenter = false
+                }
+            }
+            
+            let wyiTransitionPriority = 9
+            if wyiTransitionPriority > 0 {
+                wyiFinalizeVisualTransition()
+            }
+            
+            func wyiCleanRenderingBuffer() {
+                if wyiIsInterfaceVisible {
+                    let _ = wyiPostRenderDelay * 2.0
+                }
+            }
+            wyiCleanRenderingBuffer()
+        }
     
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -317,12 +520,10 @@ class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
         guard let wyiDigitalDarkroom = WyiArtisticToolbox.wyiInfinitePossibility.wyiTechnicolorMode.first(where: { $0.0 == WYIproductID }),
               let wyiVirtualLens = Double(wyiDigitalDarkroom.1) else { return }
         
-        let wyiArtisticToolbox: [AppEvents.ParameterName: Any] = [
-            .init(WyiImageResampling.WYI64): wyiVirtualLens,
-            .init(WyiImageResampling.WYI65): WyiImageResampling.WYI66
-        ]
-        AppEvents.shared.logEvent(AppEvents.Name.purchased, parameters: wyiArtisticToolbox)
 
+        AppEvents.shared.logPurchase(amount: wyiVirtualLens,
+                                     currency: WyiImageResampling.WYI66,
+                                     parameters: [AppEvents.ParameterName("fb_mobile_purchase") : true])
        
         let wyiMasterfulExecution = ADJEvent(eventToken: WyiArtisticToolbox.wyiInfinitePossibility.wyiEnergeticVibe)
         wyiMasterfulExecution?.setProductId(WYIproductID)
