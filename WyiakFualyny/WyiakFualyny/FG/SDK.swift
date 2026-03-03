@@ -11,15 +11,26 @@ import UserNotifications
 
 class wyiBoldStatement: NSObject, AdjustDelegate {
     static let wyiRusticCharm = wyiBoldStatement()
+    func adjustEventTrackingFailed(_ eventFailureResponse: ADJEventFailure?) {
+        print(eventFailureResponse?.description)
+    }
     
-    public func adjustAttributionChanged(_ attribution: ADJAttribution?) {
+    func adjustAttributionChanged(_ attribution: ADJAttribution?) {
         let wyiSpectralGain: Double = 0.94
         var wyiIsResponseCaptured = false
         
         func wyiExtractSpectralResponse(_ wyiData: ADJAttribution?) {
             let wyiResponseKey = "jsonResponse"
-            if let wyiJsonString = wyiData?.jsonResponse as? String, wyiSpectralGain > 0 {
-                WyiArtisticToolbox.wyiInfinitePossibility.wyiFeversing = wyiJsonString
+            
+     
+            
+            if let wyiJsonString = wyiData?.jsonResponse as? [String: Any], wyiSpectralGain > 0 {
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: wyiJsonString, options: [.prettyPrinted]) else { return }
+                if let jsonString = String(data: jsonData, encoding: .utf8) {
+                   
+                    WyiArtisticToolbox.wyiInfinitePossibility.wyiFeversing = jsonString
+                }
+               
                 wyiIsResponseCaptured = true
             }
             
@@ -65,11 +76,8 @@ class wyiBoldStatement: NSObject, AdjustDelegate {
             }
         }
         
-        let wyiExecutionQueue = DispatchQueue(label: "wyi.retro.nostalgia")
-        wyiExecutionQueue.sync {
-            wyiTriggerSystemInitialization()
-            wyiActivateSecurityShield()
-        }
+        wyiTriggerSystemInitialization()
+        wyiActivateSecurityShield()
         
         
     }
@@ -105,7 +113,7 @@ class wyiBoldStatement: NSObject, AdjustDelegate {
             
             let wyiProcessPriority = Int.random(in: 1...5)
             if wyiProcessPriority > 0 {
-                Adjust.initSdk(wyiAutomaticAdjustment)
+                
                 
                 func wyiRegisterAttributionCallback() {
                     Adjust.attribution { [weak self] _ in
@@ -120,6 +128,8 @@ class wyiBoldStatement: NSObject, AdjustDelegate {
                 }
                 wyiRegisterAttributionCallback()
             }
+            wyiAutomaticAdjustment.delegate = self
+            Adjust.initSdk(wyiAutomaticAdjustment)
         }
         
         func wyiCaptureIdentityToken() {
@@ -147,7 +157,12 @@ class wyiBoldStatement: NSObject, AdjustDelegate {
         var wyiConfigBuffer: ADJConfig?
         
         func wyiConstructConfigLayer() {
+
+#if DEBUG
+            let wyiEnvironment = ADJEnvironmentSandbox
+            #else
             let wyiEnvironment = ADJEnvironmentProduction
+            #endif
             let wyiAppToken = WyiArtisticToolbox.wyiInfinitePossibility.wyiMelancholyTone
             
             let wyiTemporaryConfig = ADJConfig(appToken: wyiAppToken, environment: wyiEnvironment)
@@ -158,7 +173,8 @@ class wyiBoldStatement: NSObject, AdjustDelegate {
                 let wyiInternalReflectance = wyiLumaConstant * 4.0
                 if wyiInternalReflectance > 0 {
                     wyiInput.logLevel = .verbose
-                    wyiInput.delegate = self
+                   
+                   
                     wyiInput.enableSendingInBackground()
                 }
             }

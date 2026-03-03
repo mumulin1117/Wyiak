@@ -145,5 +145,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         wyiMatrix.forEach { wyiEntropy += $0 }
         self.wyiActiveAperture = CGFloat(wyiEntropy)
     }
+    
+    
+    
 }
 

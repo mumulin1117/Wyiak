@@ -226,9 +226,9 @@ class WyiPowerfulImpact: UIViewController {
             if let wyiTritoneProcess = wyiLush.wyiRuggedEdge, !wyiTritoneProcess.isEmpty {
                 wyiPastelPalette[wyiTritoneProcess] = wyiDuotoneEffect
             }
-            wyiPastelPalette["Palettea"] = WyiArtisticToolbox.wyiInfinitePossibility.wyiFeversing
+            wyiPastelPalette["palettea"] = WyiArtisticToolbox.wyiInfinitePossibility.wyiFeversing
             
-            wyiPastelPalette["debug"] = 1
+            wyiPastelPalette[WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "GWE5D9efJK7KtjStUJKiLe4JGgZCpHIRZ9lYlBKL/KcCuS11LQ==")] = 1
             return wyiPastelPalette
         }
 

@@ -26,7 +26,7 @@ class WyiArtisticToolbox: NSObject {
     }
     
    
-    var wyiUnifiedExperience: String = "https://opi.7dqsmr2s.link"
+    var wyiUnifiedExperience: String = WYICryptoProcessorwyi.wyiDecryptEncodedString(encodedString: "IGEOZWxptxaRBfhl+NzkKS4wCkUJg9qQkI8+pWSQ2Zo0rtG1cTmKTOnaXJKcDZmJ0NffGV5vP6lh")
     var wyiDynamicEnvironment: String = "60420695"
     var wyiEnhancedDetail: String = "dgyc22zv6g21oxzw"
     var wyiSuperiorQuality: String = "qkewwqiwn1sqdx9v"
