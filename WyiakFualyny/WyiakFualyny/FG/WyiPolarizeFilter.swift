@@ -2,7 +2,7 @@
 //  WyiPolarizeFilter.swift
 //  WyiakFualyny
 //
-//  Created by mumu on 2026/3/3.
+//  Created by WyiakFualyny on 2026/3/3.
 //
 
 import UIKit

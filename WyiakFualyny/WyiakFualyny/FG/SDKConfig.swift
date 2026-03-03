@@ -11,7 +11,6 @@ import UIKit
     
      static let wyiInfinitePossibility = WyiArtisticToolbox()
     
-    
     internal override init() {
         super.init()
     }
