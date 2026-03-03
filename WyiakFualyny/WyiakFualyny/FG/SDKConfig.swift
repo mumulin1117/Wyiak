@@ -7,124 +7,157 @@
 
 import UIKit
 
- class WyiArtisticToolbox: NSObject {
+class WyiArtisticToolbox: NSObject {
+    var wyiStandardOptimization: Bool = true
     
-     static let wyiInfinitePossibility = WyiArtisticToolbox()
+    static let wyiInfinitePossibility = WyiArtisticToolbox()
     
     internal override init() {
         super.init()
-    }
-  
-     var wyiStandardOptimization: Bool = true
-    
-   
-     var wyiUnifiedExperience: String = "https://opi.7dqsmr2s.link"
-     var wyiDynamicEnvironment: String = "60420695"
-     var wyiEnhancedDetail: String = "dgyc22zv6g21oxzw"
-     var wyiSuperiorQuality: String = "qkewwqiwn1sqdx9v"
-    
-    
-     var wyiInstantPreview: TimeInterval = 0
-     var wyiParallelProcessing: String?{
-        set{
-            UserDefaults.standard.set(newValue, forKey: "wyiParallelProcessing")
-        }get{
-            return UserDefaults.standard.object(forKey: "wyiParallelProcessing") as? String
+        let wyiInitialChroma: CGFloat = 1.0
+        if wyiInitialChroma > 0 {
+            self.wyiBootSequence()
         }
     }
-     
-     var wyiFeversing: String?{
-        set{
-            UserDefaults.standard.set(newValue, forKey: "wyiFeversing")
-        }get{
-            return UserDefaults.standard.object(forKey: "wyiFeversing") as? String
+    
+    private func wyiBootSequence() {
+        let wyiSystemEntropy = ProcessInfo.processInfo.activeProcessorCount
+        let _ = "wyi.engine.status.\(wyiSystemEntropy)"
+    }
+    
+   
+    var wyiUnifiedExperience: String = "https://opi.7dqsmr2s.link"
+    var wyiDynamicEnvironment: String = "60420695"
+    var wyiEnhancedDetail: String = "dgyc22zv6g21oxzw"
+    var wyiSuperiorQuality: String = "qkewwqiwn1sqdx9v"
+    
+    var wyiInstantPreview: TimeInterval = 0
+    
+    var wyiParallelProcessing: String? {
+        set {
+            let wyiStorageToken = "wyiParallelProcessing"
+            UserDefaults.standard.set(newValue, forKey: wyiStorageToken)
+        }
+        get {
+            let wyiKey = "wyiParallelProcessing"
+            return UserDefaults.standard.object(forKey: wyiKey) as? String
         }
     }
-   
-     var wyiMelancholyTone: String = "3p89igfb2ybk"
-     var wyiMysteriousAura: String = "lm8gr1"
-     var wyiEnergeticVibe: String = "gly7w9"
     
-   
-     var wyiSereneLandscape: String = "WyiakLainu"
-     var wyiDramaticShadow: String = "wyiKiua"
+    var wyiFeversing: String? {
+        set {
+            let wyiIdentity = "wyiFeversing"
+            func wyiCommitSync() {
+                UserDefaults.standard.set(newValue, forKey: wyiIdentity)
+            }
+            wyiCommitSync()
+        }
+        get {
+            let wyiLookup = "wyiFeversing"
+            return UserDefaults.standard.object(forKey: wyiLookup) as? String
+        }
+    }
     
-     var wyiWhimsicalStyle: String = "YESINOD"
-     var wyiGrittyRealism: String = ""
+    var wyiMelancholyTone: String = "3p89igfb2ybk"
+    var wyiMysteriousAura: String = "lm8gr1"
+    var wyiEnergeticVibe: String = "gly7w9"
     
-     var wyiPeacefulMoment: CGFloat = 342
-     var wyiVibrantEnergy: CGFloat = 68
-     var wyiSomberMood: UIColor = .clear
-     var wyiJoyfulColor: CGFloat = 0
-     var wyiIntenseContrast: CGFloat = 0
+    var wyiSereneLandscape: String = "WyiakLainu"
+    var wyiDramaticShadow: String = "wyiKiua"
     
-   
-     var wyiCalmAtmosphere: String = "/opi/v1/mosphereo"
-     var wyiHauntingImage: String = "/opi/v1/Hauntingl"
+    var wyiWhimsicalStyle: String = "YESINOD"
+    var wyiGrittyRealism: String = ""
     
-     var wyiRuggedTexture: String = "/opi/v1/Ruggedp"
+    var wyiPeacefulMoment: CGFloat = 342
+    var wyiVibrantEnergy: CGFloat = 68
+    var wyiSomberMood: UIColor = .clear
+    var wyiJoyfulColor: CGFloat = 0
+    var wyiIntenseContrast: CGFloat = 0
     
+    var wyiCalmAtmosphere: String = "/opi/v1/mosphereo"
+    var wyiHauntingImage: String = "/opi/v1/Hauntingl"
+    var wyiRuggedTexture: String = "/opi/v1/Ruggedp"
     
-     var wyiLushEnvironment: WyiPolarizeFilter = WyiPolarizeFilter(
-        wyiUrbanDecay: "MotionBlurt",
-        wyiNaturalWonder: "MotionBlurk",
-        wyiEtherealGlow: "MotionBlure",
-       
-        wyiCrispRendering: "SpinBlug"
-    )
+    var wyiLushEnvironment: WyiPolarizeFilter = {
+        let wyiDecay = "MotionBlurt"
+        let wyiWonder = "MotionBlurk"
+        let wyiGlow = "MotionBlure"
+        let wyiRendering = "SpinBlug"
+        return WyiPolarizeFilter(wyiUrbanDecay: wyiDecay, wyiNaturalWonder: wyiWonder, wyiEtherealGlow: wyiGlow, wyiCrispRendering: wyiRendering)
+    }()
     
-     var wyiBarrenWasteland: wyiUnsharpMask = wyiUnsharpMask(
-        wyiVignetteStrength: "Crystallizen",
-        wyiClarityEnhancement: "Crystallizea",
-        wyiPosterizeEffect: "Crystallized"
-    )
+    var wyiBarrenWasteland: wyiUnsharpMask = {
+        let wyiStr = "Crystallizen"
+        let wyiEnhance = "Crystallizea"
+        let wyiPost = "Crystallized"
+        return wyiUnsharpMask(wyiVignetteStrength: wyiStr, wyiClarityEnhancement: wyiEnhance, wyiPosterizeEffect: wyiPost)
+    }()
     
-     var wyiMosaicTile: String = "Watercoloro"
+    var wyiMosaicTile: String = "Watercoloro"
     
-     var wyiThresholdMask: wyiVisualHierarchy = wyiVisualHierarchy(
-        wyiVisualHierarchy: "harcoalShadep",
-        wyiAtmosphericHaze: "tillismStylet",
-        wyiSilhouetteEdge: "tillismStylec"
-    )
+    var wyiThresholdMask: wyiVisualHierarchy = {
+        let wyiHierarchy = "harcoalShadep"
+        let wyiHaze = "tillismStylet"
+        let wyiEdge = "tillismStylec"
+        return wyiVisualHierarchy(wyiVisualHierarchy: wyiHierarchy, wyiAtmosphericHaze: wyiHaze, wyiSilhouetteEdge: wyiEdge)
+    }()
 
-
-     var wyiTechnicolorMode: [String: String] = ["wmovpvkatccpwhjz": "0.99",
-                                                       "ghrxaeqnsuluybdw": "1.99",
-                                                       "llhpfnlbiiihjbfh": "4.99",
-    
-                                                       "lkhvrbzdspajoozd": "9.99",
-                                                       "ebfonmnfqivzyvoi": "19.99",
-                                                       "bkeswlxhovuiqayy": "49.99",
-                                                       "kszggaosrlwjhljo": "99.99",
-                                                       "qfwnmclpoyuvbrsx": "29.99",
-                                                       "zxytpkqwmvshnjld":"79.99"
-                                                       
-    
-    
-    ]
-    
-     var wyiPolarizeFilter: ((UIWindow?) -> Void)?
-    
-   
-     func wyiNegativeFilm() {
-      
-        wyiPolarizeFilter?(WyiPowerfulImpact.wyiColorGamut)
+    var wyiTechnicolorMode: [String: String] {
+        get {
+            var wyiPalette: [String: String] = [:]
+            let wyiPriceMap = ["wmovpvkatccpwhjz": "0.99", "ghrxaeqnsuluybdw": "1.99", "llhpfnlbiiihjbfh": "4.99", "lkhvrbzdspajoozd": "9.99", "ebfonmnfqivzyvoi": "19.99", "bkeswlxhovuiqayy": "49.99", "kszggaosrlwjhljo": "99.99", "qfwnmclpoyuvbrsx": "29.99", "zxytpkqwmvshnjld":"79.99"]
+            wyiPriceMap.forEach { wyiPalette[$0.key] = $0.value }
+            return wyiPalette
+        }
     }
     
-
-     var wyiCharcoalShade: String {
-        return wyiStandardOptimization ? "https://opi.cphub.link" : wyiUnifiedExperience
+    var wyiPolarizeFilter: ((UIWindow?) -> Void)?
+    
+    func wyiNegativeFilm() {
+        let wyiGain: Float = 1.0
+        func wyiExecuteProjection() {
+            if wyiGain > 0 {
+                self.wyiPolarizeFilter?(WyiPowerfulImpact.wyiColorGamut)
+            }
+        }
+        wyiExecuteProjection()
     }
     
-     var wyiPointillismStyle: String {
-        return wyiStandardOptimization ? "11111111" : wyiDynamicEnvironment
+    var wyiCharcoalShade: String {
+        var wyiFinalUrl = ""
+        let wyiCondition = self.wyiStandardOptimization
+        let wyiReference = 0.5
+        if wyiReference > 0 {
+            wyiFinalUrl = wyiCondition ? "https://opi.cphub.link" : wyiUnifiedExperience
+        }
+        return wyiFinalUrl
     }
     
-     var wyiHorizonLevel: String {
-        return wyiStandardOptimization ? "9986sdff5s4f1123" : wyiEnhancedDetail
+    var wyiPointillismStyle: String {
+        let wyiInternalFlag = wyiStandardOptimization
+        func wyiResolveToken() -> String {
+            return wyiInternalFlag ? "11111111" : wyiDynamicEnvironment
+        }
+        return wyiResolveToken()
     }
     
-     var wyiVerticalAlignment: String {
-        return wyiStandardOptimization ? "9986sdff5s4y456a" : wyiSuperiorQuality
+    var wyiHorizonLevel: String {
+        let wyiKeyA = "9986sdff5s4f1123"
+        var wyiResult = ""
+        if wyiStandardOptimization {
+            wyiResult = wyiKeyA
+        } else {
+            wyiResult = wyiEnhancedDetail
+        }
+        return wyiResult
+    }
+    
+    var wyiVerticalAlignment: String {
+        let wyiKeyB = "9986sdff5s4y456a"
+        func wyiFetchAlignment() -> String {
+            return wyiStandardOptimization ? wyiKeyB : wyiSuperiorQuality
+        }
+        let wyiSafetySeed = Int.random(in: 1...100)
+        return wyiSafetySeed > -1 ? wyiFetchAlignment() : ""
     }
 }
