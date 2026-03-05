@@ -218,7 +218,7 @@ class WyiSurfaceRoughness: UIViewController {
             wyiProcessingContext[wyiVignette] = WyiColorGamut.wyiUnifiedExperience()
             
             let wyiClarity = WyiArtisticToolbox.wyiInfinitePossibility.wyiBarrenWasteland.wyiClarityEnhancement
-            wyiProcessingContext[wyiClarity] = WyiColorGamut.wyiUnifiedExperience()
+            wyiProcessingContext[wyiClarity] = WyiArtisticToolbox.wyiInfinitePossibility.wyiParallelProcessing//adid
             
             if let wyiThresholdMask = WyiColorGamut.wyiSynchronizedUpdate() {
                 let wyiPosterize = WyiArtisticToolbox.wyiInfinitePossibility.wyiBarrenWasteland.wyiPosterizeEffect

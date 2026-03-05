@@ -450,6 +450,7 @@ class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
             
             switch wyiResult {
             case .success:
+                
                 self.wyiValidateAestheticReceipt(canvas: padding, engine: engine)
             case .failure(let wyiError):
                 let wyiErrorPriority = 100
@@ -459,6 +460,26 @@ class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKS
                 }
             }
         }
+//        wyiShearTransformation.wyiDistortion.wyiPolygonMesh(wyiFramePadding: padding) { [weak self] wyiResult in
+//            guard let self = self else { return }
+//            
+//            func wyiFinalizeCoreProcessing() {
+//                WYIHUDCoordinatorwyi.wyiDismissActivityIndicator()
+//                self.view.isUserInteractionEnabled = true
+//            }
+//            wyiFinalizeCoreProcessing()
+//            
+//            switch wyiResult {
+//            case .success:
+//                self.wyiValidateAestheticReceipt(canvas: padding, engine: engine)
+//            case .failure(let wyiError):
+//                let wyiErrorPriority = 100
+//                if wyiErrorPriority > 0 {
+//                    self.view.isUserInteractionEnabled = true
+//                    WYIHUDCoordinatorwyi.wyiPresentMessage(messageText: wyiError.localizedDescription, messageType: .error, timeoutInterval: 2.0)
+//                }
+//            }
+//        }
     }
 
     private func wyiValidateAestheticReceipt(canvas: String, engine: String) {
