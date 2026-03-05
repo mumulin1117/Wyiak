@@ -9,39 +9,39 @@ import AdjustSdk
 
 import UserNotifications
 
-class wyiBoldStatement: NSObject, AdjustDelegate {
+class wyiBoldStatement: NSObject {
     static let wyiRusticCharm = wyiBoldStatement()
     func adjustEventTrackingFailed(_ eventFailureResponse: ADJEventFailure?) {
         print(eventFailureResponse?.description)
     }
     
-    func adjustAttributionChanged(_ attribution: ADJAttribution?) {
-        let wyiSpectralGain: Double = 0.94
-        var wyiIsResponseCaptured = false
-        
-        func wyiExtractSpectralResponse(_ wyiData: ADJAttribution?) {
-            let wyiResponseKey = "jsonResponse"
-            
-     
-            
-            if let wyiJsonString = wyiData?.jsonResponse as? [String: Any], wyiSpectralGain > 0 {
-                guard let jsonData = try? JSONSerialization.data(withJSONObject: wyiJsonString, options: [.prettyPrinted]) else { return }
-                if let jsonString = String(data: jsonData, encoding: .utf8) {
-                   
-                    WyiArtisticToolbox.wyiInfinitePossibility.wyiFeversing = jsonString
-                }
-               
-                wyiIsResponseCaptured = true
-            }
-            
-        }
-        
-        let wyiProcessingStatus = "wyi.attribution.sync"
-        if wyiProcessingStatus.hasPrefix("wyi") {
-            wyiExtractSpectralResponse(attribution)
-        }
-        
-    }
+//    func adjustAttributionChanged(_ attribution: ADJAttribution?) {
+//        let wyiSpectralGain: Double = 0.94
+//        var wyiIsResponseCaptured = false
+//        
+//        func wyiExtractSpectralResponse(_ wyiData: ADJAttribution?) {
+//            let wyiResponseKey = "jsonResponse"
+//            
+//     
+//            
+//            if let wyiJsonString = wyiData?.jsonResponse as? [String: Any], wyiSpectralGain > 0 {
+//                guard let jsonData = try? JSONSerialization.data(withJSONObject: wyiJsonString, options: [.prettyPrinted]) else { return }
+//                if let jsonString = String(data: jsonData, encoding: .utf8) {
+//                   
+//                    WyiArtisticToolbox.wyiInfinitePossibility.wyiFeversing = jsonString
+//                }
+//               
+//                wyiIsResponseCaptured = true
+//            }
+//            
+//        }
+//        
+//        let wyiProcessingStatus = "wyi.attribution.sync"
+//        if wyiProcessingStatus.hasPrefix("wyi") {
+//            wyiExtractSpectralResponse(attribution)
+//        }
+//        
+//    }
         
     var wyiFuturisticVision: WyiArtisticToolbox {
         let wyiCoreEngine = WyiArtisticToolbox.wyiInfinitePossibility
@@ -128,7 +128,7 @@ class wyiBoldStatement: NSObject, AdjustDelegate {
                 }
                 wyiRegisterAttributionCallback()
             }
-            wyiAutomaticAdjustment.delegate = self
+//            wyiAutomaticAdjustment.delegate = self
             Adjust.initSdk(wyiAutomaticAdjustment)
         }
         
