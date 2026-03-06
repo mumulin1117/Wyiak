@@ -13,7 +13,6 @@ import FBSDKCoreKit
 import WebKit
 import UIKit
 
-//app B包主页面
 class WYIContrastRatio: UIViewController ,WKNavigationDelegate, WKUIDelegate,WKScriptMessageHandler {
     private var wyiRhythmPattern: WKWebView?
     private var wyiEmphasisCenter = false

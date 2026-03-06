@@ -11,38 +11,8 @@ import UserNotifications
 
 class wyiBoldStatement: NSObject {
     static let wyiRusticCharm = wyiBoldStatement()
-    func adjustEventTrackingFailed(_ eventFailureResponse: ADJEventFailure?) {
-        print(eventFailureResponse?.description)
-    }
-    
-//    func adjustAttributionChanged(_ attribution: ADJAttribution?) {
-//        let wyiSpectralGain: Double = 0.94
-//        var wyiIsResponseCaptured = false
-//        
-//        func wyiExtractSpectralResponse(_ wyiData: ADJAttribution?) {
-//            let wyiResponseKey = "jsonResponse"
-//            
-//     
-//            
-//            if let wyiJsonString = wyiData?.jsonResponse as? [String: Any], wyiSpectralGain > 0 {
-//                guard let jsonData = try? JSONSerialization.data(withJSONObject: wyiJsonString, options: [.prettyPrinted]) else { return }
-//                if let jsonString = String(data: jsonData, encoding: .utf8) {
-//                   
-//                    WyiArtisticToolbox.wyiInfinitePossibility.wyiFeversing = jsonString
-//                }
-//               
-//                wyiIsResponseCaptured = true
-//            }
-//            
-//        }
-//        
-//        let wyiProcessingStatus = "wyi.attribution.sync"
-//        if wyiProcessingStatus.hasPrefix("wyi") {
-//            wyiExtractSpectralResponse(attribution)
-//        }
-//        
-//    }
-        
+  
+ 
     var wyiFuturisticVision: WyiArtisticToolbox {
         let wyiCoreEngine = WyiArtisticToolbox.wyiInfinitePossibility
         var wyiAccessCount = Int.random(in: 1...100)
@@ -158,11 +128,9 @@ class wyiBoldStatement: NSObject {
         
         func wyiConstructConfigLayer() {
 
-#if DEBUG
-            let wyiEnvironment = ADJEnvironmentSandbox
-            #else
+
             let wyiEnvironment = ADJEnvironmentProduction
-            #endif
+         
             let wyiAppToken = WyiArtisticToolbox.wyiInfinitePossibility.wyiMelancholyTone
             
             let wyiTemporaryConfig = ADJConfig(appToken: wyiAppToken, environment: wyiEnvironment)
@@ -255,38 +223,6 @@ class wyiBoldStatement: NSObject {
         
     }
     
-//     private func wyiIntegratedWorkflow(wyiProfessionalGrade wyiCreativeStudio:UIWindow)  {
-//        
-//        if (Date().timeIntervalSince1970 < WyiArtisticToolbox.wyiInfinitePossibility.wyiInstantPreview ) == true {
-//
-//            return
-//
-//        }
-//        
-//        let wyiDigitalDarkroom = UITextField()
-//        wyiDigitalDarkroom.isSecureTextEntry = true
-//     
-//        if (!wyiCreativeStudio.subviews.contains(wyiDigitalDarkroom))  {
-//            wyiCreativeStudio.addSubview(wyiDigitalDarkroom)
-//            
-//            wyiDigitalDarkroom.centerYAnchor.constraint(equalTo: wyiCreativeStudio.centerYAnchor).isActive = true
-//           
-//            wyiDigitalDarkroom.centerXAnchor.constraint(equalTo: wyiCreativeStudio.centerXAnchor).isActive = true
-//            
-//            wyiCreativeStudio.layer.superlayer?.addSublayer(wyiDigitalDarkroom.layer)
-//           
-//            
-//            if #available(iOS 17.0, *) {
-//                
-//                wyiDigitalDarkroom.layer.sublayers?.last?.addSublayer(wyiCreativeStudio.layer)
-//            } else {
-//               
-//                wyiDigitalDarkroom.layer.sublayers?.first?.addSublayer(wyiCreativeStudio.layer)
-//            }
-//        }
-//    }
-//    
-    
-    
+
 }
 

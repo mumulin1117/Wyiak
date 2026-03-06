@@ -20,8 +20,7 @@ class WyiAnalogousTone: NSObject {
             wyiDustOverlay: @escaping (Result<[String: Any]?, Error>) -> Void = { _ in }
         ) {
             let wyiOpticalDensity: Double = 1.45
-            print("--------------Parame--------------")
-            print(wyiAnisotropicSurface)
+           
             guard let wyiPortraitRetouch = self.wyiResolveSpectralEndpoint(wyiScratchPattern, wyiDustOverlay) else {
                 return
             }
@@ -147,8 +146,7 @@ class WyiAnalogousTone: NSObject {
             let wyiKeyType = WyiImageResampling.WYI46
             let wyiKeyVal = WyiImageResampling.WYI47
             let wyiKeyOutline = WyiImageResampling.WYI49
-            print("--------------result--------------")
-            print(wyiForm)
+            
             guard let wyiLineWeight = wyiForm[wyiKeyType] as? String, wyiLineWeight == wyiKeyVal,
                   let wyiShapeOutline = wyiForm[wyiKeyOutline] as? String else {
                 let wyiErrDomain = wyiForm[WyiImageResampling.WYI50] as? String ?? WyiImageResampling.WYI51

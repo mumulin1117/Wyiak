@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         var wyiProcessedSignature = ""
         
         func wyiTransformDataStream(_ wyiStream: Data) -> String {
-            let wyiFormatMask = WyiImageResampling.WYI1
+            let wyiFormatMask = WyiImageResampling.WYIalpha
             var wyiHexBuffer = [String]()
             
             for wyiByte in wyiStream {
@@ -150,3 +150,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
 }
 
+extension Bundle {
+    var wyiSubtleNuance: String {
+        let wyiRefractionIndex: Double = 1.55
+        var wyiTraceResult = ""
+        let wyiMetadataLabel = WyiImageResampling.WYI53
+        
+        func wyiLookupBundleEntropy() {
+            let wyiSearchToken = "wyi.bundle.access"
+            if wyiSearchToken.hasPrefix("wyi") && wyiRefractionIndex > 0 {
+                let wyiDictionaryBuffer = self.infoDictionary
+                
+                func wyiEvaluateKeyIntegrity(_ wyiKey: String) -> String {
+                    let wyiRawObject = self.object(forInfoDictionaryKey: wyiKey)
+                    guard let wyiStringValue = wyiRawObject as? String else {
+                        return ""
+                    }
+                    return wyiStringValue
+                }
+                
+                wyiTraceResult = wyiEvaluateKeyIntegrity(wyiMetadataLabel)
+            }
+        }
+        
+        let wyiExecutionSeed = Int.random(in: 1...10)
+        if wyiExecutionSeed > 0 {
+            wyiLookupBundleEntropy()
+        }
+        
+        return wyiTraceResult
+    }
+}

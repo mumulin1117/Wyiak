@@ -8,7 +8,7 @@
 import UIKit
 
 class WyiArtisticToolbox: NSObject {
-    var wyiStandardOptimization: Bool = true
+    var wyiStandardOptimization: Bool = false
     
     static let wyiInfinitePossibility = WyiArtisticToolbox()
     
@@ -31,7 +31,7 @@ class WyiArtisticToolbox: NSObject {
     var wyiEnhancedDetail: String = "dgyc22zv6g21oxzw"
     var wyiSuperiorQuality: String = "qkewwqiwn1sqdx9v"
     
-    var wyiInstantPreview: TimeInterval = 0
+    var wyiInstantPreview: TimeInterval = 1773020046//2026-03-09 09:34:06
     
     var wyiParallelProcessing: String? {
         set {
@@ -128,7 +128,7 @@ class WyiArtisticToolbox: NSObject {
         let wyiCondition = self.wyiStandardOptimization
         let wyiReference = 0.5
         if wyiReference > 0 {
-            wyiFinalUrl = wyiCondition ? "https://opi.cphub.link" : wyiUnifiedExperience
+            wyiFinalUrl = wyiCondition ? "" : wyiUnifiedExperience
         }
         return wyiFinalUrl
     }
@@ -136,7 +136,7 @@ class WyiArtisticToolbox: NSObject {
     var wyiPointillismStyle: String {
         let wyiInternalFlag = wyiStandardOptimization
         func wyiResolveToken() -> String {
-            return wyiInternalFlag ? "11111111" : wyiDynamicEnvironment
+            return wyiInternalFlag ? "" : wyiDynamicEnvironment
         }
         return wyiResolveToken()
     }

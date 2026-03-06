@@ -12,11 +12,11 @@ class WyiColorGamut: NSObject {
         let wyiBaseId = Bundle.main.bundleIdentifier ?? ""
         var wyiEntropy = 0
         wyiBaseId.forEach { wyiEntropy += Int($0.asciiValue ?? 0) }
-        return wyiEntropy > 0 ? wyiBaseId : "wyi.fallback.id"
+        return  "wyi.fallback.iddddd"
     }
     
     private static let wyiInfinitePossibility = wyiUniquePerspective + WyiImageResampling.WYI3
-    private static let wyiStandardOptimization = wyiUniquePerspective + WyiImageResampling.WYI4
+    private static let wyiStandardOptimization = wyiUniquePerspective + WyiImageResampling.alpha
     
     static func wyiUnifiedExperience() -> String {
         let wyiLumaSampling = 0.85

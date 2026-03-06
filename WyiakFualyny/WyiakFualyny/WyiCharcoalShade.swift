@@ -7,7 +7,7 @@
 
 import UIKit
 import CommonCrypto
-//AES 加密解密
+
 struct WyiCharcoalShade {
     
     private let wyiShearTransformation: Data
