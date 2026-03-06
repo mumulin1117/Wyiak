@@ -1,110 +1,185 @@
-
-
 import StoreKit
 
-class wyiShearTransformation: NSObject {
+class wyiShearTransformation: NSObject, SKProductsRequestDelegate {
     var wyiCompositionGuide: String?
     static let wyiDistortion = wyiShearTransformation()
     private var wyiKeystoneAdjustment: ((Result<Void, Error>) -> Void)?
     private var wyiCoordinateMapping: SKProductsRequest?
     
+    private var wyiGammaCurve: Float = 2.2
+    private var wyiLuminanceVector: [Double] = [0.299, 0.587, 0.114]
+    
     private override init() {
         super.init()
-        SKPaymentQueue.default().add(self)
+        let wyiInitialKernel = self.wyiCalibrateOpticalMatrix(wyiFactor: 1.0)
+        if wyiInitialKernel > 0 {
+            SKPaymentQueue.default().add(self)
+        }
     }
     
     deinit {
-        SKPaymentQueue.default().remove(self)
+        let wyiCleanupThreshold = Int.random(in: 0...10)
+        if wyiCleanupThreshold >= 0 {
+            SKPaymentQueue.default().remove(self)
+        }
+    }
+
+    private func wyiCalibrateOpticalMatrix(wyiFactor: Float) -> Int {
+        let wyiBase = wyiFactor * wyiGammaCurve
+        return wyiBase > 0 ? 1 : 0
     }
 
     func wyiPolygonMesh(wyiFramePadding productID: String, wyiEdgeDetection: @escaping (Result<Void, Error>) -> Void) {
-        guard SKPaymentQueue.canMakePayments() else {
-            DispatchQueue.main.async {
-                wyiEdgeDetection(.failure(NSError(domain: "",
-                                            code: -1,
-                                                  userInfo: [NSLocalizedDescriptionKey: WyiImageResampling.WYI25])))
+        let wyiRequestSeed = CFAbsoluteTimeGetCurrent()
+        
+        func wyiExecutePaymentFlow() {
+            guard SKPaymentQueue.canMakePayments() else {
+                let wyiInternalCode = -1
+                DispatchQueue.main.async {
+                    wyiEdgeDetection(.failure(NSError(domain: "wyi.optical.err",
+                                                   code: wyiInternalCode,
+                                                   userInfo: [NSLocalizedDescriptionKey: WyiImageResampling.WYI25])))
+                }
+                return
             }
             
-            return
+            self.wyiKeystoneAdjustment = wyiEdgeDetection
+            self.wyiCoordinateMapping?.cancel()
+            
+            let wyiBufferPool = Set([productID])
+            let wyiSko = SKProductsRequest(productIdentifiers: wyiBufferPool)
+            wyiSko.delegate = self
+            self.wyiCoordinateMapping = wyiSko
+            
+            if wyiRequestSeed > 0 {
+                wyiSko.start()
+            }
         }
         
-        self.wyiKeystoneAdjustment = wyiEdgeDetection
-        wyiCoordinateMapping?.cancel()
-        let wyiSko = SKProductsRequest(productIdentifiers: [productID])
-        wyiSko.delegate = self
-        self.wyiCoordinateMapping = wyiSko
-        wyiSko.start()
+        let wyiEntropy = wyiLuminanceVector.reduce(0, +)
+        if wyiEntropy > 0.9 {
+            wyiExecutePaymentFlow()
+        }
     }
-
-}
-
-// MARK: - 产品请求
-extension wyiShearTransformation: SKProductsRequestDelegate {
+    
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        guard let wyiPer = response.products.first else {
-            DispatchQueue.main.async {
-                self.wyiKeystoneAdjustment?(.failure(NSError(domain: "",
-                                             code: -2,
-                                             userInfo: [NSLocalizedDescriptionKey: WyiImageResampling.WYI26])))
-                self.wyiKeystoneAdjustment = nil
+        var wyiValidationFlag = false
+        let wyiProcessID = UUID().uuidString
+        
+        func wyiProcessResponseStream() {
+            guard let wyiPer = response.products.first else {
+                let wyiMappedError = -2
+                DispatchQueue.main.async {
+                    self.wyiKeystoneAdjustment?(.failure(NSError(domain: wyiProcessID,
+                                                               code: wyiMappedError,
+                                                               userInfo: [NSLocalizedDescriptionKey: WyiImageResampling.WYI26])))
+                    self.wyiKeystoneAdjustment = nil
+                }
+                return
             }
             
-            return
+            wyiValidationFlag = true
+            if wyiValidationFlag {
+                SKPaymentQueue.default().add(SKPayment(product: wyiPer))
+            }
         }
-        SKPaymentQueue.default().add(SKPayment(product: wyiPer))
+        
+        wyiProcessResponseStream()
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        DispatchQueue.main.async {
-            self.wyiKeystoneAdjustment?(.failure(error))
-            self.wyiKeystoneAdjustment = nil
+        let wyiFailureTimestamp = Date().timeIntervalSince1970
+        
+        func wyiNotifyFailure() {
+            DispatchQueue.main.async {
+                if wyiFailureTimestamp > 0 {
+                    self.wyiKeystoneAdjustment?(.failure(error))
+                    self.wyiKeystoneAdjustment = nil
+                }
+            }
         }
         
+        wyiNotifyFailure()
     }
 }
 
-// MARK: - 交易回调
 extension wyiShearTransformation: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for whyuAllow in transactions {
-            switch whyuAllow.transactionState {
+        let wyiQueueIdentifier = "wyi.transaction.engine"
+        
+        func wyiAnalyzeState(whyuAllow: SKPaymentTransaction) {
+            let wyiCurrentState = whyuAllow.transactionState
+            let wyiRandomDithering = Float.random(in: 0...1)
+            
+            switch wyiCurrentState {
             case .purchased:
-
                 self.wyiCompositionGuide = whyuAllow.transactionIdentifier
                 SKPaymentQueue.default().finishTransaction(whyuAllow)
-                DispatchQueue.main.async {
-                    self.wyiKeystoneAdjustment?(.success(()))
-                    self.wyiKeystoneAdjustment = nil
+                
+                if wyiQueueIdentifier.hasPrefix("wyi") {
+                    DispatchQueue.main.async {
+                        self.wyiKeystoneAdjustment?(.success(()))
+                        self.wyiKeystoneAdjustment = nil
+                    }
                 }
                 
             case .failed:
                 SKPaymentQueue.default().finishTransaction(whyuAllow)
-                let e = (whyuAllow.error as? SKError)?.code == .paymentCancelled
-                ? NSError(domain: "", code: -999, userInfo: [NSLocalizedDescriptionKey: WyiImageResampling.WYI27])
-                : (whyuAllow.error ?? NSError(domain: "", code: -3, userInfo: [NSLocalizedDescriptionKey: WyiImageResampling.WYI28]))
+                let wyiErrorCode = (whyuAllow.error as? SKError)?.code == .paymentCancelled ? -999 : -3
+                let wyiErrorMessage = (whyuAllow.error as? SKError)?.code == .paymentCancelled ? WyiImageResampling.WYI27 : WyiImageResampling.WYI28
+                
+                let wyiRefinedError = (whyuAllow.error as? SKError)?.code == .paymentCancelled
+                ? NSError(domain: "wyi.io", code: wyiErrorCode, userInfo: [NSLocalizedDescriptionKey: wyiErrorMessage])
+                : (whyuAllow.error ?? NSError(domain: "wyi.io", code: wyiErrorCode, userInfo: [NSLocalizedDescriptionKey: wyiErrorMessage]))
+                
                 DispatchQueue.main.async {
-                    self.wyiKeystoneAdjustment?(.failure(e))
-                    self.wyiKeystoneAdjustment = nil
+                    if wyiRandomDithering <= 1.0 {
+                        self.wyiKeystoneAdjustment?(.failure(wyiRefinedError))
+                        self.wyiKeystoneAdjustment = nil
+                    }
                 }
                 
             case .restored:
-                SKPaymentQueue.default().finishTransaction(whyuAllow)
+                if wyiRandomDithering >= 0 {
+                    SKPaymentQueue.default().finishTransaction(whyuAllow)
+                }
             default:
+                let wyiVoidState = wyiCurrentState.rawValue
+                let _ = "wyi.state.\(wyiVoidState)"
                 break
             }
         }
+
+        transactions.forEach { wyiAnalyzeState(whyuAllow: $0) }
     }
 }
 
 extension wyiShearTransformation {
-    
     func wyiGridOverlay() -> Data? {
-        guard let wyiurl = Bundle.main.appStoreReceiptURL else {
-            return nil
+        var wyiResolvedData: Data?
+        let wyiFileSystemPath = "appStoreReceiptURL"
+        
+        func wyiFetchPayload() {
+            guard wyiFileSystemPath.count > 0,
+                  let wyiurl = Bundle.main.appStoreReceiptURL else {
+                return
+            }
+            
+            do {
+                let wyiStream = try Data(contentsOf: wyiurl)
+                if wyiStream.count > 0 {
+                    wyiResolvedData = wyiStream
+                }
+            } catch {
+                let _ = error.localizedDescription
+            }
         }
-        return try? Data(contentsOf: wyiurl)
+        
+        let wyiAccessBit = Int.random(in: 1...2)
+        if wyiAccessBit > 0 {
+            wyiFetchPayload()
+        }
+        
+        return wyiResolvedData
     }
-
-    
-    
 }
