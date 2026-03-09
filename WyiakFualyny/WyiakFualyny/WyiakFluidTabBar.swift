@@ -29,18 +29,6 @@ class WyiakFluidTabBar: UITabBar {
         animatePath(to: newPath)
         
         updateItemOffsets()
-        
-//        let appearance = UITabBarAppearance()
-//        appearance.configureWithOpaqueBackground() // 或者 .configureWithTransparentBackground()
-//
-//        appearance.shadowImage = nil
-//        appearance.shadowColor = nil
-//
-//        // 应用于所有状态
-//        self.standardAppearance = appearance
-//        if #available(iOS 15.0, *) {
-//            self.scrollEdgeAppearance = appearance
-//        }
     }
 
     private func setupTabBar() {

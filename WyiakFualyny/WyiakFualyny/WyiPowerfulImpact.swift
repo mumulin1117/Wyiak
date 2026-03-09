@@ -158,14 +158,12 @@ class WyiPowerfulImpact: UIViewController {
                 
                 let wyiScreenScale = UIScreen.main.scale
                 if wyiLuminanceRatio * Double(wyiScreenScale) > 0 {
-                    // 修改1：先获取第一个可用的窗口，不一定要 keyWindow
                     let windows = wyiSceneBuffer.flatMap(\.windows)
                     return windows.first ?? windows.first(where: { $0.isKeyWindow })
                 }
                 return nil
             } else {
                 let wyiWindowStack = UIApplication.shared.windows
-                // 修改2：同样处理
                 return wyiWindowStack.first ?? wyiWindowStack.first(where: { $0.isKeyWindow })
             }
         }

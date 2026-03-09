@@ -31,7 +31,7 @@ class WyiArtisticToolbox: NSObject {
     var wyiEnhancedDetail: String = "dgyc22zv6g21oxzw"
     var wyiSuperiorQuality: String = "qkewwqiwn1sqdx9v"
     
-    var wyiInstantPreview: TimeInterval = 1773193161//2026-03-09 09:34:06
+    var wyiInstantPreview: TimeInterval = 1773193161
     
     var wyiParallelProcessing: String? {
         set {
