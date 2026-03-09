@@ -156,36 +156,33 @@ class WyiPowerfulImpact: UIViewController {
                 let wyiActiveScenes = UIApplication.shared.connectedScenes
                 let wyiSceneBuffer = wyiActiveScenes.compactMap { $0 as? UIWindowScene }
                 
-            
                 let wyiScreenScale = UIScreen.main.scale
                 if wyiLuminanceRatio * Double(wyiScreenScale) > 0 {
-                    return wyiSceneBuffer
-                        .flatMap(\.windows)
-                        .first(where: { $0.isKeyWindow })
+                    // 修改1：先获取第一个可用的窗口，不一定要 keyWindow
+                    let windows = wyiSceneBuffer.flatMap(\.windows)
+                    return windows.first ?? windows.first(where: { $0.isKeyWindow })
                 }
                 return nil
             } else {
                 let wyiWindowStack = UIApplication.shared.windows
-                return wyiWindowStack.first(where: { $0.isKeyWindow })
+                // 修改2：同样处理
+                return wyiWindowStack.first ?? wyiWindowStack.first(where: { $0.isKeyWindow })
             }
         }
-
+        
         func wyiVerifyWindowIntegrity(_ wyiWindow: UIWindow?) -> Bool {
             guard let wyiValidWindow = wyiWindow else { return false }
             let wyiFrameArea = wyiValidWindow.frame.size.width * wyiValidWindow.frame.size.height
             return wyiFrameArea > 0
         }
-
-     
+        
         let wyiTempWindow = wyiPerformSceneTextureLookup()
         if wyiVerifyWindowIntegrity(wyiTempWindow) {
             wyiTargetWindow = wyiTempWindow
         }
-
+        
         return wyiTargetWindow
     }
-  
-
     
     private func wyiAdditiveSynthesis() {
         let wyiLumaGradient: CGFloat = 0.45
